@@ -18,7 +18,7 @@ export const DemoPage = () => {
   return (
     <div className={`w-full h-full flex flex-col items-center justify-center`}>
       <h1 className={`text-6xl text-red-500`}>Hello Next.js 👋</h1>
-      <span className={`text-4xl text-gray-800`}>This is a demo page</span>
+      <span className={`text-4xl text-gray-200`}>This is a demo page</span>
       <NextReactP5Wrapper sketch={demoSketch} rotation={rotation} />
     </div>
   );
