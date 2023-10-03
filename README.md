@@ -1,138 +1,47 @@
-# p5ts
+# TypeScript Next.js example
 
-## Start
+This is a really simple project that shows the usage of Next.js with TypeScript.
+
+## Deploy your own
+
+Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-typescript)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-typescript&project-name=with-typescript&repository-name=with-typescript)
+
+## How to use it?
+
+Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+
+```bash
+npx create-next-app --example with-typescript with-typescript-app
+```
+
+```bash
+yarn create next-app --example with-typescript with-typescript-app
+```
+
+```bash
+pnpm create next-app --example with-typescript with-typescript-app
+```
+
+Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+
+## Notes
+
+This example shows how to integrate the TypeScript type system into Next.js. Since TypeScript is supported out of the box with Next.js, all we have to do is to install TypeScript.
 
 ```
-yarn
-yarn start
+npm install --save-dev typescript
 ```
 
-Open `http://localhost:8080/?sketch=SampleSketch`.
+To enable TypeScript's features, we install the type declarations for React and Node.
 
-## Sketches
+```
+npm install --save-dev @types/react @types/react-dom @types/node
+```
 
-### Sketch2019072601
+When we run `next dev` the next time, Next.js will start looking for any `.ts` or `.tsx` files in our project and builds it. It even automatically creates a `tsconfig.json` file for our project with the recommended settings.
 
-https://twitter.com/airtoxin/status/1154724351238791169
-https://twitter.com/airtoxin/status/1154762762666385409
+Next.js has built-in TypeScript declarations, so we'll get autocompletion for Next.js' modules straight away.
 
-### Sketch2018093004
-
-https://twitter.com/airtoxin/status/1046896691582914560
-
-### Sketch2018093003
-
-https://twitter.com/airtoxin/status/1046781845575102464
-
-### Sketch2018093002
-
-https://twitter.com/airtoxin/status/1046779574023938048
-
-### Sketch2018093001
-
-https://twitter.com/airtoxin/status/1046761187042516993
-
-### Sketch2018090102
-
-https://twitter.com/airtoxin/status/1035665943744077824
-
-### Sketch2018090101
-
-https://twitter.com/airtoxin/status/1035659213517676544
-
-### Sketch2018081303
-
-https://twitter.com/airtoxin/status/1029044851432542209
-
-### Sketch2018081302
-
-https://twitter.com/airtoxin/status/1029036706673000448
-
-### Sketch2018081301
-
-https://twitter.com/airtoxin/status/1029008184848015360
-
-### Sketch2018080901
-
-https://twitter.com/airtoxin/status/1027347435125755904
-
-### Sketch2018080801
-
-https://twitter.com/airtoxin/status/1027170101508730880
-
-### Sketch2018080501
-
-https://twitter.com/airtoxin/status/1025949540690485249
-
-### Sketch2018080401
-
-https://twitter.com/airtoxin/status/1025545739873574913
-
-### Sketch2018080402
-
-https://twitter.com/airtoxin/status/1025558308550193152
-
-### Sketch2018080403
-
-https://twitter.com/airtoxin/status/1025559415275978752
-
-### Sketch2018080301
-
-https://twitter.com/airtoxin/status/1025145325281931264
-
-### Sketch2018080302
-
-https://twitter.com/airtoxin/status/1025150474255659008
-
-### Sketch2018080201
-
-https://twitter.com/airtoxin/status/1024801162619277312
-
-### Sketch2018080103
-
-https://twitter.com/airtoxin/status/1024443615840366592
-
-### Sketch2018080102
-
-Too big animation for twitter
-
-### Sketch2018080101
-
-https://twitter.com/airtoxin/status/1024439875120975872
-https://twitter.com/airtoxin/status/1024440445135278080
-
-### Sketch2018073104
-
-https://twitter.com/airtoxin/status/1024058840373837825
-
-### Sketch2018073103
-
-https://twitter.com/airtoxin/status/1024052125049839616
-
-### Sketch2018073102
-
-https://twitter.com/airtoxin/status/1024041537456418816
-
-### Sketch2018073101
-
-https://twitter.com/airtoxin/status/1024038833246035969
-
-### Sketch2018072802
-
-https://twitter.com/airtoxin/status/1023048634965708800
-
-### Sketch20180727
-
-https://twitter.com/airtoxin/status/1022864004811636737
-
-### StretchingEllipsesSketch
-
-https://twitter.com/airtoxin/status/1022302716784078848
-
-### EllipsesSketch
-
-https://twitter.com/airtoxin/status/1022278639444840449
-
-### SampleSketch
-
-https://twitter.com/airtoxin/status/1022271624685309952
+A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately. You can then include this, for example, in your `test` scripts.
