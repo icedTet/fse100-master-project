@@ -6,7 +6,7 @@
   "author": "airtoxin <airtoxin@icloud.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-serve",
+    "start": "export NODE_OPTIONS=--openssl-legacy-provider;webpack-serve",
     "format": "prettier --write --ignore-path .gitignore ."
   },
   "devDependencies": {
