@@ -49,6 +49,13 @@ p5.draw = ()=>{
   p5.strokeWeight(1);
   p5.stroke(255,0,255);
   p5.circle(160,50,100);
+//triangle
+c= p5.color(0,0,0);
+  p5.fill(c);
+  p5.strokeWeight(1);
+  p5.stroke(255,0,255);
+p5.triangle(220, 0, 320, 0, 320, 100);
+
   //div
    if (p5.mouseX > 0 && p5.mouseX < 90  && p5.mouseY > 0  && p5.mouseY < 90) 
   {overBox1hole = true;} 
@@ -95,6 +102,29 @@ p5.draw = ()=>{
     bx2 = 160;
     by2 = 50;
   }
+//div
+/*if (p5.mouseX > 110 && p5.mouseX < 210  && p5.mouseY > 0  && p5.mouseY < 80) 
+  {overBox2hole = true;} 
+  else 
+  {overBox2hole = false;}*/
+
+  if (p5.mouseX > bx3  && p5.mouseX < bx3 + boxSize3 && p5.mouseY > by3  && p5.mouseY < by3 + boxSize3) 
+  {overBox3 = true;} 
+  else 
+  {overBox3 = false;}
+
+ /* if (bx2==160 && by2==50)
+  {
+    locked2 = false;
+    overBox2 = false; 
+    overBox2hole = true;
+  }
+  
+  if(overBox2 == true && overBox2hole == true && locked2 == true)
+  {
+    bx2 = 160;
+    by2 = 50;
+  }*/
   
   //moving box bottom left
   c= p5.color(0,255,0);
@@ -121,6 +151,7 @@ p5.draw = ()=>{
   overBox1 = false;
   overBox2 = true;
 
+
 }
   
 
@@ -144,6 +175,15 @@ p5.mousePressed = ()=> {
   else {
     locked2 = false;}
 
+  if (overBox3) {
+    locked3 = true;
+    p5.fill(255, 255, 255);
+    xOffset = p5.mouseX - bx3;
+    yOffset = p5.mouseY - by3;} 
+  else {
+    locked3 = false;}
+  
+  
 }
 
 p5.mouseDragged = ()=> {
@@ -158,11 +198,18 @@ p5.mouseDragged = ()=> {
     by2 = p5.mouseY - yOffset;
     p5.push();
   }
+
+  if (locked3 == true) {
+    bx3 = p5.mouseX - xOffset;
+    by3 = p5.mouseY - yOffset;
+    p5.push();
+  }
 }
 
 p5.mouseReleased = ()=> {
   locked1 = false;
   locked2 = false;
+  locked3 = false;
 }
 
 }
