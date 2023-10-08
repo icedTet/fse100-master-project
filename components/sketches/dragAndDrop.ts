@@ -103,45 +103,64 @@ p5.triangle(220, 0, 320, 0, 320, 100);
     by2 = 50;
   }
 //div
-/*if (p5.mouseX > 110 && p5.mouseX < 210  && p5.mouseY > 0  && p5.mouseY < 80) 
-  {overBox2hole = true;} 
+if (p5.mouseX > 220 && p5.mouseX < 320  && p5.mouseY > 0  && p5.mouseY < 80) 
+  {overBox3hole = true;} 
   else 
-  {overBox2hole = false;}*/
+  {overBox3hole = false;}
 
   if (p5.mouseX > bx3  && p5.mouseX < bx3 + boxSize3 && p5.mouseY > by3  && p5.mouseY < by3 + boxSize3) 
   {overBox3 = true;} 
   else 
   {overBox3 = false;}
 
- /* if (bx2==160 && by2==50)
+  if (bx3==220 && by3==0)
   {
-    locked2 = false;
-    overBox2 = false; 
-    overBox2hole = true;
+    locked3 = false;
+    overBox3 = false; 
+    overBox3hole = true;
   }
   
-  if(overBox2 == true && overBox2hole == true && locked2 == true)
+  if(overBox3 == true && overBox3hole == true && locked3 == true)
   {
-    bx2 = 160;
-    by2 = 50;
-  }*/
+    bx3 = 220;
+    by3 = 0;
+  }
   
   //moving box bottom left
-  c= p5.color(0,255,0);
-   p5.fill(c);
+  if (bx1==0 && by1==0)
+  {
+    c= p5.color(0,255,0);
+  }
+  else{
+    c= p5.color(255,0,0);
+  }
+  
+  p5.fill(c);
   p5.strokeWeight(1);
   p5.stroke(255);
   p5.rect(bx1, by1, boxSize1, boxSize1);
   
   //moving circle
-  c= p5.color(255,0,0);
-   p5.fill(c);
+  if (bx2==160 && by2==50)
+  {
+    c= p5.color(0,255,0);
+  }
+  else{
+    c= p5.color(255,0,0);
+  }
+  p5.fill(c);
   p5.strokeWeight(1);
   p5.stroke(255);
   p5.circle(bx2, by2, boxSize2);
  
   //moving triangle
-  c=p5.color(255,0,0);
+  if (bx3==220 && by3==0)
+  {
+    c= p5.color(0,255,0);
+  }
+  else{
+    c= p5.color(255,0,0);
+  }
   p5.fill(c);
   p5.strokeWeight(1);
   p5.stroke(255);
