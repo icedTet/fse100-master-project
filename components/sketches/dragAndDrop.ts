@@ -2,7 +2,8 @@ import { P5CanvasInstance } from "@p5-wrapper/react";
 
 export const dragandDropSketch = (p5: P5CanvasInstance) =>{
 
-
+let startTime = 0;
+let totalTime = 0;
 let points = 0;
 //square
 let bx1 = 1;
@@ -38,11 +39,19 @@ let yOffset = 0.0;
 
 p5.setup = ()=> {
   p5.createCanvas(720, 400);
+  startTime = Date.now();
 }
 
 p5.draw = ()=>{
+
   p5.background(222);
   //shape holes
+
+  if(points = 6){
+    totalTime = (startTime - Date.now())/1000;
+  }
+
+
   //square
   let c= p5.color(0,0,0);
   p5.fill(c);
@@ -126,7 +135,7 @@ if (p5.mouseX > 220 && p5.mouseX < 320  && p5.mouseY > 0  && p5.mouseY < 80)
   {overBox3 = true;} 
   else 
   {overBox3 = false;}//hi
-
+//kkkkkkkk
   if (bx3==220 && by3==0)
   {
     locked3 = false;
@@ -245,5 +254,7 @@ p5.mouseReleased = ()=> {
   locked2 = false;
   locked3 = false;
 }
+
+
 
 }
