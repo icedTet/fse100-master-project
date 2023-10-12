@@ -2,7 +2,9 @@ import { P5CanvasInstance } from "@p5-wrapper/react";
 
 export const dragandDropSketch = (p5: P5CanvasInstance) =>{
 
-  //square
+
+let points = 0;
+//square
 let bx1 = 1;
 let by1 = 200;
 let boxSize1 = 100;
@@ -10,7 +12,7 @@ let overBox1 = false;
 let locked1 = false as boolean;
 let overBox1hole = false;
 
-
+//circle
 let bx2 = 160;
 let by2 = 250;
 let boxSize2 = 100;
@@ -18,12 +20,16 @@ let overBox2 = false;
 let locked2 = false;
 let overBox2hole = false;
 
+//toptri
 let bx3 = 220;
 let by3 = 200;
 let boxSize3 = 100;
 let overBox3 = false;
 let locked3 = false;
 let overBox3hole = false;
+
+//midtri
+
 
 let xOffset = 0.0;
 let yOffset = 0.0;
@@ -49,15 +55,21 @@ p5.draw = ()=>{
   p5.strokeWeight(1);
   p5.stroke(255,0,255);
   p5.circle(160,50,100);
-//triangle
-c= p5.color(0,0,0);
+//triangle1
+  c= p5.color(0,0,0);
   p5.fill(c);
   p5.strokeWeight(1);
   p5.stroke(255,0,255);
-p5.triangle(220, 0, 320, 0, 320, 100);
+  p5.triangle(220, 0, 320, 0, 320, 100);
+//triangle2
+  c= p5.color(0,0,0);
+  p5.fill(c);
+  p5.strokeWeight(1);
+  p5.stroke(255,0,255);
+  p5.triangle(340, 100, 390, 0, 440, 100);
 
   //div
-   if (p5.mouseX > 0 && p5.mouseX < 90  && p5.mouseY > 0  && p5.mouseY < 90) 
+   if (p5.mouseX > 0 && p5.mouseX < 100  && p5.mouseY > 0  && p5.mouseY < 100) 
   {overBox1hole = true;} 
   else 
   {overBox1hole = false;}
@@ -72,6 +84,7 @@ p5.triangle(220, 0, 320, 0, 320, 100);
     locked1 = false;
     overBox1 = false; 
     overBox1hole = true;
+    points+1;
   }
   
   if(overBox1 == true && overBox1hole == true && locked1 == true)
@@ -95,6 +108,7 @@ p5.triangle(220, 0, 320, 0, 320, 100);
     locked2 = false;
     overBox2 = false; 
     overBox2hole = true;
+    points+1;
   }
   
   if(overBox2 == true && overBox2hole == true && locked2 == true)
@@ -118,6 +132,7 @@ if (p5.mouseX > 220 && p5.mouseX < 320  && p5.mouseY > 0  && p5.mouseY < 80)
     locked3 = false;
     overBox3 = false; 
     overBox3hole = true;
+    points+1;
   }
   
   if(overBox3 == true && overBox3hole == true && locked3 == true)
