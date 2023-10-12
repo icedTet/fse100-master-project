@@ -11,7 +11,7 @@ let boxSize1 = 100;
 let overBox1 = false;
 let locked1 = false as boolean;
 let overBox1hole = false;
-
+// this is new code or something
 //circle
 let bx2 = 160;
 let by2 = 250;
