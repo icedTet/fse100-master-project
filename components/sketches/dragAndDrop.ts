@@ -12,7 +12,7 @@ let boxSize1 = 100;
 let overBox1 = false;
 let locked1 = false as boolean;
 let overBox1hole = false;
-// this is new code or somethinga
+
 //circle
 let bx2 = 160;
 let by2 = 250;
@@ -177,7 +177,7 @@ if (p5.mouseX > 220 && p5.mouseX < 320  && p5.mouseY > 0  && p5.mouseY < 80)
   p5.stroke(255);
   p5.circle(bx2, by2, boxSize2);
  
-  //moving triangle
+  //moving triangle1
   if (bx3==220 && by3==0)
   {
     c= p5.color(0,255,0);
@@ -190,13 +190,18 @@ if (p5.mouseX > 220 && p5.mouseX < 320  && p5.mouseY > 0  && p5.mouseY < 80)
   p5.stroke(255);
   p5.triangle(bx3, by3, bx3+100, by3+0, bx3+100, by3+100);
 
-     if(overBox1 == true && overBox2 == true){
+    if(overBox1 == true && overBox2 == true){
   overBox1 = false;
   overBox2 = true;
-
-
 }
-  
+    if(overBox1 == true && overBox3 == true){
+  overBox1 = false;
+  overBox3 = true;
+}
+    if(overBox2 == true && overBox3 == true){
+  overBox2 = false;
+  overBox3 = true;
+}
 
 
 }
