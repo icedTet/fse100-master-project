@@ -125,7 +125,7 @@ if (p5.mouseX > 220 && p5.mouseX < 320  && p5.mouseY > 0  && p5.mouseY < 80)
   if (p5.mouseX > bx3  && p5.mouseX < bx3 + boxSize3 && p5.mouseY > by3  && p5.mouseY < by3 + boxSize3) 
   {overBox3 = true;} 
   else 
-  {overBox3 = false;}
+  {overBox3 = false;}//hi
 
   if (bx3==220 && by3==0)
   {
