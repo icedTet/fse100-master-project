@@ -30,7 +30,12 @@ let locked3 = false;
 let overBox3hole = false;
 
 //midtri
-
+let bx4 = 340;
+let by4 = 100;
+let boxSize4 = 100;
+let overBox4 = false;
+let locked4 = false;
+let overBox4hole = false;
 
 let xOffset = 0.0;
 let yOffset = 0.0;
@@ -134,8 +139,8 @@ if (p5.mouseX > 220 && p5.mouseX < 320  && p5.mouseY > 0  && p5.mouseY < 80)
   if (p5.mouseX > bx3  && p5.mouseX < bx3 + boxSize3 && p5.mouseY > by3  && p5.mouseY < by3 + boxSize3) 
   {overBox3 = true;} 
   else 
-  {overBox3 = false;}//hi
-//kkkkkkkk
+  {overBox3 = false;}
+
   if (bx3==220 && by3==0)
   {
     locked3 = false;
@@ -189,6 +194,20 @@ if (p5.mouseX > 220 && p5.mouseX < 320  && p5.mouseY > 0  && p5.mouseY < 80)
   p5.strokeWeight(1);
   p5.stroke(255);
   p5.triangle(bx3, by3, bx3+100, by3+0, bx3+100, by3+100);
+
+  //moving triangle2
+  if (bx4==220 && by4==0)
+  {
+    c= p5.color(0,255,0);
+  }
+  else{
+    c= p5.color(255,0,0);
+  }
+  p5.fill(c);
+  p5.strokeWeight(1);
+  p5.stroke(255);
+  p5.triangle(bx4, by4, bx4+100, by4+0, bx4+100, by4+100);
+
 
     if(overBox1 == true && overBox2 == true){
   overBox1 = false;
