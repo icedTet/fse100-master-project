@@ -6,10 +6,15 @@ import { HiCog, HiOutlineCog } from "react-icons/hi";
 type Props = {
   children?: ReactNode;
   title?: string;
+  centerContainer?: boolean;
 };
 
-const Layout = ({ children, title = "This is the default title" }: Props) => (
-  <div className={`w-full h-full`}>
+const Layout = ({
+  children,
+  title = "This is the default title",
+  centerContainer,
+}: Props) => (
+  <div className={`w-full grow max-w-[130ch] mx-auto flex flex-col`}>
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
@@ -48,7 +53,7 @@ const Layout = ({ children, title = "This is the default title" }: Props) => (
         </div>
       </div>
     </header>
-    {children}  
+    {children}
   </div>
 );
 
