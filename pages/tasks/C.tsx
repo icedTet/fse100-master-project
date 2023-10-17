@@ -20,7 +20,7 @@ export const DemoPage = () => {
   return (
     <div className={`w-full h-full flex flex-col items-center justify-center`}>
       <h1 className={`text-6xl text-red-500`}>This is an unfinished game</h1>
-      <span className={`text-4xl text-gray-200`}>Typing Tune-Up!</span>
+      <span className={`text-4xl text-gray-200`}>Labyrinth Escape!</span>
       <Link href="/">
         <span className={`text-4xl hover:text-purple-200 underline text-purple-600`}>Go back home</span>
       </Link>

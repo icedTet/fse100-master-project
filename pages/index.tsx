@@ -135,7 +135,7 @@ const IndexPage = () => {
                 onClick={() => {
                   alert("Game not implemented yet");
                 }}
-                link="/tasks/c"
+                link="/tasks/B"
               />
             }
             {
@@ -159,7 +159,7 @@ const IndexPage = () => {
                 onClick={() => {
                   alert("Game not implemented yet");
                 }}
-                link="/tasks/notImplementedYet"
+                link="/tasks/C"
                 complete
               />
             }
