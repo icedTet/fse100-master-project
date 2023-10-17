@@ -48,7 +48,7 @@ class Box implements Shape {
     this.boxSize = boxSize;
     this.p5 = p5;
     this.destination = destination;
-    this.tolerance = 0.001;
+    this.tolerance = 0.05;
     ShapeManager.getInstance().addShape(this);
   }
   id?: number | undefined;
@@ -97,11 +97,27 @@ class Box implements Shape {
     }
   }
   checkForHole(x: number, y: number) {
+    // console.log(
+    //   "checking for hole",
+    //   `X tol`,
+    //   this.destination.x - this.boxSize * this.tolerance,
+    //   `X tol`,
+    //   this.destination.x + this.boxSize * this.tolerance,
+    //   `Y tol`,
+    //   this.destination.y - this.boxSize * this.tolerance,
+    //   `Y tol`,
+    //   this.destination.y + this.boxSize * this.tolerance,
+    //   { x, y },
+    //   x >= this.destination.x - this.boxSize * this.tolerance,
+    //   x <= this.destination.x + this.boxSize * this.tolerance,
+    //   y >= this.destination.y - this.boxSize * this.tolerance,
+    //   y <= this.destination.y + this.boxSize * this.tolerance
+    // );
     return (
-      x > this.destination.x - this.boxSize * this.tolerance &&
-      x < this.destination.x + this.boxSize * (1 + this.tolerance) &&
-      y > this.destination.y - this.boxSize * this.tolerance &&
-      y < this.destination.y + this.boxSize * (1 + this.tolerance)
+      x >= this.destination.x - this.boxSize * this.tolerance &&
+      x <= this.destination.x + this.boxSize * this.tolerance &&
+      y >= this.destination.y - this.boxSize * this.tolerance &&
+      y <= this.destination.y + this.boxSize * this.tolerance
     );
   }
   shapeWin() {
