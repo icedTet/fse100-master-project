@@ -40,56 +40,22 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
   let xOffset = 0.0;
   let yOffset = 0.0;
 
-  let c: Color;
 
-  p5.setup = () => {
-    p5.createCanvas(720, 400);
-    startTime = Date.now();
-  };
 
-  p5.draw = () => {
-    p5.background(222);
-    //shape holes
+ 
 
-    if ((points = 6)) {
-      totalTime = (startTime - Date.now()) / 1000;
-    }
-
-    //square
-    let bx1 = 1;
-    let by1 = 200;
-    let boxSize1 = 100;
-    let overBox1 = false as boolean;
-    let locked1 = false as boolean;
-    let overBox1hole = false as boolean;
-    // this is new code or somethinga
-    //circle
-    let bx2 = 160;
-    let by2 = 250;
-    let boxSize2 = 100;
-    let overBox2 = false as boolean;
-    let locked2 = false as boolean;
-    let overBox2hole = false as boolean;
-
-    //toptri
-    let bx3 = 220;
-    let by3 = 200;
-    let boxSize3 = 100;
-    let overBox3 = false as boolean;
-    let locked3 = false as boolean;
-    let overBox3hole = false as boolean;
-
-    //midtri
-
-    let xOffset = 0.0;
-    let yOffset = 0.0;
-
+  
     p5.setup = () => {
       p5.createCanvas(720, 400);
+      startTime = Date.now();
     };
 
     p5.draw = () => {
       p5.background(222);
+
+      if ((points = 6)) {
+        totalTime = (startTime - Date.now()) / 1000;
+      }
       //shape holes
       //square
       let c = p5.color(0, 0, 0);
@@ -286,7 +252,7 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
       } else {
         locked3 = false;
       }
-    };
+    }
 
     p5.mouseDragged = () => {
       if (locked1 == true) {
@@ -306,7 +272,7 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
         by3 = p5.mouseY - yOffset;
         p5.push();
       }
-    };
+    }
 
     p5.mouseReleased = () => {
       locked1 = false;
@@ -314,7 +280,7 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
       overBox2 = false;
       overBox2hole = true;
       points + 1;
-    };
+    }
 
     if (overBox2 == true && overBox2hole == true && locked2 == true) {
       bx2 = 160;
@@ -350,64 +316,7 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
       by3 = 0;
     }
 
-    //moving box bottom left
-    if (bx1 == 0 && by1 == 0) {
-      c = p5.color(0, 255, 0);
-    } else {
-      c = p5.color(255, 0, 0);
-    }
-
-    p5.fill(c);
-    p5.strokeWeight(1);
-    p5.stroke(255);
-    p5.rect(bx1, by1, boxSize1, boxSize1);
-
-    //moving circle
-    if (bx2 == 160 && by2 == 50) {
-      c = p5.color(0, 255, 0);
-    } else {
-      c = p5.color(255, 0, 0);
-    }
-    p5.fill(c);
-    p5.strokeWeight(1);
-    p5.stroke(255);
-    p5.circle(bx2, by2, boxSize2);
-
-    //moving triangle1
-    if (bx3 == 220 && by3 == 0) {
-      c = p5.color(0, 255, 0);
-    } else {
-      c = p5.color(255, 0, 0);
-    }
-    p5.fill(c);
-    p5.strokeWeight(1);
-    p5.stroke(255);
-    p5.triangle(bx3, by3, bx3 + 100, by3 + 0, bx3 + 100, by3 + 100);
-
-    //moving triangle2
-    if (bx4 == 220 && by4 == 0) {
-      c = p5.color(0, 255, 0);
-    } else {
-      c = p5.color(255, 0, 0);
-    }
-    p5.fill(c);
-    p5.strokeWeight(1);
-    p5.stroke(255);
-    p5.triangle(bx4, by4, bx4 + 100, by4 + 0, bx4 + 100, by4 + 100);
-
-    if (overBox1 == true && overBox2 == true) {
-      overBox1 = false;
-      overBox2 = true;
-    }
-    if (overBox1 == true && overBox3 == true) {
-      overBox1 = false;
-      overBox3 = true;
-    }
-    if (overBox2 == true && overBox3 == true) {
-      overBox2 = false;
-      overBox3 = true;
-    }
-  };
+    
 
   p5.mousePressed = () => {
     if (overBox1 == true && overBox1hole == false) {
@@ -436,7 +345,7 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
     } else {
       locked3 = false;
     }
-  };
+  }
 
   p5.mouseDragged = () => {
     if (locked1 == true) {
@@ -456,11 +365,11 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
       by3 = p5.mouseY - yOffset;
       p5.push();
     }
-  };
+  }
 
   p5.mouseReleased = () => {
     locked1 = false;
     locked2 = false;
     locked3 = false;
-  };
-};
+  }
+}
