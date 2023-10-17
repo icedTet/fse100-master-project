@@ -6,36 +6,14 @@ let startTime = 0;
 let totalTime = 0;
 let points = 0;
 //square
-let bx1 = 1;
+let bx1 = 50;
 let by1 = 200;
-let boxSize1 = 100;
+let boxSize1 = 50;
 let overBox1 = false;
 let locked1 = false as boolean;
-let overBox1hole = false;
+let oOB = false;
 
-//circle
-let bx2 = 160;
-let by2 = 250;
-let boxSize2 = 100;
-let overBox2 = false;
-let locked2 = false;
-let overBox2hole = false;
 
-//toptri
-let bx3 = 220;
-let by3 = 200;
-let boxSize3 = 100;
-let overBox3 = false;
-let locked3 = false;
-let overBox3hole = false;
-
-//midtri
-let bx4 = 340;
-let by4 = 100;
-let boxSize4 = 100;
-let overBox4 = false;
-let locked4 = false;
-let overBox4hole = false;
 
 let xOffset = 0.0;
 let yOffset = 0.0;
@@ -45,11 +23,12 @@ let yOffset = 0.0;
 p5.setup = ()=> {
   p5.createCanvas(720, 400);
   startTime = Date.now();
+
 }
 
 p5.draw = ()=>{
 
-  p5.background(222);
+  p5.background(0);
   //shape holes
 
   if(points = 6){
@@ -57,106 +36,33 @@ p5.draw = ()=>{
   }
 
 
-  //square
-  let c= p5.color(0,0,0);
+  //goodpatch1
+  let c= p5.color(0,180,0);
   p5.fill(c);
-  p5.strokeWeight(1);
-  p5.stroke(255,0,255);
-  p5.rect(0,0,100,100);
-  //circle
-  c= p5.color(0,0,0);
-  p5.fill(c);
-  p5.strokeWeight(1);
-  p5.stroke(255,0,255);
-  p5.circle(160,50,100);
-//triangle1
-  c= p5.color(0,0,0);
-  p5.fill(c);
-  p5.strokeWeight(1);
-  p5.stroke(255,0,255);
-  p5.triangle(220, 0, 320, 0, 320, 100);
-//triangle2
-  c= p5.color(0,0,0);
-  p5.fill(c);
-  p5.strokeWeight(1);
-  p5.stroke(255,0,255);
-  p5.triangle(340, 100, 390, 0, 440, 100);
+  p5.noStroke();
+  p5.rect(0,162,300,75);
+ //goodpatch2
+ p5.rect(225,237,235,75);
+//goodpatch3
+p5.rect(385,162,335,75);
 
   //div
-   if (p5.mouseX > 0 && p5.mouseX < 100  && p5.mouseY > 0  && p5.mouseY < 100) 
-  {overBox1hole = true;} 
+   if (bx1 > 100 && bx1 < 200  && by1 > 0  && by1 < 100) 
+  {oOB = true;} 
   else 
-  {overBox1hole = false;}
+  {oOB = false;}
   
-   if (p5.mouseX > bx1 && p5.mouseX < bx1 + boxSize1 && p5.mouseY > by1  && p5.mouseY < by1 + boxSize1) 
+   if (p5.mouseX > bx1 - boxSize1/2 +10 && p5.mouseX < bx1 + boxSize1/2 && p5.mouseY > by1 - boxSize1/2  && p5.mouseY < by1 + boxSize1) 
   {overBox1 = true;} 
   else 
   {overBox1 = false;}
   
-  if (bx1==0 && by1==0)
-  {
-    locked1 = false;
-    overBox1 = false; 
-    overBox1hole = true;
-    points+1;
-  }
-  
-  if(overBox1 == true && overBox1hole == true && locked1 == true)
-  {
-    bx1 = 0;
-    by1 = 0;
-  }
-//div
-  if (p5.mouseX > 110 && p5.mouseX < 210  && p5.mouseY > 0  && p5.mouseY < 80) 
-  {overBox2hole = true;} 
-  else 
-  {overBox2hole = false;}
+ 
+ 
 
-  if (p5.mouseX > bx2 - boxSize2/2 && p5.mouseX < bx2 + boxSize2/2 && p5.mouseY > by2 - boxSize2/2 && p5.mouseY < by2 + boxSize2/2) 
-  {overBox2 = true;} 
-  else 
-  {overBox2 = false;}
-
-  if (bx2==160 && by2==50)
-  {
-    locked2 = false;
-    overBox2 = false; 
-    overBox2hole = true;
-    points+1;
-  }
-  
-  if(overBox2 == true && overBox2hole == true && locked2 == true)
-  {
-    bx2 = 160;
-    by2 = 50;
-  }
-//div
-if (p5.mouseX > 220 && p5.mouseX < 320  && p5.mouseY > 0  && p5.mouseY < 80) 
-  {overBox3hole = true;} 
-  else 
-  {overBox3hole = false;}
-
-  if (p5.mouseX > bx3  && p5.mouseX < bx3 + boxSize3 && p5.mouseY > by3  && p5.mouseY < by3 + boxSize3) 
-  {overBox3 = true;} 
-  else 
-  {overBox3 = false;}
-
-  if (bx3==220 && by3==0)
-  {
-    locked3 = false;
-    overBox3 = false; 
-    overBox3hole = true;
-    points+1;
-  }
-  
-  if(overBox3 == true && overBox3hole == true && locked3 == true)
-  {
-    bx3 = 220;
-    by3 = 0;
-  }
   
   //moving box bottom left
-  if (bx1==0 && by1==0)
+  if (oOB==true)
   {
     c= p5.color(0,255,0);
   }
@@ -167,88 +73,22 @@ if (p5.mouseX > 220 && p5.mouseX < 320  && p5.mouseY > 0  && p5.mouseY < 80)
   p5.fill(c);
   p5.strokeWeight(1);
   p5.stroke(255);
-  p5.rect(bx1, by1, boxSize1, boxSize1);
+  p5.circle(bx1, by1, boxSize1);
   
-  //moving circle
-  if (bx2==160 && by2==50)
-  {
-    c= p5.color(0,255,0);
-  }
-  else{
-    c= p5.color(255,0,0);
-  }
-  p5.fill(c);
-  p5.strokeWeight(1);
-  p5.stroke(255);
-  p5.circle(bx2, by2, boxSize2);
  
-  //moving triangle1
-  if (bx3==220 && by3==0)
-  {
-    c= p5.color(0,255,0);
-  }
-  else{
-    c= p5.color(255,0,0);
-  }
-  p5.fill(c);
-  p5.strokeWeight(1);
-  p5.stroke(255);
-  p5.triangle(bx3, by3, bx3+100, by3+0, bx3+100, by3+100);
-
-  //moving triangle2
-  if (bx4==220 && by4==0)
-  {
-    c= p5.color(0,255,0);
-  }
-  else{
-    c= p5.color(255,0,0);
-  }
-  p5.fill(c);
-  p5.strokeWeight(1);
-  p5.stroke(255);
-  p5.triangle(bx4, by4, bx4+100, by4+0, bx4+100, by4+100);
-
-
-    if(overBox1 == true && overBox2 == true){
-  overBox1 = false;
-  overBox2 = true;
-}
-    if(overBox1 == true && overBox3 == true){
-  overBox1 = false;
-  overBox3 = true;
-}
-    if(overBox2 == true && overBox3 == true){
-  overBox2 = false;
-  overBox3 = true;
-}
+   
 
 
 }
 
 p5.mousePressed = ()=> {
-  if (overBox1 == true && overBox1hole == false) {
+  if (overBox1 == true) {
     locked1 = true;
     p5.fill(255, 255, 255);
     xOffset = p5.mouseX - bx1;
     yOffset = p5.mouseY - by1;} 
   else {
     locked1 = false;}
-  
-  if (overBox2) {
-    locked2 = true;
-    p5.fill(255, 255, 255);
-    xOffset = p5.mouseX - bx2;
-    yOffset = p5.mouseY - by2;} 
-  else {
-    locked2 = false;}
-
-  if (overBox3) {
-    locked3 = true;
-    p5.fill(255, 255, 255);
-    xOffset = p5.mouseX - bx3;
-    yOffset = p5.mouseY - by3;} 
-  else {
-    locked3 = false;}
   
   
 }
@@ -260,23 +100,12 @@ p5.mouseDragged = ()=> {
     p5.push();
   }
   
-  if (locked2 == true) {
-    bx2 = p5.mouseX - xOffset;
-    by2 = p5.mouseY - yOffset;
-    p5.push();
-  }
 
-  if (locked3 == true) {
-    bx3 = p5.mouseX - xOffset;
-    by3 = p5.mouseY - yOffset;
-    p5.push();
-  }
 }
 
 p5.mouseReleased = ()=> {
   locked1 = false;
-  locked2 = false;
-  locked3 = false;
+  
 }
 
 
