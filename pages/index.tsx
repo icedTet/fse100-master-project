@@ -132,8 +132,10 @@ const IndexPage = () => {
                 bestAttempt={"25.08s"}
                 lastAttempt={1832252210000}
                 icon={"⌨️"}
-                onClick={() => {}}
-                link="/"
+                onClick={() => {
+                  alert("Game not implemented yet");
+                }}
+                link="/tasks/c"
               />
             }
             {
@@ -154,7 +156,10 @@ const IndexPage = () => {
                 bestAttempt="25.08s"
                 lastAttempt={1832252210000}
                 icon={"🌋"}
-                onClick={() => {}}
+                onClick={() => {
+                  alert("Game not implemented yet");
+                }}
+                link="/tasks/B"
                 complete
               />
             }
