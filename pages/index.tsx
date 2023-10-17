@@ -122,7 +122,7 @@ const IndexPage = () => {
           <span className={`text-lg text-gray-200/40 font-bold`}>
             Recommended tasks
           </span>
-          <div className={`grid grid-cols-2 gap-4`}>
+          <div className={`grid grid-cols-2 gap-6`}>
             {
               <ActivityCard
                 title={"Typing Tune-Up!"}
@@ -132,7 +132,10 @@ const IndexPage = () => {
                 bestAttempt={"25.08s"}
                 lastAttempt={1832252210000}
                 icon={"⌨️"}
-                onClick={() => {}}
+                onClick={() => {
+                  alert("Game not implemented yet");
+                }}
+                link="/tasks/c"
               />
             }
             {
@@ -143,6 +146,7 @@ const IndexPage = () => {
                 lastAttempt={1832252210000}
                 icon={"🧩"}
                 onClick={() => {}}
+                link="/tasks/A"
               />
             }
             {
@@ -152,13 +156,14 @@ const IndexPage = () => {
                 bestAttempt="25.08s"
                 lastAttempt={1832252210000}
                 icon={"🌋"}
-                onClick={() => {}}
+                onClick={() => {
+                  alert("Game not implemented yet");
+                }}
+                link="/tasks/B"
                 complete
               />
             }
-            {
-
-            }
+            {}
           </div>
         </div>
       </div>

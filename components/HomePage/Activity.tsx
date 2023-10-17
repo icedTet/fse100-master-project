@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import Link from "next/link";
 import ConfettiExplosion from "react-confetti-explosion";
 export const ActivityCard = (props: {
   title: string;
@@ -8,6 +9,7 @@ export const ActivityCard = (props: {
   icon: string;
   onClick: () => void;
   complete?: boolean;
+  link?: string;
 }) => {
   const {
     title,
@@ -17,6 +19,7 @@ export const ActivityCard = (props: {
     icon,
     onClick,
     complete,
+    link
   } = props;
   return (
     <div
@@ -34,7 +37,11 @@ export const ActivityCard = (props: {
         >
           <div className={`flex flex-col gap-2`}>
             <div className={`flex flex-row gap-6  items-center justify-start`}>
-              <div className={`bg-gray-800/80 w-14 h-14 text-3xl flex flex-row items-center justify-center rounded-full`}>{icon}</div>
+              <div
+                className={`bg-gray-800/80 w-14 h-14 text-3xl flex flex-row items-center justify-center rounded-full`}
+              >
+                {icon}
+              </div>
               <span className={`text-4xl text-white font-bold`}>{title}</span>
             </div>
             <span className={`text-xl text-white font-bold`}>Completed 🎉</span>
@@ -78,11 +85,13 @@ export const ActivityCard = (props: {
               {dayjs(lastAttempt).format("h:mm A")}
             </span>
           </div>
-          <button
-            className={`bg-purple-500 rounded-2xl px-6 py-3 text-white text-sm font-medium font-wsans`}
-          >
-            Play now
-          </button>
+          <Link href={link || ''} >
+            <button
+              className={`bg-purple-500 rounded-2xl px-6 py-3 text-white text-sm font-medium font-wsans`}
+            >
+              Play now
+            </button>
+          </Link>
         </div>
       </div>
     </div>
