@@ -12,7 +12,9 @@ let boxSize1 = 50;
 let overBox1 = false;
 let locked1 = false as boolean;
 let oOB = false;
-
+let sec1=false;
+let sec2=false;
+let sec3=false;
 
 
 let xOffset = 0.0;
@@ -27,15 +29,10 @@ p5.setup = ()=> {
 }
 
 p5.draw = ()=>{
-
   p5.background(0);
-  //shape holes
-
   if(points = 6){
     totalTime = (startTime - Date.now())/1000;
   }
-
-
   //goodpatch1
   let c= p5.color(0,180,0);
   p5.fill(c);
@@ -47,19 +44,35 @@ p5.draw = ()=>{
 p5.rect(385,162,335,75);
 
   //div
-   if (bx1 > 100 && bx1 < 200  && by1 > 0  && by1 < 100) 
-  {oOB = true;} 
+  if (sec1==true||sec2==true||sec3==true){
+    oOB=false;
+  }
   else 
-  {oOB = false;}
+  {oOB = true;}
   
-   if (p5.mouseX > bx1 - boxSize1/2 +10 && p5.mouseX < bx1 + boxSize1/2 && p5.mouseY > by1 - boxSize1/2  && p5.mouseY < by1 + boxSize1) 
+
+ if (bx1 > 0 && bx1 < 275 && by1 > 187 && by1 <= 212){
+    sec1=true;
+    }
+   else{sec1=false;}
+
+ if(bx1 > 250 && bx1 < 434 && by1 > 222 && by1 < 286){
+    sec2=true;
+  }
+  else{sec2=false;}
+  
+  if(bx1 > 410 && bx1 < 720 && by1 > 187 && by1 <= 212) 
+  {
+    sec3=true;
+  }
+  else{sec3=false;}
+  
+  
+  
+   if (p5.mouseX > bx1 - boxSize1/2  && p5.mouseX < bx1 + boxSize1/2 && p5.mouseY > by1 - boxSize1/2  && p5.mouseY < by1 + boxSize1) 
   {overBox1 = true;} 
   else 
   {overBox1 = false;}
-  
- 
- 
-
   
   //moving box bottom left
   if (oOB==true)
