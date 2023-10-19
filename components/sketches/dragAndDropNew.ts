@@ -3,6 +3,7 @@ import { Color } from "p5";
 import { Box } from "../Games/DragAndDrop/Box";
 import { Circle } from "../Games/DragAndDrop/Circle";
 import { ShapeManager } from "../Games/DragAndDrop/ShapeManager";
+import { Triangle } from "../Games/DragAndDrop/Triangle";
 
 
 
@@ -11,6 +12,7 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
   let totalTime = 0;
   let points = 0;
   const shapeManager = ShapeManager.getInstance(); // Create a new shape manager.
+
   for(let i=0 ;i<1;i++){
     let a =20 +Math.random()*window.innerWidth/3;
     let b =20 + Math.random()*window.innerHeight/3;
@@ -27,6 +29,8 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
   
  
   const newCircle = new Circle({x: 50, y: 100 }, 100, p5, { x: 600, y: 150});
+
+ 
   p5.setup = () => {
     p5.createCanvas(window.innerWidth, window.innerHeight);
     startTime = Date.now();
