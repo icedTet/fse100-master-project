@@ -11,9 +11,22 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
   let totalTime = 0;
   let points = 0;
   const shapeManager = ShapeManager.getInstance(); // Create a new shape manager.
-  const box = new Box({ x: 100, y: 200 }, 200, p5, { x: 500, y: 300 });
-  const newBox = new Box({ x: 200, y: 300 }, 100, p5, { x: 600, y: 150 });
-  const newCircle = new Circle({x: 50, y: 100 }, 50, p5, { x: 600, y: 150});
+  for(let i=0 ;i<1;i++){
+    let a =20 +Math.random()*window.innerWidth/3;
+    let b =20 + Math.random()*window.innerHeight/3;
+    let c =Math.random()*window.innerWidth/2;
+    let d = Math.random()*window.innerHeight/2;
+    const box = new Box({ x: a, y: b }, 200, p5, { x: c, y: d });
+  }
+  for(let i=0 ;i<1;i++){
+    let a =50 +Math.random()*100;
+    let b =500 -Math.random()*100;
+
+    const newBox = new Box({ x: a, y: b }, 100, p5, { x: 500, y: 300 });
+  }
+  
+ 
+  const newCircle = new Circle({x: 50, y: 100 }, 100, p5, { x: 600, y: 150});
   p5.setup = () => {
     p5.createCanvas(window.innerWidth, window.innerHeight);
     startTime = Date.now();

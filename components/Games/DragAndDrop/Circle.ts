@@ -21,7 +21,7 @@ export class Circle implements Shape {
     this.boxSize = boxSize;
     this.p5 = p5;
     this.destination = destination;
-    this.tolerance = 0.05;
+    this.tolerance = 0.10;
     ShapeManager.getInstance().addShape(this);
   }
   id?: number | undefined;
@@ -33,10 +33,10 @@ export class Circle implements Shape {
    */
   isClickingOnShape(x: number, y: number) {
     return (
-      x > this.x &&
-      x < this.x + this.boxSize &&
-      y > this.y &&
-      y < this.y + this.boxSize
+      x > this.x -this.boxSize/2&&
+      x < this.x + this.boxSize/2 &&
+      y > this.y -this.boxSize/2&&
+      y < this.y + this.boxSize/2
     );
   }
   /**
@@ -69,7 +69,7 @@ export class Circle implements Shape {
     this.p5.fill(c);
     this.p5.strokeWeight(1);
     this.p5.stroke(255, 0, 255);
-    this.p5.rect(this.x, this.y, this.boxSize, this.boxSize);
+    this.p5.circle(this.x, this.y, this.boxSize);
   }
   /**
    * Updates the position of the shape.
