@@ -1,7 +1,7 @@
 
-export const DragAndDrop = ()=>{
+export const DragAndDropNew = ()=>{
     return <div>
         Hi!
     </div>
 }
-export default DragAndDrop;
+export default DragAndDropNew;

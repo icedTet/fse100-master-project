@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
 import { demoSketch } from "../../components/sketches/demoSketch";
-import { dragandDropSketch } from "../../components/sketches/dragAndDrop";
+import { dragandDropSketch } from "../../components/sketches/dragAndDropNew";
 
 export const DemoPage = () => {
   const [rotation, setRotation] = useState(0);

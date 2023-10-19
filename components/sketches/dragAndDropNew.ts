@@ -1,6 +1,7 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { Color } from "p5";
 import { Box } from "../Games/DragAndDrop/Box";
+import { Circle } from "../Games/DragAndDrop/Circle";
 import { ShapeManager } from "../Games/DragAndDrop/ShapeManager";
 
 
@@ -12,6 +13,7 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
   const shapeManager = ShapeManager.getInstance(); // Create a new shape manager.
   const box = new Box({ x: 100, y: 200 }, 200, p5, { x: 500, y: 300 });
   const newBox = new Box({ x: 200, y: 300 }, 100, p5, { x: 600, y: 150 });
+  const newCircle = new Circle({x: 50, y: 100 }, 50, p5, { x: 600, y: 150});
   p5.setup = () => {
     p5.createCanvas(window.innerWidth, window.innerHeight);
     startTime = Date.now();
