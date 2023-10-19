@@ -3,6 +3,7 @@ import { Color } from "p5";
 import { Box } from "../Games/DragAndDrop/Box";
 import { Circle } from "../Games/DragAndDrop/Circle";
 import { ShapeManager } from "../Games/DragAndDrop/ShapeManager";
+import { Triangle } from "../Games/DragAndDrop/Triangle";
 
 
 
@@ -14,6 +15,8 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
   const box = new Box({ x: 100, y: 200 }, 200, p5, { x: 500, y: 300 });
   const newBox = new Box({ x: 200, y: 300 }, 100, p5, { x: 600, y: 150 });
   const newCircle = new Circle({x: 50, y: 100 }, 50, p5, { x: 600, y: 150});
+  const newTriangle = new Triangle({ x: 0, y: 0 }, 100, p5, { x: 400, y: 100 });
+
   p5.setup = () => {
     p5.createCanvas(window.innerWidth, window.innerHeight);
     startTime = Date.now();
