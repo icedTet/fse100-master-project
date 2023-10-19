@@ -24,7 +24,7 @@ export const DemoPage = () => {
       <Link href="/">
         <span className={`text-4xl hover:text-purple-200 underline text-purple-600`}>Go back home</span>
       </Link>
-      {/* <NextReactP5Wrapper sketch={labyrinthEscapeSketch} rotation={rotation} /> */}
+     <NextReactP5Wrapper sketch={labyrinthEscapeSketch} rotation={rotation} />
     </div>
   );
 };
