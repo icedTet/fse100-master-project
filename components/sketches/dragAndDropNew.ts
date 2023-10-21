@@ -4,6 +4,7 @@ import { Box } from "../Games/DragAndDrop/Box";
 import { Circle } from "../Games/DragAndDrop/Circle";
 import { ShapeManager } from "../Games/DragAndDrop/ShapeManager";
 import { Triangle } from "../Games/DragAndDrop/Triangle";
+import { EquilateralT } from "../Games/DragAndDrop/EquilateralT";
 
 
 
@@ -44,6 +45,13 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
     const newBox = new Circle({ x: a, y: b }, 100, p5, { x: c, y: d });
   }
 
+  for(let i=0 ;i<1;i++){
+    let a = Math.random()*(window.innerWidth-100);
+    let b = Math.random()*(window.innerHeight-100);
+    let c = Math.random()*(window.innerWidth-100);
+    let d = Math.random()*(window.innerHeight-100);
+    const newEQT = new EquilateralT({ x: 0, y: 0 }, 100, p5, { x: 200, y: 0 });
+  }
  
   p5.setup = () => {
     p5.createCanvas(window.innerWidth, window.innerHeight);
