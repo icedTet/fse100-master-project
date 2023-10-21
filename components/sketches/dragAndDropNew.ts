@@ -50,14 +50,12 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
       p5.mouseX,
       p5.mouseY
     );
-    console.log("mouse pressed", selectedShape);
   };
   p5.mouseDragged = () => {
     const selectedShape = ShapeManager.getInstance().determineShapeClicked(
       p5.mouseX,
       p5.mouseY
     );
-    console.log("mouse dragged", selectedShape, p5.mouseX, p5.mouseY);
     if (selectedShape) {
       ShapeManager.getInstance().lockShapeToMouse(selectedShape, p5);
     }
