@@ -28,8 +28,21 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
     const newBox = new Box({ x: a, y: b }, 100, p5, { x: c, y: d });
   }
   //
- 
-  const newCircle = new Circle({x: 50, y: 100 }, 100, p5, { x: 600, y: 150});
+  for(let i=0 ;i<1;i++){
+    let a = Math.random()*window.innerWidth;
+    let b = Math.random()*window.innerHeight;
+    let c = Math.random()*window.innerWidth;
+    let d = Math.random()*window.innerHeight;
+    const newBox = new Triangle({ x: a, y: b }, 100, p5, { x: c, y: d });
+  }
+
+  for(let i=0 ;i<1;i++){
+    let a = Math.random()*window.innerWidth;
+    let b = Math.random()*window.innerHeight;
+    let c = Math.random()*window.innerWidth;
+    let d = Math.random()*window.innerHeight;
+    const newBox = new Circle({ x: a, y: b }, 100, p5, { x: c, y: d });
+  }
 
  
   p5.setup = () => {
