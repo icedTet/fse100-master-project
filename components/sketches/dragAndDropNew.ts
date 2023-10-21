@@ -14,33 +14,33 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
   const shapeManager = ShapeManager.getInstance(); // Create a new shape manager.
 
   for(let i=0 ;i<1;i++){
-    let a = Math.random()*window.innerWidth;
-    let b = Math.random()*window.innerHeight;
-    let c = Math.random()*window.innerWidth;
-    let d = Math.random()*window.innerHeight;
+    let a = Math.random()*(window.innerWidth-200);
+    let b = Math.random()*(window.innerHeight-200);
+    let c = Math.random()*(window.innerWidth-200);
+    let d = Math.random()*(window.innerHeight-200);
     const box = new Box({ x: a, y: b }, 200, p5, { x: c, y: d });
   }
   for(let i=0 ;i<1;i++){
-    let a = Math.random()*window.innerWidth;
-    let b = Math.random()*window.innerHeight;
-    let c = Math.random()*window.innerWidth;
-    let d = Math.random()*window.innerHeight;
+    let a = Math.random()*(window.innerWidth-100);
+    let b = Math.random()*(window.innerHeight-100);
+    let c = Math.random()*(window.innerWidth-100);
+    let d = Math.random()*(window.innerHeight-100);
     const newBox = new Box({ x: a, y: b }, 100, p5, { x: c, y: d });
   }
   //
   for(let i=0 ;i<1;i++){
-    let a = Math.random()*window.innerWidth;
-    let b = Math.random()*window.innerHeight;
-    let c = Math.random()*window.innerWidth;
-    let d = Math.random()*window.innerHeight;
+    let a = Math.random()*(window.innerWidth-100);
+    let b = Math.random()*(window.innerHeight-100);
+    let c = Math.random()*(window.innerWidth-100);
+    let d = Math.random()*(window.innerHeight-100);
     const newBox = new Triangle({ x: a, y: b }, 100, p5, { x: c, y: d });
   }
 
   for(let i=0 ;i<1;i++){
-    let a = Math.random()*window.innerWidth;
-    let b = Math.random()*window.innerHeight;
-    let c = Math.random()*window.innerWidth;
-    let d = Math.random()*window.innerHeight;
+    let a = Math.random()*(window.innerWidth-50);
+    let b = Math.random()*(window.innerHeight-50);
+    let c = Math.random()*(window.innerWidth-50);
+    let d = Math.random()*(window.innerHeight-50);
     const newBox = new Circle({ x: a, y: b }, 100, p5, { x: c, y: d });
   }
 
