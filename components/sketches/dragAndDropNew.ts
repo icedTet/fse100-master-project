@@ -13,6 +13,8 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
   let points = 0;
   const shapeManager = ShapeManager.getInstance(); // Create a new shape manager.
 
+// rng shape placements, each variable is based off of the size of the window so the position will work on biggest screens as well
+//big box
   for(let i=0 ;i<1;i++){
     let a =20 +Math.random()*window.innerWidth/3;
     let b =20 + Math.random()*window.innerHeight/3;
@@ -20,6 +22,7 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
     let d = window.innerHeight - window.innerHeight*.25;
     const box = new Box({ x: a, y: b }, 200, p5, { x: c, y: d });
   }
+  //small box
   for(let i=0 ;i<1;i++){
     let a =20 +Math.random()*window.innerWidth/3;
     let b =20 + Math.random()*window.innerHeight/3;
@@ -27,6 +30,7 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
     let d = window.innerHeight - window.innerHeight*.4;
     const newBox = new Box({ x: a, y: b }, 100, p5, { x: c, y: d });
   }
+  //circle
   for(let i=0 ;i<1;i++){
     let a =45 +Math.random()*window.innerWidth/3;
     let b =45 + Math.random()*window.innerHeight/3;
