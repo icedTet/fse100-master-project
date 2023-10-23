@@ -1,7 +1,8 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { ShapeManager } from "./ShapeManager";
 import { Shape, Coordinate } from "./dndTypes";
-
+//WHY ISNT THIS WORKING!
+let e = 0;
 export class EquilateralT implements Shape {
   x: number;
   y: number;
