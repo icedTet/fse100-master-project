@@ -101,7 +101,10 @@ export class EquilateralT implements Shape {
    */
   checkForHole(x: number, y: number) {
     return (
-      y < this.destination.y &&
+      x >= this.destination.x - this.boxSize * this.tolerance &&
+      x <= this.destination.x + this.boxSize * this.tolerance &&
+      y >= this.destination.y - this.boxSize * this.tolerance &&
+      y <= this.destination.y + this.boxSize * this.tolerance &&
       y > -Math.sqrt(3)*x+Math.sqrt(3)*this.destination.x+this.destination.y &&
       y > Math.sqrt(3)*x-Math.sqrt(3)*(this.destination.x+this.boxSize)+this.destination.y
     );
