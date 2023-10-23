@@ -39,7 +39,7 @@ export class ShapeManager {
       if (this.draggedShape) return this.draggedShape;
       let shapeClicked = null as Shape | null;
       this.shapes.forEach((shape) => {
-        if (shape.isClickingOnShape(x, y)) {
+        if (shape.isClickingOnShape(x, y) && !shape.correct) {
           shapeClicked = shape;
         }
       });
