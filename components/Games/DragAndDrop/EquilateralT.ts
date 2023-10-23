@@ -18,7 +18,7 @@ export class EquilateralT implements Shape {
     this.boxSize = boxSize;
     this.p5 = p5;
     this.destination = destination;
-    this.tolerance = 0.05;
+    this.tolerance = 0.2;
     ShapeManager.getInstance().addShape(this);
   }
   id?: number | undefined;
