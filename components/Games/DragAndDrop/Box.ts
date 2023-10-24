@@ -10,7 +10,8 @@ export class Box implements Shape {
   destination: Coordinate;
   tolerance: number;
   correct: boolean = false;
-  fade: number = 255;
+  fade: number = 300;
+  greenShift: number = 0;
   constructor(
     boxStart: Coordinate,
     boxSize: number,
@@ -53,10 +54,12 @@ export class Box implements Shape {
    */
   drawHole() {
     let c = this.correct
-      ? this.p5.color(0, 0, 0, 100)
-      : this.p5.color(0, 0, 0, this.fade);
+      ? this.p5.color(0,this.greenShift, 0, this.fade)
+      : this.p5.color(13/2, 27/2, 41/2, 255);
     if (this.correct) {
-      this.fade--;
+      this.fade-=5;
+      if (this.greenShift < 120)
+      this.greenShift+=2;
     }
     this.p5.fill(c);
     this.p5.noStroke();
@@ -80,10 +83,10 @@ export class Box implements Shape {
       : this.p5.color(13, 27, 41, 200);
     this.p5.fill(c);
     this.p5.noStroke();
-    if (!this.correct) {
-      this.p5.strokeWeight(1);
-      this.p5.stroke(255, 0, 255);
-    }
+    // if (!this.correct) {
+    //   this.p5.strokeWeight(1);
+    //   this.p5.stroke(255, 0, 255);
+    // }
     this.p5.rect(this.x, this.y, this.boxSize, this.boxSize);
   }
   /**
