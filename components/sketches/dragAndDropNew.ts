@@ -80,7 +80,8 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
     ShapeManager.getInstance().releaseShapeFromMouse();
   };
   p5.draw = () => {
-    p5.background(222);
+    p5.clear(20,20,20,100);
+    // p5.background(20,0);
     //shape holes
 
     if ((points = 6)) {

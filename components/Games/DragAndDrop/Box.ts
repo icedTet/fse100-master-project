@@ -10,6 +10,7 @@ export class Box implements Shape {
   destination: Coordinate;
   tolerance: number;
   correct: boolean = false;
+  fade: number = 255;
   constructor(
     boxStart: Coordinate,
     boxSize: number,
@@ -51,10 +52,18 @@ export class Box implements Shape {
    * Draws the hole, where the shape should be moved to.
    */
   drawHole() {
-    let c = this.p5.color(0, 0, 0);
+    let c = this.correct
+      ? this.p5.color(0, 0, 0, 100)
+      : this.p5.color(0, 0, 0, this.fade);
+    if (this.correct) {
+      this.fade--;
+    }
     this.p5.fill(c);
-    this.p5.strokeWeight(1);
-    this.p5.stroke(255, 0, 255);
+    this.p5.noStroke();
+    if (!this.correct && ShapeManager.getInstance().draggedShape === this) {
+      this.p5.strokeWeight(1);
+      this.p5.stroke(255, 0, 255);
+    }
     this.p5.rect(
       this.destination.x,
       this.destination.y,
@@ -66,10 +75,15 @@ export class Box implements Shape {
    * Draws the shape.
    */
   drawShape() {
-    let c = this.correct ? this.p5.color(0, 255, 0) : this.p5.color(0, 0, 255);
+    let c = this.correct
+      ? this.p5.color(0, 0, 0, 0)
+      : this.p5.color(13, 27, 41, 200);
     this.p5.fill(c);
-    this.p5.strokeWeight(1);
-    this.p5.stroke(255, 0, 255);
+    this.p5.noStroke();
+    if (!this.correct) {
+      this.p5.strokeWeight(1);
+      this.p5.stroke(255, 0, 255);
+    }
     this.p5.rect(this.x, this.y, this.boxSize, this.boxSize);
   }
   /**
