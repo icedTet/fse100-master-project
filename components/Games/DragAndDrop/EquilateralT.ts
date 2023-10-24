@@ -106,8 +106,8 @@ export class EquilateralT implements Shape {
       x <= this.destination.x + this.boxSize * this.tolerance &&
       y >= this.destination.y - this.boxSize * this.tolerance &&
       y <= this.destination.y + this.boxSize * this.tolerance &&
-      y > -Math.sqrt(3)*x+Math.sqrt(3)*this.destination.x+this.destination.y &&
-      y > Math.sqrt(3)*x-Math.sqrt(3)*(this.destination.x+this.boxSize)+this.destination.y
+      (this.tolerance+1)*y > -Math.sqrt(3)*x+Math.sqrt(3)*this.destination.x+this.destination.y &&
+      (this.tolerance+1)*y > Math.sqrt(3)*x-Math.sqrt(3)*(this.destination.x+this.boxSize)+this.destination.y
     );
   }
   /**
