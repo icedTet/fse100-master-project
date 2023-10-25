@@ -6,8 +6,6 @@ import { ShapeManager } from "../Games/DragAndDrop/ShapeManager";
 import { Triangle } from "../Games/DragAndDrop/Triangle";
 import { EquilateralT } from "../Games/DragAndDrop/EquilateralT";
 
-
-
 export const dragandDropSketch = (p5: P5CanvasInstance) => {
   let startTime = 0;
   let totalTime = 0;
@@ -66,7 +64,7 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
 
   p5.setup = () => {
     p5.createCanvas(window.innerWidth, window.innerHeight);
-    startTime = Date.now();
+    ShapeManager.getInstance().start();
   };
   p5.mousePressed = () => {
     const selectedShape = ShapeManager.getInstance().determineShapeClicked(
@@ -88,13 +86,9 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
     ShapeManager.getInstance().releaseShapeFromMouse();
   };
   p5.draw = () => {
-    p5.background(222);
-    //shape holes
+    p5.clear(20, 20, 20, 100);
 
-    if ((points = 6)) {
-      totalTime = (startTime - Date.now()) / 1000;
-      points = 0;
-    }
     ShapeManager.getInstance().drawShapes(p5);
+    
   };
 };

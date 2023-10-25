@@ -5,7 +5,7 @@ export interface GenericGameSaveData {
 }
 export interface DNDStatistics {
   attemptTime: number; // in ms
-  accuracy: number; // in %
+  points: number;
 }
 export interface DNDGameSaveData extends GenericGameSaveData {
   bestAttempt?: DNDStatistics;

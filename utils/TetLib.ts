@@ -23,6 +23,18 @@ export const TetLib = {
       minutes < 10 ? `0${minutes}` : minutes
     }:${seconds < 10 ? `0${seconds}` : seconds}`;
   },
+  StopwatchFormat:(ms: number) => {
+    let seconds = Math.floor(ms / 1000);
+    let minutes = Math.floor((seconds % 3600) / 60);
+    seconds = seconds % 60;
+    if (minutes) {
+      return `${minutes < 10 ? `0${minutes}` : minutes}:${
+        seconds < 10 ? `0${seconds}` : seconds
+      }`;
+    } else {
+      return `${seconds < 10 ? `0${seconds}` : seconds}.${ms % 1000}s`;
+    }
+  },
   genID: (length: number) => {
     var result = "";
     var characters =

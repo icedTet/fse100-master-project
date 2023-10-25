@@ -87,6 +87,7 @@ export class Circle implements Shape {
     if (this.checkForHole(this.x, this.y)) {
       this.shapeWin();
     }
+    
   }
   /**
    * Checks if the shape is in the hole.

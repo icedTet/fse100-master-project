@@ -1,16 +1,73 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
+import { Color } from "p5";
+import { Box } from "../Games/DragAndDrop/Box";
+import { Circle } from "../Games/DragAndDrop/Circle";
+import { Triangle } from "../Games/DragAndDrop/Triangle";
+import { EquilateralT } from "../Games/DragAndDrop/EquilateralT";
+import { PlayerManager } from "../Games/LabyrinthEscape/PlayerManager";
+import { player } from "../Games/LabyrinthEscape/Player";
 
 export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
+  let startTime = 0;
+  let totalTime = 0;
+  let points = 0;
+ 
+  const playerManager = PlayerManager.getInstance(); // Create a new player manager.
 
+  for(let i=0 ;i<1;i++){
+    let a =200;
+    let b =200;
+    let c = 600;
+    let d = 200;
+    const Player = new player({ x: a, y: b }, 100, p5, { x: c, y: d });
+  }
+
+
+  p5.setup = () => {
+    p5.createCanvas(window.innerWidth, window.innerHeight);
+    startTime = Date.now();
+  };
+  p5.mousePressed = () => {
+    const selectedPlayer = PlayerManager.getInstance().determinePlayerClicked(
+      p5.mouseX,
+      p5.mouseY
+    );
+  };
+  p5.mouseDragged = () => {
+    const selectedPlayer = PlayerManager.getInstance().determinePlayerClicked(
+      p5.mouseX,
+      p5.mouseY
+    );
+    if (selectedPlayer) {
+      PlayerManager.getInstance().lockPlayerToMouse(selectedPlayer, p5);
+    }
+    PlayerManager.getInstance().mouseMoveUpdate(p5);
+  };
+  p5.mouseReleased = () => {
+    PlayerManager.getInstance().releasePlayerFromMouse();
+  };
+  p5.draw = () => {
+    p5.background(0);
+    //player holes
+
+    if ((points = 6)) {
+      totalTime = (startTime - Date.now()) / 1000;
+    }
+    PlayerManager.getInstance().drawPlayers(p5);
+  };
+
+}
+
+/*
 let startTime = 0;
 let totalTime = 0;
 let points = 0;
-//defining moving shape
+//defining moving player
 let bx1 = 50;
 let by1 = 200;
 let boxSize1 = 50;
 let overBox1 = false;
-//interactions with how the shape moves
+//interactions with how the player moves
 let locked1 = false as boolean;
 let oOB = false;
 //defining each part of the maze
@@ -76,7 +133,7 @@ p5.rect(385,162,335,75);
   else 
   {overBox1 = false;}
   
-  //changes color of shape to note whether or not the shape is in bounds
+  //changes color of player to note whether or not the player is in bounds
   if (oOB==true)//out of bounds
   {
     c= p5.color(0,255,0);
@@ -124,5 +181,4 @@ p5.mouseReleased = ()=> {
 }
 
 
-
-}
+*/
