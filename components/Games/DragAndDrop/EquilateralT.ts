@@ -99,8 +99,17 @@ export class EquilateralT implements Shape {
       this.x = newPosition.x;
       this.y = newPosition.y;
     } else {
+      if(this.x<0)
+      this.x = 0;
+      if(this.x+this.boxSize>=window.innerWidth)
+      this.x = window.innerWidth-this.boxSize;
+      if(this.y-Math.sqrt(3)/2*this.boxSize<0)
+      this.y = Math.sqrt(3)/2*this.boxSize;
+      if(this.y>window.innerHeight)
+      this.y = window.innerHeight;
       this.x += newPosition.x;
       this.y += newPosition.y;
+
     }
     if (this.checkForHole(this.x, this.y)) {
       this.shapeWin();

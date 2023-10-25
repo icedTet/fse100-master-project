@@ -91,6 +91,7 @@ export class ShapeManager extends EventEmitter {
         x: deltaX,
         y: deltaY,
       });
+      
       this.lastMousePosition = { x: p5.mouseX, y: p5.mouseY };
     }
   }

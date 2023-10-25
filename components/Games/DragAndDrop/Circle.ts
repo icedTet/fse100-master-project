@@ -93,8 +93,17 @@ export class Circle implements Shape {
       this.x = newPosition.x;
       this.y = newPosition.y;
     } else {
+      if(this.x-this.boxSize/2<0)
+      this.x = this.boxSize/2;
+      if(this.x+this.boxSize/2>=window.innerWidth)
+      this.x = window.innerWidth-this.boxSize/2;
+      if(this.y-this.boxSize/2<=0)
+      this.y = this.boxSize/2;
+      if(this.y+this.boxSize/2>=window.innerHeight)
+      this.y = window.innerHeight-this.boxSize/2;
       this.x += newPosition.x;
       this.y += newPosition.y;
+
     }
     if (this.checkForHole(this.x, this.y)) {
       this.shapeWin();

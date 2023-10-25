@@ -98,8 +98,17 @@ export class Box implements Shape {
       this.x = newPosition.x;
       this.y = newPosition.y;
     } else {
+      if(this.x<0)
+      this.x = 0;
+      if(this.x+this.boxSize>=window.innerWidth)
+      this.x = window.innerWidth-this.boxSize;
+      if(this.y<=0)
+      this.y = 0;
+      if(this.y+this.boxSize>=window.innerHeight)
+      this.y = window.innerHeight-this.boxSize;
       this.x += newPosition.x;
       this.y += newPosition.y;
+
     }
     if (this.checkForHole(this.x, this.y)) {
       this.shapeWin();
