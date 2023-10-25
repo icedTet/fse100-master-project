@@ -54,12 +54,11 @@ export class Box implements Shape {
    */
   drawHole() {
     let c = this.correct
-      ? this.p5.color(0,this.greenShift, 0, this.fade)
-      : this.p5.color(13/2, 27/2, 41/2, 255);
+      ? this.p5.color(0, this.greenShift, 0, this.fade)
+      : this.p5.color(13 / 2, 27 / 2, 41 / 2, 255);
     if (this.correct) {
-      this.fade-=5;
-      if (this.greenShift < 120)
-      this.greenShift+=2;
+      this.fade -= 5;
+      if (this.greenShift < 120) this.greenShift += 2;
     }
     this.p5.fill(c);
     this.p5.noStroke();

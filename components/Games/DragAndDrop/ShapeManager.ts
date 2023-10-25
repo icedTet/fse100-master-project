@@ -1,7 +1,8 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { Shape, Coordinate } from "./dndTypes";
+import EventEmitter from "events";
 
-export class ShapeManager {
+export class ShapeManager extends EventEmitter {
   static instance: ShapeManager;
   static getInstance() {
     if (!ShapeManager.instance) {
@@ -13,8 +14,25 @@ export class ShapeManager {
   draggedShape: Shape | null = null;
   nextShapeID: number = 0;
   lastMousePosition: Coordinate = { x: 0, y: 0 };
+  startTime: number = 0;
+  private lastPointTally: number = 0;
   private constructor() {
+    super();
     this.shapes = new Map();
+  }
+  start() {
+    this.startTime = Date.now();
+    this.emit("start", this.startTime);
+  }
+  stop() {
+    this.emit("stop", Date.now());
+    this.shapes.clear();
+    this.draggedShape = null;
+    this.nextShapeID = 0;
+    this.lastMousePosition = { x: 0, y: 0 };
+    this.startTime = 0;
+    this.lastPointTally = 0;
+    
   }
   addShape(shape: Shape) {
     shape.id = this.nextShapeID;
@@ -36,6 +54,10 @@ export class ShapeManager {
     this.shapes.forEach((shape) => {
       if (shape.correct) points++;
     });
+    if (points > this.lastPointTally) {
+      this.emit("points", points);
+      this.lastPointTally = points;
+    }
     return points;
   }
   drawShapes(p5: P5CanvasInstance) {
@@ -54,6 +76,7 @@ export class ShapeManager {
   }
   releaseShapeFromMouse() {
     this.draggedShape = null;
+    ShapeManager.getInstance().countPoints()
   }
   lockShapeToMouse(shape: Shape, p5: P5CanvasInstance) {
     if (this.draggedShape) return;

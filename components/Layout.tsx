@@ -14,7 +14,7 @@ const Layout = ({
   title = "This is the default title",
   centerContainer,
 }: Props) => (
-  <div className={`w-full grow max-w-[130ch] mx-auto flex flex-col`}>
+  <div className={`w-full grow max-w-[130ch] mx-auto flex flex-col relative`}>
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
