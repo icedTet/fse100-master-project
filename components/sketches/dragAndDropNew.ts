@@ -17,42 +17,50 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
 // rng shape placements, each variable is based off of the size of the window so the position will work on biggest screens as well
 //big box
   for(let i=0 ;i<1;i++){
-    let a =20 +Math.random()*window.innerWidth/3;
-    let b =20 + Math.random()*window.innerHeight/3;
-    let c = window.innerWidth/2 + Math.random()*window.innerWidth/4;
-    let d = window.innerHeight - window.innerHeight*.25;
+    let a = 10+Math.random()*(window.innerWidth/2-210);
+    let b = 10+Math.random()*(window.innerHeight-210);
+    let c = 10+window.innerWidth/2+Math.random()*(window.innerWidth/2-210);
+    let d = 10+Math.random()*(window.innerHeight-210);
     const box = new Box({ x: a, y: b }, 200, p5, { x: c, y: d });
   }
   //small box
   for(let i=0 ;i<1;i++){
-    let a =20 +Math.random()*window.innerWidth/3;
-    let b =20 + Math.random()*window.innerHeight/3;
-    let c = window.innerWidth/2 + Math.random()*window.innerWidth/4;
-    let d = window.innerHeight - window.innerHeight*.4;
+    let a = 10+Math.random()*(window.innerWidth/2-110);
+    let b = 10+Math.random()*(window.innerHeight-110);
+    let c = 10+window.innerWidth/2+Math.random()*(window.innerWidth/2-110);
+    let d = 10+Math.random()*(window.innerHeight-110);
     const newBox = new Box({ x: a, y: b }, 100, p5, { x: c, y: d });
   }
   //circle
   for(let i=0 ;i<1;i++){
-    let a =45 +Math.random()*window.innerWidth/3;
-    let b =45 + Math.random()*window.innerHeight/3;
-    let c = window.innerWidth/2 + Math.random()*window.innerWidth/3;
-    let d = window.innerHeight - window.innerHeight*.5;
+    let a = 60+Math.random()*(window.innerWidth/2-120);
+    let b = 60+Math.random()*(window.innerHeight-120);
+    let c = 60+window.innerWidth/2+Math.random()*(window.innerWidth/2-120);
+    let d = 60+Math.random()*(window.innerHeight-120);
     const newCircle = new Circle({x: a, y: b }, 100, p5, { x: c, y: d});
+  }
+
+  for(let i=0 ;i<1;i++){
+    let a = 120+Math.random()*(window.innerWidth/2-240);
+    let b = 120+Math.random()*(window.innerHeight-240);
+    let c = 120+window.innerWidth/2+Math.random()*(window.innerWidth/2-240);
+    let d = 120+Math.random()*(window.innerHeight-240);
+    const newCircle = new Circle({x: a, y: b }, 200, p5, { x: c, y: d});
   }
  
   for(let i=0 ;i<1;i++){
-    let a =20 +Math.random()*window.innerWidth/3;
-    let b =20 + Math.random()*window.innerHeight/3;
-    let c = window.innerWidth/2 + Math.random()*window.innerWidth/4;
-    let d = window.innerHeight - window.innerHeight*.4;
+    let a = 10+Math.random()*(window.innerWidth/2-110);
+    let b = 10+Math.random()*(window.innerHeight-110);
+    let c = 10+window.innerWidth/2+Math.random()*(window.innerWidth/2-110);
+    let d = 10+Math.random()*(window.innerHeight-110);
     const newBox = new Triangle({ x: a, y: b }, 100, p5, { x: c, y: d });
   }
  
   for(let i=0 ;i<1;i++){
-    let a =20 +Math.random()*window.innerWidth/3;
-    let b =20 + Math.random()*window.innerHeight/3;
-    let c = window.innerWidth/2 + Math.random()*window.innerWidth/4;
-    let d = window.innerHeight - window.innerHeight*.4;
+    let a = 10+Math.random()*(window.innerWidth/2-120);
+    let b = 110+Math.random()*(window.innerHeight-120);
+    let c = 10+window.innerWidth/2+Math.random()*(window.innerWidth/2-120);
+    let d = 110+Math.random()*(window.innerHeight-120);
     const newBox = new EquilateralT({ boxStart: { x: a, y: b }, boxSize: 100, p5, destination: { x: c, y: d } });
   }
 
@@ -85,6 +93,7 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
 
     if ((points = 6)) {
       totalTime = (startTime - Date.now()) / 1000;
+      points = 0;
     }
     ShapeManager.getInstance().drawShapes(p5);
   };
