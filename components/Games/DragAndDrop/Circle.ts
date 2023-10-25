@@ -10,6 +10,8 @@ export class Circle implements Shape {
   destination: Coordinate;
   tolerance: number;
   correct: boolean = false;
+  fade: number = 300;
+  greenShift: number = 0;
   constructor(
     boxStart: Coordinate,
     boxSize: number,
@@ -51,10 +53,19 @@ export class Circle implements Shape {
    * Draws the hole, where the shape should be moved to.
    */
   drawHole() {
-    let c = this.p5.color(0, 0, 0);
+    let c = this.correct
+      ? this.p5.color(0, this.greenShift, 0, this.fade)
+      : this.p5.color(13 / 2, 27 / 2, 41 / 2, 255);
+    if (this.correct) {
+      this.fade -= 5;
+      if (this.greenShift < 120) this.greenShift += 2;
+    }
     this.p5.fill(c);
-    this.p5.strokeWeight(1);
-    this.p5.stroke(255, 0, 255);
+    this.p5.noStroke();
+    if (!this.correct && ShapeManager.getInstance().draggedShape === this) {
+      this.p5.strokeWeight(1);
+      this.p5.stroke(255, 0, 255);
+    }
     this.p5.circle(
       this.destination.x,
       this.destination.y,
@@ -65,10 +76,11 @@ export class Circle implements Shape {
    * Draws the shape.
    */
   drawShape() {
-    let c = this.correct ? this.p5.color(0, 255, 0) : this.p5.color(0, 0, 255);
+    let c = this.correct
+      ? this.p5.color(0, 0, 0, 0)
+      : this.p5.color(13, 27, 41, 200);
     this.p5.fill(c);
-    this.p5.strokeWeight(1);
-    this.p5.stroke(255, 0, 255);
+    this.p5.noStroke();
     this.p5.circle(this.x, this.y, this.boxSize);
   }
   /**
