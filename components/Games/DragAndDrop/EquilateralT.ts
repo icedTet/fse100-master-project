@@ -9,6 +9,9 @@ export class EquilateralT implements Shape {
   boxSize: number;
   p5: P5CanvasInstance;
   destination: Coordinate;
+  center: Coordinate;
+  destinationCenter: Coordinate;
+  radius: number
   tolerance: number;
   correct: boolean = false;
   fade: number = 300;
@@ -22,6 +25,9 @@ export class EquilateralT implements Shape {
     this.destination = destination;
     this.tolerance = 0.2;
     ShapeManager.getInstance().addShape(this);
+    this.center = { x: boxStart.x+this.boxSize/2, y: boxStart.y-this.boxSize/2};
+    this.destinationCenter = { x: destination.x+this.boxSize/2, y: destination.y-this.boxSize/2};
+    this.radius = boxSize/2*Math.sqrt(2);
   }
   id?: number | undefined;
   /**
@@ -77,7 +83,7 @@ export class EquilateralT implements Shape {
   drawShape() {
     let c = this.correct
       ? this.p5.color(0, 0, 0, 0)
-      : this.p5.color(13, 27, 41, 200);
+      : this.p5.color(100, 27, 100, 200);
     this.p5.fill(c);
     this.p5.noStroke();
     this.p5.triangle(

@@ -1,6 +1,8 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { Shape, Coordinate } from "./dndTypes";
 import EventEmitter from "events";
+import p5 from "p5";
+import { Box } from "./Box";
 
 export class ShapeManager extends EventEmitter {
   static instance: ShapeManager;
@@ -91,8 +93,12 @@ export class ShapeManager extends EventEmitter {
         x: deltaX,
         y: deltaY,
       });
-      
       this.lastMousePosition = { x: p5.mouseX, y: p5.mouseY };
     }
   }
+  isOverlapping(a: Shape, b:Shape) {
+    let d = a.p5.dist(a.center.x, a.center.y, b.center.x, b.center.y);
+    return d > a.radius+b.radius;
+  }
+
 }

@@ -8,6 +8,9 @@ export class Circle implements Shape {
   boxSize: number;
   p5: P5CanvasInstance;
   destination: Coordinate;
+  center: Coordinate;
+  destinationCenter: Coordinate;
+  radius: number;
   tolerance: number;
   correct: boolean = false;
   fade: number = 300;
@@ -23,8 +26,11 @@ export class Circle implements Shape {
     this.boxSize = boxSize;
     this.p5 = p5;
     this.destination = destination;
-    this.tolerance = 0.10;
+    this.tolerance = 0.05;
     ShapeManager.getInstance().addShape(this);
+    this.center = {x: boxStart.x, y: boxStart.y};
+    this.destinationCenter = destination;
+    this.radius = boxSize;
   }
   id?: number | undefined;
   /**
@@ -78,7 +84,7 @@ export class Circle implements Shape {
   drawShape() {
     let c = this.correct
       ? this.p5.color(0, 0, 0, 0)
-      : this.p5.color(13, 27, 41, 200);
+      : this.p5.color(100, 27, 100, 200);
     this.p5.fill(c);
     this.p5.noStroke();
     this.p5.circle(this.x, this.y, this.boxSize);

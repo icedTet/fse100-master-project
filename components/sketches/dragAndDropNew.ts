@@ -5,6 +5,7 @@ import { Circle } from "../Games/DragAndDrop/Circle";
 import { ShapeManager } from "../Games/DragAndDrop/ShapeManager";
 import { Triangle } from "../Games/DragAndDrop/Triangle";
 import { EquilateralT } from "../Games/DragAndDrop/EquilateralT";
+import { Shape } from "../Games/DragAndDrop/dndTypes";
 
 export const dragandDropSketch = (p5: P5CanvasInstance) => {
   let startTime = 0;
@@ -28,6 +29,7 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
     let c = 10+window.innerWidth/2+Math.random()*(window.innerWidth/2-110);
     let d = 10+Math.random()*(window.innerHeight-110);
     const newBox = new Box({ x: a, y: b }, 100, p5, { x: c, y: d });
+    if(isOverlapping())
   }
   //circle
   for(let i=0 ;i<1;i++){
