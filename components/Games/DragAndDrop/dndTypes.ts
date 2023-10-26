@@ -12,4 +12,8 @@ export interface Shape {
   tolerance: number; // Percentage of the shape that the mouse can be outside of the hole shape and still be considered "in" the hole and lock
   checkForHole: (x: number, y: number) => boolean;
   correct: boolean;
+  center: Coordinate;
+  destinationCenter: Coordinate;
+  radius: number;
+  p5: P5CanvasInstance
 }
