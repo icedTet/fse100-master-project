@@ -1,9 +1,4 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
-import { Color } from "p5";
-import { Box } from "../Games/DragAndDrop/Box";
-import { Circle } from "../Games/DragAndDrop/Circle";
-import { Triangle } from "../Games/DragAndDrop/Triangle";
-import { EquilateralT } from "../Games/DragAndDrop/EquilateralT";
 import { PlayerManager } from "../Games/LabyrinthEscape/PlayerManager";
 import { player } from "../Games/LabyrinthEscape/Player";
 
@@ -47,7 +42,7 @@ export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
     PlayerManager.getInstance().releasePlayerFromMouse();
   };
   p5.draw = () => {
-    p5.background(0);
+    p5.background(255);
     //player holes
 
     if ((points = 6)) {

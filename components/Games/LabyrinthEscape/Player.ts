@@ -5,20 +5,20 @@ import { PlayerManager } from "./PlayerManager";
 export class player implements Player {
   x: number;
   y: number;
-  boxSize: number;
+  playerSize: number;
   p5: P5CanvasInstance;
   destination: Coordinate;
   tolerance: number;
   correct: boolean = false;
   constructor(
-    boxStart: Coordinate,
-    boxSize: number,
+    playerStart: Coordinate,
+    playerSize: number,
     p5: P5CanvasInstance,
     destination: Coordinate
   ) {
-    this.x = boxStart.x;
-    this.y = boxStart.y;
-    this.boxSize = boxSize;
+    this.x = playerStart.x;
+    this.y = playerStart.y;
+    this.playerSize = playerSize;
     this.p5 = p5;
     this.destination = destination;
     this.tolerance = 0.05;
@@ -34,9 +34,9 @@ export class player implements Player {
   isClickingOnPlayer(x: number, y: number) {
     return (
       x > this.x &&
-      x < this.x + this.boxSize &&
+      x < this.x + this.playerSize &&
       y > this.y &&
-      y < this.y + this.boxSize
+      y < this.y + this.playerSize
     );
   }
   /**
@@ -58,8 +58,8 @@ export class player implements Player {
     this.p5.rect(
       this.destination.x,
       this.destination.y,
-      this.boxSize,
-      this.boxSize
+      this.playerSize,
+      this.playerSize
     );
   }
   /**
@@ -70,7 +70,7 @@ export class player implements Player {
     this.p5.fill(c);
     this.p5.strokeWeight(1);
     this.p5.stroke(255, 0, 255);
-    this.p5.rect(this.x, this.y, this.boxSize, this.boxSize);
+    this.p5.rect(this.x, this.y, this.playerSize, this.playerSize);
   }
   /**
    * Updates the position of the player.
@@ -97,10 +97,10 @@ export class player implements Player {
    */
   checkForHole(x: number, y: number) {
     return (
-      x >= this.destination.x - this.boxSize * this.tolerance &&
-      x <= this.destination.x + this.boxSize * this.tolerance &&
-      y >= this.destination.y - this.boxSize * this.tolerance &&
-      y <= this.destination.y + this.boxSize * this.tolerance
+      x >= this.destination.x - this.playerSize * this.tolerance &&
+      x <= this.destination.x + this.playerSize * this.tolerance &&
+      y >= this.destination.y - this.playerSize * this.tolerance &&
+      y <= this.destination.y + this.playerSize * this.tolerance
     );
   }
   /**
