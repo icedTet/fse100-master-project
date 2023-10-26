@@ -15,7 +15,7 @@ export const CompletePageLayout = (props: { children: React.ReactNode }) => {
         recycle={true}
         gravity={0.2}
       />
-      ;
+
       <div
         className={`flex flex-col gap-8 grow items-start justify-start px-16 py-12 h-full my-auto z-20 relative`}
         suppressHydrationWarning

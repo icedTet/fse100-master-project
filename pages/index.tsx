@@ -2,10 +2,23 @@ import Link from "next/link";
 import Layout from "../components/Layout";
 import ConfettiExplosion from "react-confetti-explosion";
 import { useEffect, useState } from "react";
-import { ActivityCard } from "../components/HomePage/Activity";
+import dynamic from "next/dynamic";
+const ActivityCard = dynamic(() => import("../components/HomePage/Activity"), {
+  ssr: false,
+});
+import { useLocalStorage } from "../utils/TetHookLib";
+import { DNDGameSaveData } from "../utils/types/GeneralGameTypes";
 const IndexPage = () => {
   const [explosionStreak, setExplosionStreak] = useState(false);
   const [explosionAccuracy, setExplosionAccuracy] = useState(false);
+  const [dndSavedGameData, setDndSavedGameData] =
+    useLocalStorage<DNDGameSaveData>("dndStatistics", {
+      averageAttempt: undefined,
+      bestAttempt: undefined,
+      lastPlayed: undefined,
+      playedCount: 0,
+      gameID: "dnd",
+    });
   useEffect(() => {
     if (explosionStreak) {
       setTimeout(() => {
@@ -21,7 +34,6 @@ const IndexPage = () => {
       }, 2500);
     }
   }, [explosionAccuracy]);
-
   return (
     <Layout title="Home | Next.js + TypeScript Example">
       <div className={`flex flex-col gap-8 w-full h-full px-16`}>
@@ -146,6 +158,16 @@ const IndexPage = () => {
                 lastAttempt={1832252210000}
                 icon={"🧩"}
                 onClick={() => {}}
+                // less than 20 hours ago
+                complete={
+                  dndSavedGameData.lastPlayed !== undefined &&
+                  dndSavedGameData.lastPlayed + 72000000 > Date.now()
+                }
+                resetTime={
+                  dndSavedGameData.lastPlayed
+                    ? dndSavedGameData.lastPlayed + 72000000
+                    : undefined
+                }
                 link="/tasks/A"
               />
             }

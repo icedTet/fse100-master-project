@@ -1,5 +1,8 @@
 import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+dayjs.extend(duration)
 import Link from "next/link";
+import { useLayoutEffect, useState } from "react";
 import ConfettiExplosion from "react-confetti-explosion";
 export const ActivityCard = (props: {
   title: string;
@@ -9,6 +12,7 @@ export const ActivityCard = (props: {
   icon: string;
   onClick: () => void;
   complete?: boolean;
+  resetTime?: number;
   link?: string;
 }) => {
   const {
@@ -19,8 +23,21 @@ export const ActivityCard = (props: {
     icon,
     onClick,
     complete,
-    link
+    link,
+    resetTime,
   } = props;
+  const [timeUntilReset, setTimeUntilReset] = useState<number>(0);
+  useLayoutEffect(() => {
+    if (resetTime) {
+      const interval = setInterval(() => {
+        setTimeUntilReset(resetTime - Date.now());
+      }, 1000);
+      setTimeUntilReset(resetTime - Date.now());
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [resetTime]);
   return (
     <div
       className={`p-px ${
@@ -36,7 +53,7 @@ export const ActivityCard = (props: {
           className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col gap-6 items-center justify-center w-[80%] group-hover:opacity-0 transition-all duration-150 pointer-events-none`}
         >
           <div className={`flex flex-col gap-2`}>
-            <div className={`flex flex-row gap-6  items-center justify-start`}>
+            <div className={`flex flex-row gap-6 items-center justify-start`}>
               <div
                 className={`bg-gray-800/80 w-14 h-14 text-3xl flex flex-row items-center justify-center rounded-full`}
               >
@@ -45,10 +62,17 @@ export const ActivityCard = (props: {
               <span className={`text-4xl text-white font-bold`}>{title}</span>
             </div>
             <span className={`text-xl text-white font-bold`}>Completed 🎉</span>
-            <span className={`text-sm text-gray-300 font-normal`}>
+            <span className={`text-sm text-gray-200 font-normal`}>
               You've completed this task! You can play it again if you want.
               Hover over the card to see your best attempt and when you last
               played.
+            </span>
+            <span className={`text-xs text-gray-300 font-normal`}>
+              {timeUntilReset > 0
+                ? `Play again in ${dayjs
+                    .duration(timeUntilReset)
+                    .format("HH:mm:ss")} to build your streak!`
+                : `You can play this again now!`}
             </span>
           </div>
         </div>
@@ -85,7 +109,7 @@ export const ActivityCard = (props: {
               {dayjs(lastAttempt).format("h:mm A")}
             </span>
           </div>
-          <Link href={link || ''} >
+          <Link href={link || ""}>
             <button
               className={`bg-purple-500 rounded-2xl px-6 py-3 text-white text-sm font-medium font-wsans`}
             >
@@ -97,3 +121,5 @@ export const ActivityCard = (props: {
     </div>
   );
 };
+
+export default ActivityCard;

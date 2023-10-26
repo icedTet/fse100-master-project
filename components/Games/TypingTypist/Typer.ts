@@ -18,6 +18,7 @@ export class TypingTypistGame {
   } 
   startGame() {
     this.startTime = Date.now();
+    this.currentWord = this.getNextWord()!;
   }
   endGame() {
     this.endTime = Date.now();

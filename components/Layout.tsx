@@ -14,13 +14,13 @@ const Layout = ({
   title = "This is the default title",
   centerContainer,
 }: Props) => (
-  <div className={`w-full grow max-w-[130ch] mx-auto flex flex-col relative`}>
+  <div className={`w-full grow max-w-[130ch] mx-auto flex flex-col`}>
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <header>
+    <header className={``}>
       <div className={`flex flex-row gap-4 w-full px-16 py-8 justify-between`}>
         <div className={`flex flex-row gap-4 items-center justify-between `}>
           <div className={`relative p-1`}>
