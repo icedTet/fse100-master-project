@@ -2,6 +2,7 @@ import { useSearchParams } from "next/navigation";
 import Layout from "../Layout";
 import useWindowSize from "react-use/lib/useWindowSize";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 const ConfettiCanvas = dynamic(() => import("react-confetti"), { ssr: false });
 export const CompletePageLayout = (props: { children: React.ReactNode }) => {
   const { width, height } = useWindowSize();
@@ -28,6 +29,13 @@ export const CompletePageLayout = (props: { children: React.ReactNode }) => {
           You've completed this task! You can play it again if you want. Hover
           over the card to see your best attempt and when you last played.
         </span>
+        <Link href={`/`}>
+          <button
+            className={`bg-gray-700/40 hover:bg-gray-700/60 p-3 rounded-lg`}
+          >
+            Return Home
+          </button>
+        </Link>
       </div>
     </Layout>
   );
