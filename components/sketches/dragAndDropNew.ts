@@ -22,6 +22,13 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
     let d = 10+Math.random()*(window.innerHeight-210);
     const box = new Box({ x: a, y: b }, 200, p5, { x: c, y: d });
   }
+  for(let i=0 ;i<1;i++){
+    let a = 120+Math.random()*(window.innerWidth/2-240);
+    let b = 120+Math.random()*(window.innerHeight-240);
+    let c = 120+window.innerWidth/2+Math.random()*(window.innerWidth/2-240);
+    let d = 120+Math.random()*(window.innerHeight-240);
+    const newCircle = new Circle({x: a, y: b }, 200, p5, { x: c, y: d});
+  }
   //small box
   for(let i=0 ;i<1;i++){
     let a = 10+Math.random()*(window.innerWidth/2-110);
@@ -29,7 +36,6 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
     let c = 10+window.innerWidth/2+Math.random()*(window.innerWidth/2-110);
     let d = 10+Math.random()*(window.innerHeight-110);
     const newBox = new Box({ x: a, y: b }, 100, p5, { x: c, y: d });
-    if(isOverlapping())
   }
   //circle
   for(let i=0 ;i<1;i++){
@@ -40,13 +46,7 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
     const newCircle = new Circle({x: a, y: b }, 100, p5, { x: c, y: d});
   }
 
-  for(let i=0 ;i<1;i++){
-    let a = 120+Math.random()*(window.innerWidth/2-240);
-    let b = 120+Math.random()*(window.innerHeight-240);
-    let c = 120+window.innerWidth/2+Math.random()*(window.innerWidth/2-240);
-    let d = 120+Math.random()*(window.innerHeight-240);
-    const newCircle = new Circle({x: a, y: b }, 200, p5, { x: c, y: d});
-  }
+
  
   for(let i=0 ;i<1;i++){
     let a = 10+Math.random()*(window.innerWidth/2-110);
