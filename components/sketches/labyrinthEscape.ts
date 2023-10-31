@@ -1,14 +1,15 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { PlayerManager } from "../Games/LabyrinthEscape/PlayerManager";
 import { player } from "../Games/LabyrinthEscape/Player";
+import { MazeMap } from "../Games/LabyrinthEscape/MazeMap";
 
 export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
   let startTime = 0;
   let totalTime = 0;
   let points = 0;
- 
   const playerManager = PlayerManager.getInstance(); // Create a new player manager.
-
+  const mazeMap = new MazeMap(p5,{x:window.innerWidth,y:window.innerHeight});
+  console.debug(MazeMap);
   for(let i=0 ;i<1;i++){
     let a =200;
     let b =200;
@@ -20,6 +21,7 @@ export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
 
   p5.setup = () => {
     p5.createCanvas(window.innerWidth, window.innerHeight);
+
     startTime = Date.now();
   };
   p5.mousePressed = () => {
@@ -44,7 +46,8 @@ export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
   p5.draw = () => {
     p5.background(255);
     //player holes
-
+    mazeMap.draw()
+  ;
     if ((points = 6)) {
       totalTime = (startTime - Date.now()) / 1000;
     }
