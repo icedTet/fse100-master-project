@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         {/* <link rel="icon" href="/volant.svg" /> */}
       </Head>
-      <div className={`w-full min-h-screen flex flex-row bg-gray-850`}>
+      <div className={`w-full min-h-screen flex flex-col bg-gray-850`}>
         <Component {...pageProps} />
       </div>
     </>

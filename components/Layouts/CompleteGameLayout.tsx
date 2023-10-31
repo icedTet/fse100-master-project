@@ -15,7 +15,7 @@ export const CompletePageLayout = (props: { children: React.ReactNode }) => {
         recycle={true}
         gravity={0.2}
       />
-      ;
+
       <div
         className={`flex flex-col gap-8 grow items-start justify-start px-16 py-12 h-full my-auto z-20 relative`}
         suppressHydrationWarning
@@ -29,11 +29,11 @@ export const CompletePageLayout = (props: { children: React.ReactNode }) => {
           You've completed this task! You can play it again if you want. Hover
           over the card to see your best attempt and when you last played.
         </span>
-        <Link href={`/`}>
+        <Link href={"/"}>
           <button
-            className={`bg-gray-700/40 hover:bg-gray-700/60 p-3 rounded-lg`}
+            className={`bg-purple-500 rounded-2xl px-6 py-3 text-white text-sm font-medium font-wsans`}
           >
-            Return Home
+            Back to Home
           </button>
         </Link>
       </div>
