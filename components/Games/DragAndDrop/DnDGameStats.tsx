@@ -1,5 +1,5 @@
 import { useSearchParams } from "next/navigation";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import { useLocalStorage } from "react-use";
 import TetLib from "../../../utils/TetLib";
 import {
@@ -19,7 +19,14 @@ export const DnDGameStats = () => {
       playedCount: 0,
       gameID: "dnd",
     });
+  const tallied = useRef(false);
   const currentAttemptData = useMemo<DNDStatistics>(() => {
+    if (tallied.current) {
+      return {
+        attemptTime: 0,
+        points: 0,
+      };
+    }
     const attemptTime = parseFloat(query.get("attemptTime") || "0");
     const score = parseFloat(query.get("score") || "0");
     globalThis?.localStorage?.setItem(
@@ -39,11 +46,11 @@ export const DnDGameStats = () => {
         },
         bestAttempt: {
           attemptTime:
-            dndSavedGameData!.bestAttempt?.attemptTime || 0 > attemptTime
-              ? dndSavedGameData!.bestAttempt?.attemptTime || 0
+            (dndSavedGameData!.bestAttempt?.attemptTime || 0) <= attemptTime && dndSavedGameData!.bestAttempt?.attemptTime !== 0
+              ? dndSavedGameData!.bestAttempt?.attemptTime
               : attemptTime,
           accuracy:
-            dndSavedGameData!.bestAttempt?.points || 0 > score
+            (dndSavedGameData!.bestAttempt?.points || 0) > score
               ? dndSavedGameData!.bestAttempt?.points || 0
               : score,
         },
@@ -51,6 +58,36 @@ export const DnDGameStats = () => {
         playedCount: dndSavedGameData!.playedCount + 1,
         gameID: "dnd",
       })
+    );
+    console.log(
+      {
+        averageAttempt: {
+          attemptTime:
+            ((dndSavedGameData!.averageAttempt?.attemptTime || 0) *
+              dndSavedGameData!.playedCount +
+              attemptTime) /
+            (dndSavedGameData!.playedCount + 1),
+          accuracy:
+            ((dndSavedGameData!.averageAttempt?.points || 0) *
+              dndSavedGameData!.playedCount +
+              score) /
+            (dndSavedGameData!.playedCount + 1),
+        },
+        bestAttempt: {
+          attemptTime:
+            (dndSavedGameData!.bestAttempt?.attemptTime || 0) <= attemptTime
+              ? dndSavedGameData!.bestAttempt?.attemptTime || 0
+              : attemptTime,
+          accuracy:
+            (dndSavedGameData!.bestAttempt?.points || 0) > score
+              ? dndSavedGameData!.bestAttempt?.points || 0
+              : score,
+        },
+        lastPlayed: Date.now(),
+        playedCount: dndSavedGameData!.playedCount + 1,
+        gameID: "dnd",
+      },
+      { attemptTime }
     );
     return {
       attemptTime,

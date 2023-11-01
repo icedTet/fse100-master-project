@@ -105,8 +105,10 @@ export const ActivityCard = (props: {
               Best attempt: {bestAttempt}
             </span>
             <span className={`text-gray-100/40 text-xs font-light`}>
-              Last attempt on {dayjs(lastAttempt).format("M/D/YY")} at{" "}
-              {dayjs(lastAttempt).format("h:mm A")}
+              Last attempt on {
+                lastAttempt ? `${dayjs(lastAttempt).format("M/D/YY")} at
+                ${dayjs(lastAttempt).format("h:mm A")}` : "--/--/--"
+              }
             </span>
           </div>
           <Link href={link || ""}>

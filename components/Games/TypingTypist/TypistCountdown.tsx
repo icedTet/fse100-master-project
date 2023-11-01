@@ -23,7 +23,7 @@ export const TypistCountdown = (props: {
         },
       }}
       animate={countdown > 0 ? "visible" : "hidden"}
-      className={`flex flex-col gap-12 items-center justify-center`}
+      className={`flex flex-col gap-12 items-center justify-center absolute`}
     >
       <h1 className={`text-6xl text-gray-200 font-black`}>
         ⌨️ Typing Typist...

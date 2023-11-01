@@ -7,12 +7,23 @@ const ActivityCard = dynamic(() => import("../components/HomePage/Activity"), {
   ssr: false,
 });
 import { useLocalStorage } from "../utils/TetHookLib";
-import { DNDGameSaveData } from "../utils/types/GeneralGameTypes";
+import {
+  DNDGameSaveData,
+  TypingGameSaveData,
+} from "../utils/types/GeneralGameTypes";
 const IndexPage = () => {
   const [explosionStreak, setExplosionStreak] = useState(false);
   const [explosionAccuracy, setExplosionAccuracy] = useState(false);
   const [dndSavedGameData, setDndSavedGameData] =
     useLocalStorage<DNDGameSaveData>("dndStatistics", {
+      averageAttempt: undefined,
+      bestAttempt: undefined,
+      lastPlayed: undefined,
+      playedCount: 0,
+      gameID: "dnd",
+    });
+  const [typingSavedGameData, setTypingSavedGameData] =
+    useLocalStorage<TypingGameSaveData>("typingStats", {
       averageAttempt: undefined,
       bestAttempt: undefined,
       lastPlayed: undefined,
@@ -141,21 +152,40 @@ const IndexPage = () => {
                 description={
                   "Attention future typing champions! Get ready to rebuild your speed and accuracy with our brand new game - Typing Tune-Up!"
                 }
-                bestAttempt={"25.08s"}
-                lastAttempt={1832252210000}
+                bestAttempt={
+                  typingSavedGameData.bestAttempt?.words
+                    ? `${typingSavedGameData.bestAttempt?.words} words`
+                    : "--"
+                }
+                lastAttempt={typingSavedGameData.lastPlayed || 0}
                 icon={"⌨️"}
                 onClick={() => {
                   alert("Game not implemented yet");
                 }}
                 link="/tasks/B"
+                complete={
+                  typingSavedGameData.lastPlayed !== undefined &&
+                  typingSavedGameData.lastPlayed + 72000000 > Date.now()
+                }
+                resetTime={
+                  typingSavedGameData.lastPlayed
+                    ? typingSavedGameData.lastPlayed + 72000000
+                    : undefined
+                }
               />
             }
             {
               <ActivityCard
                 title="Picture Perfect"
                 description="Piece together the puzzles in this fun and engaging drag and drop game!"
-                bestAttempt="1:25"
-                lastAttempt={1832252210000}
+                bestAttempt={
+                  dndSavedGameData.bestAttempt
+                    ? `${
+                        dndSavedGameData.bestAttempt.attemptTime / 1000
+                      } seconds`
+                    : "--"
+                }
+                lastAttempt={dndSavedGameData.lastPlayed || 0}
                 icon={"🧩"}
                 onClick={() => {}}
                 // less than 20 hours ago
