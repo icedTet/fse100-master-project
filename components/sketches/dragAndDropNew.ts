@@ -5,6 +5,7 @@ import { Circle } from "../Games/DragAndDrop/Circle";
 import { ShapeManager } from "../Games/DragAndDrop/ShapeManager";
 import { Triangle } from "../Games/DragAndDrop/Triangle";
 import { EquilateralT } from "../Games/DragAndDrop/EquilateralT";
+import { Shape } from "../Games/DragAndDrop/dndTypes";
 
 export const dragandDropSketch = (p5: P5CanvasInstance) => {
   let startTime = 0;
@@ -16,10 +17,17 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
 //big box
   for(let i=0 ;i<1;i++){
     let a = 10+Math.random()*(window.innerWidth/2-210);
-    let b = 10+Math.random()*(window.innerHeight-210);
+    let b = 100+Math.random()*(window.innerHeight-300);
     let c = 10+window.innerWidth/2+Math.random()*(window.innerWidth/2-210);
-    let d = 10+Math.random()*(window.innerHeight-210);
+    let d = 100+Math.random()*(window.innerHeight-300);
     const box = new Box({ x: a, y: b }, 200, p5, { x: c, y: d });
+  }
+  for(let i=0 ;i<1;i++){
+    let a = 120+Math.random()*(window.innerWidth/2-240);
+    let b = 120+Math.random()*(window.innerHeight-240);
+    let c = 120+window.innerWidth/2+Math.random()*(window.innerWidth/2-240);
+    let d = 120+Math.random()*(window.innerHeight-240);
+    const newCircle = new Circle({x: a, y: b }, 200, p5, { x: c, y: d});
   }
   //small box
   for(let i=0 ;i<1;i++){
@@ -38,13 +46,7 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
     const newCircle = new Circle({x: a, y: b }, 100, p5, { x: c, y: d});
   }
 
-  for(let i=0 ;i<1;i++){
-    let a = 120+Math.random()*(window.innerWidth/2-240);
-    let b = 120+Math.random()*(window.innerHeight-240);
-    let c = 120+window.innerWidth/2+Math.random()*(window.innerWidth/2-240);
-    let d = 120+Math.random()*(window.innerHeight-240);
-    const newCircle = new Circle({x: a, y: b }, 200, p5, { x: c, y: d});
-  }
+
  
   for(let i=0 ;i<1;i++){
     let a = 10+Math.random()*(window.innerWidth/2-110);
