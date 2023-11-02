@@ -17,9 +17,9 @@ export const dragandDropSketch = (p5: P5CanvasInstance) => {
 //big box
   for(let i=0 ;i<1;i++){
     let a = 10+Math.random()*(window.innerWidth/2-210);
-    let b = 10+Math.random()*(window.innerHeight-210);
+    let b = 100+Math.random()*(window.innerHeight-300);
     let c = 10+window.innerWidth/2+Math.random()*(window.innerWidth/2-210);
-    let d = 10+Math.random()*(window.innerHeight-210);
+    let d = 100+Math.random()*(window.innerHeight-300);
     const box = new Box({ x: a, y: b }, 200, p5, { x: c, y: d });
   }
   for(let i=0 ;i<1;i++){

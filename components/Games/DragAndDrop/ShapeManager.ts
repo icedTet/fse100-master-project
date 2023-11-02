@@ -50,19 +50,20 @@ export class ShapeManager extends EventEmitter {
       }
       if (all === this.shapes.size) anyOverlapping = false;
       if (anyOverlapping){
-        let x = 60 + Math.random() * (window.innerWidth / 2 - 120);
-        let y = 60 + Math.random() * (window.innerHeight - 120);
+        let x = 120 + Math.random() * (window.innerWidth / 2 - 230);
+        let y = 120 + Math.random() * (window.innerHeight - 230);
         shape.updatePosition({ x, y }, true);
         attempts++
         // console.log(attempts)
         if (attempts > 10000) {
-          console.log("Forced break for shape",shape);
+          // console.log("Forced break for shape",shape);
           break;
         }
         // console.log(shapes[i], shape, "overlap", Math.sqrt((a.center.x - b.center.x) ** 2 + (a.center.y - b.center.y) ** 2), a.center.x, b.center.x, a.center.y, b.center.y, i, a.radius + b.radius)
       }
     }
-
+    attempts = 0;
+    anyOverlapping = true;
 //for holes
     while (anyOverlapping) {
       let all = 0;
@@ -73,11 +74,11 @@ export class ShapeManager extends EventEmitter {
       }
       if (all === this.shapes.size) anyOverlapping = false;
       if (anyOverlapping){
-        let x = 10+window.innerWidth/2+Math.random()*(window.innerWidth/2-210);
-        let y = 10+Math.random()*(window.innerHeight-210);
-        shape.updatePosition({ x, y }, true);
+        let x = 120+window.innerWidth/2+Math.random()*(window.innerWidth/2-230);
+        let y = 120+Math.random()*(window.innerHeight-230);
+        shape.updateHolePosition({ x, y }, true);
         attempts++
-        // console.log(attempts)
+        console.log(attempts)
         if (attempts > 10000) {
           console.log("Forced break for shape",shape);
           break;
