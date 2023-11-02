@@ -32,7 +32,7 @@ export const TetLib = {
         seconds < 10 ? `0${seconds}` : seconds
       }`;
     } else {
-      return `${seconds < 10 ? `0${seconds}` : seconds}.${(ms % 1000)
+      return `${seconds < 10 ? `0${seconds}` : seconds}.${(~~(ms/10) % 100)
         .toString()
         .padStart(2, "0")}s`;
     }
