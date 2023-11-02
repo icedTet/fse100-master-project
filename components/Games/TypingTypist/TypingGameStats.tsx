@@ -30,7 +30,7 @@ export const TypingGameStats = () => {
     }
   >(() => {
     const lastGame = JSON.parse(
-      globalThis.sessionStorage.getItem("typingGameStats") || "null"
+      globalThis?.sessionStorage?.getItem("typingGameStats") || "null"
     );
     if (!lastGame) {
       return {
