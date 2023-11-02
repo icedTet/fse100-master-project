@@ -92,7 +92,7 @@ export const DemoPage = () => {
           </div>
         </div>
         <div
-          className={`relative group bg-gray-800/50 top-[1.875rem] right-4 p-6 h-20 rounded-2xl backdrop-blur-lg flex flex-row gap-4 items-center ring ring-gray-100/10 pointer-events-none `}
+          className={`relative group bg-gray-800/30 top-[1.875rem] right-4 p-6 h-20 rounded-2xl backdrop-blur-sm flex flex-row gap-4 items-center ring ring-gray-100/10 pointer-events-none `}
         >
           <span
             className={`text-2xl w-20 text-center font-bold text-gray-100/40`}

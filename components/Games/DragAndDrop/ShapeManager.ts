@@ -50,8 +50,8 @@ export class ShapeManager extends EventEmitter {
       }
       if (all === this.shapes.size) anyOverlapping = false;
       if (anyOverlapping){
-        let x = 120 + Math.random() * (window.innerWidth / 2 - 230);
-        let y = 120 + Math.random() * (window.innerHeight - 230);
+        let x = shape.radius + Math.random() * (window.innerWidth / 2 - shape.radius)*.8;
+        let y = shape.radius + (Math.random() * (window.innerHeight - shape.radius)*.8);
         shape.updatePosition({ x, y }, true);
         attempts++
         // console.log(attempts)
@@ -74,8 +74,8 @@ export class ShapeManager extends EventEmitter {
       }
       if (all === this.shapes.size) anyOverlapping = false;
       if (anyOverlapping){
-        let x = 120+window.innerWidth/2+Math.random()*(window.innerWidth/2-230);
-        let y = 120+Math.random()*(window.innerHeight-230);
+        let x = (shape.radius+50)*1+window.innerWidth/2+Math.random()*(window.innerWidth/2-shape.radius-50)*.8;
+        let y = (shape.radius+50)*1+Math.random()*(window.innerHeight-shape.radius-50)*.8;
         shape.updateHolePosition({ x, y }, true);
         attempts++
         console.log(attempts)
