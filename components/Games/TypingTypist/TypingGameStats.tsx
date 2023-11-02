@@ -208,27 +208,30 @@ export const TypingGameStats = () => {
                     Missed Words
                   </span>
                   <div className="flex flex-row gap-2 items-baseline">
+                    {/* {JSON.stringify(currentAttemptData)} */}
                     {currentAttemptData.charLists.map((charList, index) => {
-                      charList.map((char, index) => {
-                        return (
-                          <span
-                            key={`${index}-letter-${char.char}`}
-                            className={`inline-block ${
-                              char.correct ? `text-green-400` : `text-red-400`
-                            } font-medium`}
-                          >
-                            {char.char} {char.correct}
-                          </span>
-                        );
-                      });
+                      if (charList.filter((char) => !char.correct).length === 0)
+                        return null;
+                      return (
+                        <span className={`text-2xl`}>
+                          {charList.map((char, index) => {
+                            return (
+                              <span
+                                key={`${index}-letter-${char.char}`}
+                                className={`inline-block ${
+                                  char.correct
+                                    ? `text-green-400`
+                                    : `text-red-400`
+                                } font-medium`}
+                              >
+                                {char.char} {char.correct}
+                              </span>
+                            );
+                          })}
+                        </span>
+                      );
                     })}
                   </div>
-                  {(typingSavedGameData?.bestAttempt?.words ||
-                    Number.MIN_VALUE) <= (currentAttemptData.words || 0) && (
-                    <span className={`text-gray-100/60 text-xs font-normal`}>
-                      Old best: {typingSavedGameData?.bestAttempt?.words} words
-                    </span>
-                  )}
                 </div>
               </div>
             </div>
