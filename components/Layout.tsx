@@ -7,14 +7,16 @@ type Props = {
   children?: ReactNode;
   title?: string;
   centerContainer?: boolean;
+  className?: string;
 };
 
 const Layout = ({
   children,
   title = "This is the default title",
   centerContainer,
+  className,
 }: Props) => (
-  <div className={`w-full grow max-w-[130ch] mx-auto flex flex-col`}>
+  <div className={`w-full grow max-w-[130ch] mx-auto flex flex-col ${className}`}>
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />

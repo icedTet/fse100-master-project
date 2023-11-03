@@ -9,6 +9,9 @@ export class EquilateralT implements Shape {
   boxSize: number;
   p5: P5CanvasInstance;
   destination: Coordinate;
+  center: Coordinate;
+  destinationCenter: Coordinate;
+  radius: number
   tolerance: number;
   correct: boolean = false;
   fade: number = 300;
@@ -21,6 +24,10 @@ export class EquilateralT implements Shape {
     this.p5 = p5;
     this.destination = destination;
     this.tolerance = 0.2;
+    
+    this.center = { x: boxStart.x+this.boxSize/2, y: boxStart.y-this.boxSize/2};
+    this.destinationCenter = { x: destination.x+this.boxSize/2, y: destination.y-this.boxSize/2};
+    this.radius = boxSize/2*Math.sqrt(2);
     ShapeManager.getInstance().addShape(this);
   }
   id?: number | undefined;
@@ -77,7 +84,7 @@ export class EquilateralT implements Shape {
   drawShape() {
     let c = this.correct
       ? this.p5.color(0, 0, 0, 0)
-      : this.p5.color(13, 27, 41, 200);
+      : this.p5.color(100, 27, 100, 200);
     this.p5.fill(c);
     this.p5.noStroke();
     this.p5.triangle(
@@ -98,6 +105,7 @@ export class EquilateralT implements Shape {
     if (absolute) {
       this.x = newPosition.x;
       this.y = newPosition.y;
+      this.center = { x: this.x+this.boxSize/2, y: this.y-this.boxSize/2};
     } else {
       if(this.x<0)
       this.x = 0;
@@ -109,11 +117,32 @@ export class EquilateralT implements Shape {
       this.y = window.innerHeight;
       this.x += newPosition.x;
       this.y += newPosition.y;
-
+      this.center = { x: this.x+this.boxSize/2, y: this.y-this.boxSize/2};
     }
     if (this.checkForHole(this.x, this.y)) {
       this.shapeWin();
     }
+  }
+
+  updateHolePosition(newPosition: Coordinate, absolute?: boolean) {
+    if (absolute) {
+      this.destination.x = newPosition.x;
+      this.destination.y = newPosition.y;
+      this.destinationCenter = { x: this.destination.x+this.boxSize/2, y: this.destination.y-this.boxSize/2};
+    } else {
+      if(this.destination.x<0)
+      this.destination.x = 0;
+      if(this.destination.x+this.boxSize>=window.innerWidth)
+      this.destination.x = window.innerWidth-this.boxSize;
+      if(this.destination.y-Math.sqrt(3)/2*this.boxSize<0)
+      this.destination.y = Math.sqrt(3)/2*this.boxSize;
+      if(this.destination.y>window.innerHeight)
+      this.destination.y = window.innerHeight;
+      this.destination.x += newPosition.x;
+      this.destination.y += newPosition.y;
+      this.destinationCenter = { x: this.destination.x+this.boxSize/2, y: this.destination.y-this.boxSize/2};
+    }
+    
   }
   /**
    * Checks if the shape is in the hole.

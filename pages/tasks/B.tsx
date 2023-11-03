@@ -13,11 +13,12 @@ import TetLib from "../../utils/TetLib";
 import wordList from "../../public/words.json";
 import { TypistWord } from "../../components/Games/TypingTypist/TypistWord";
 import Link from "next/link";
+import { HiChevronLeft } from "react-icons/hi";
 const TypistCountdown = dynamic(
   () => import("../../components/Games/TypingTypist/TypistCountdown"),
   { ssr: false }
 );
-const timeLimit = 1000 * 60 * 0.1; // 30 seconds
+const timeLimit = 1000 * 60 * 5; // 30 seconds
 export type TypingTypistWordResult = Map<
   string,
   {
@@ -154,7 +155,7 @@ export const TypingTypistGamePage = (props: { list: string[] }) => {
     }
   }, [inputValue, wordPosition]);
   return (
-    <Layout title="Home | Next.js + TypeScript Example">
+    <Layout title="Home | Next.js + TypeScript Example" className={` max-h-screen overflow-hidden`}>
       <div
         className={`w-full h-full flex flex-col items-center justify-center gap-8 grow relative`}
       >
@@ -205,6 +206,17 @@ export const TypingTypistGamePage = (props: { list: string[] }) => {
             <div
               className={`bg-gray-800/50  p-6 rounded-2xl backdrop-blur-lg flex flex-row gap-8 items-center border border-gray-100/10 justify-between`}
             >
+              <Link
+                href={`/`}
+                onClick={() => {
+                }}
+              >
+                <div
+                  className={`bg-gray-700/50 h-12 aspect-square flex flex-row items-center justify-center rounded-xl cursor-pointer hover:bg-gray-600 transition-all duration-150 z-30`}
+                >
+                  <HiChevronLeft className={`text-white text-2xl`} />
+                </div>
+              </Link>
               <div className={`flex flex-row items-baseline gap-2 w-fit`}>
                 <p
                   className={`text-white text-2xl font-bold whitespace-nowrap`}
@@ -301,7 +313,6 @@ export const TypingTypistGamePage = (props: { list: string[] }) => {
               }}
               onFocus={() => {
                 if (!gameInSession) inputBox.current?.blur();
-
               }}
             />
             <div className={`flex flex-col gap-1 justify-between`}>

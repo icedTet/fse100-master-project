@@ -1,6 +1,12 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { ShapeManager } from "./ShapeManager";
 import { Shape, Coordinate } from "./dndTypes";
+import { Howl, Howler } from "howler";
+const soundSuccess = new Howl({
+  src: ["/hit.ogg"],
+  volume: 0.5,
+  autoplay: false,
+});
 
 export class Box implements Shape {
   x: number;
@@ -8,6 +14,9 @@ export class Box implements Shape {
   boxSize: number;
   p5: P5CanvasInstance;
   destination: Coordinate;
+  center: Coordinate;
+  destinationCenter: Coordinate;
+  radius: number;
   tolerance: number;
   correct: boolean = false;
   fade: number = 300;
@@ -24,6 +33,16 @@ export class Box implements Shape {
     this.p5 = p5;
     this.destination = destination;
     this.tolerance = 0.05;
+
+    this.center = {
+      x: boxStart.x + this.boxSize / 2,
+      y: boxStart.y + this.boxSize / 2,
+    };
+    this.destinationCenter = {
+      x: destination.x + this.boxSize / 2,
+      y: destination.y + this.boxSize / 2,
+    };
+    this.radius = (boxSize / 2) * Math.sqrt(2);
     ShapeManager.getInstance().addShape(this);
   }
   id?: number | undefined;
@@ -79,7 +98,7 @@ export class Box implements Shape {
   drawShape() {
     let c = this.correct
       ? this.p5.color(0, 0, 0, 0)
-      : this.p5.color(13, 27, 41, 200);
+      : this.p5.color(100, 27, 100, 255);
     this.p5.fill(c);
     this.p5.noStroke();
     // if (!this.correct) {
@@ -97,21 +116,50 @@ export class Box implements Shape {
     if (absolute) {
       this.x = newPosition.x;
       this.y = newPosition.y;
+      this.center = {
+        x: this.x + this.boxSize / 2,
+        y: this.y + this.boxSize / 2,
+      };
     } else {
-      if(this.x<0)
-      this.x = 0;
-      if(this.x+this.boxSize>=window.innerWidth)
-      this.x = window.innerWidth-this.boxSize;
-      if(this.y<=0)
-      this.y = 0;
-      if(this.y+this.boxSize>=window.innerHeight)
-      this.y = window.innerHeight-this.boxSize;
+      if (this.x < 0) this.x = 0;
+      if (this.x + this.boxSize >= window.innerWidth)
+        this.x = window.innerWidth - this.boxSize;
+      if (this.y <= 0) this.y = 0;
+      if (this.y + this.boxSize >= window.innerHeight)
+        this.y = window.innerHeight - this.boxSize;
       this.x += newPosition.x;
       this.y += newPosition.y;
-
+      this.center = {
+        x: this.x + this.boxSize / 2,
+        y: this.y + this.boxSize / 2,
+      };
     }
     if (this.checkForHole(this.x, this.y)) {
       this.shapeWin();
+    }
+  }
+
+  updateHolePosition(newPosition: Coordinate, absolute?: boolean) {
+    if (absolute) {
+      this.destination.x = newPosition.x;
+      this.destination.y = newPosition.y;
+      this.destinationCenter = {
+        x: this.destination.x + this.boxSize / 2,
+        y: this.destination.y + this.boxSize / 2,
+      };
+    } else {
+      if (this.destination.x < 0) this.destination.x = 0;
+      if (this.destination.x + this.boxSize >= window.innerWidth)
+        this.destination.x = window.innerWidth - this.boxSize;
+      if (this.destination.y <= 0) this.destination.y = 0;
+      if (this.destination.y + this.boxSize >= window.innerHeight)
+        this.destination.y = window.innerHeight - this.boxSize;
+      this.destination.x += newPosition.x;
+      this.destination.y += newPosition.y;
+      this.destinationCenter = {
+        x: this.destination.x + this.boxSize / 2,
+        y: this.destination.y + this.boxSize / 2,
+      };
     }
   }
   /**
@@ -135,6 +183,9 @@ export class Box implements Shape {
     this.x = this.destination.x;
     this.y = this.destination.y;
     this.correct = true;
+
+    soundSuccess.play();
+    ShapeManager.getInstance().draggedShape = null;
     ShapeManager.getInstance().releaseShapeFromMouse();
   }
 }

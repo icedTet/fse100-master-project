@@ -8,6 +8,9 @@ export class Circle implements Shape {
   boxSize: number;
   p5: P5CanvasInstance;
   destination: Coordinate;
+  center: Coordinate;
+  destinationCenter: Coordinate;
+  radius: number;
   tolerance: number;
   correct: boolean = false;
   fade: number = 300;
@@ -23,7 +26,11 @@ export class Circle implements Shape {
     this.boxSize = boxSize;
     this.p5 = p5;
     this.destination = destination;
-    this.tolerance = 0.10;
+    this.tolerance = 0.05;
+    
+    this.center = {x: boxStart.x, y: boxStart.y};
+    this.destinationCenter = destination;
+    this.radius = boxSize;
     ShapeManager.getInstance().addShape(this);
   }
   id?: number | undefined;
@@ -78,7 +85,7 @@ export class Circle implements Shape {
   drawShape() {
     let c = this.correct
       ? this.p5.color(0, 0, 0, 0)
-      : this.p5.color(13, 27, 41, 200);
+      : this.p5.color(100, 27, 100, 200);
     this.p5.fill(c);
     this.p5.noStroke();
     this.p5.circle(this.x, this.y, this.boxSize);
@@ -92,6 +99,7 @@ export class Circle implements Shape {
     if (absolute) {
       this.x = newPosition.x;
       this.y = newPosition.y;
+      this.center = {x: this.x, y: this.y};
     } else {
       if(this.x-this.boxSize/2<0)
       this.x = this.boxSize/2;
@@ -103,10 +111,31 @@ export class Circle implements Shape {
       this.y = window.innerHeight-this.boxSize/2;
       this.x += newPosition.x;
       this.y += newPosition.y;
-
+      this.center = {x: this.x, y: this.y};
     }
     if (this.checkForHole(this.x, this.y)) {
       this.shapeWin();
+    }
+    
+  }
+
+  updateHolePosition(newPosition: Coordinate, absolute?: boolean) {
+    if (absolute) {
+      this.destination.x = newPosition.x;
+      this.destination.y = newPosition.y;
+      this.destinationCenter = {x: this.destination.x, y: this.destination.y};
+    } else {
+      if(this.destination.x-this.boxSize/2<0)
+      this.destination.x = this.boxSize/2;
+      if(this.destination.x+this.boxSize/2>=window.innerWidth)
+      this.destination.x = window.innerWidth-this.boxSize/2;
+      if(this.destination.y-this.boxSize/2<=0)
+      this.destination.y = this.boxSize/2;
+      if(this.destination.y+this.boxSize/2>=window.innerHeight)
+      this.destination.y = window.innerHeight-this.boxSize/2;
+      this.destination.x += newPosition.x;
+      this.destination.y += newPosition.y;
+      this.destinationCenter = {x: this.destination.x, y: this.destination.y};
     }
     
   }
