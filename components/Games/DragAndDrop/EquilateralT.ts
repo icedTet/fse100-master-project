@@ -1,6 +1,12 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { ShapeManager } from "./ShapeManager";
 import { Shape, Coordinate } from "./dndTypes";
+import { Howl, Howler } from "howler";
+const soundSuccess = new Howl({
+  src: ["/hit.ogg"],
+  volume: 0.5,
+  autoplay: false,
+});
 //WHY ISNT THIS WORKING!
 let e = 0;
 export class EquilateralT implements Shape {
@@ -167,7 +173,8 @@ export class EquilateralT implements Shape {
     this.x = this.destination.x;
     this.y = this.destination.y;
     this.correct = true;
-    
+    soundSuccess.play();
+    ShapeManager.getInstance().draggedShape = null;
     ShapeManager.getInstance().releaseShapeFromMouse();
   }
 }
