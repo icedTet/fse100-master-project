@@ -11,11 +11,11 @@ export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
   const mazeMap = new MazeMap(p5,{x:window.innerWidth,y:window.innerHeight});
   console.debug(MazeMap);
   for(let i=0 ;i<1;i++){
-    let a =200;
-    let b =200;
-    let c = 600;
-    let d = 200;
-    const Player = new player({ x: a, y: b }, 100, p5, { x: c, y: d });
+    let a =10;
+    let b =(window.innerHeight/2)+20;
+    let c = 1820;
+    let d = (window.innerHeight/2)+20;
+    const Player = new player({ x: a, y: b }, 80, p5, { x: c, y: d });
   }
 
 
@@ -46,8 +46,7 @@ export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
   p5.draw = () => {
     p5.background(255);
     //player holes
-    mazeMap.draw()
-  ;
+    mazeMap.draw();
     if ((points = 6)) {
       totalTime = (startTime - Date.now()) / 1000;
     }
