@@ -6,7 +6,6 @@ import { ShapeManager } from "../Games/DragAndDrop/ShapeManager";
 import { Triangle } from "../Games/DragAndDrop/Triangle";
 import { EquilateralT } from "../Games/DragAndDrop/EquilateralT";
 import { Shape } from "../Games/DragAndDrop/dndTypes";
-
 function genShapes(p5: P5CanvasInstance) {
   // rng shape placements, each variable is based off of the size of the window so the position will work on biggest screens as well
   //big box
