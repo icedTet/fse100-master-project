@@ -20,7 +20,7 @@ export class MazeMap{
 
     }
     id?: number | undefined;
-  
+    //part: null
     draw(){
         this.drawPath();
         this.updateFailure();
@@ -40,17 +40,20 @@ export class MazeMap{
         part.push(this.pathPart(840,window.innerHeight/2-240,4));
         part.push(this.pathPart(1200,window.innerHeight/2-120,2));
         part.push(this.pathPart(1320,window.innerHeight/2,5));
+        //put in laby maybe
 
     }
     pathPart(x:number,y: number,length: number){
 
-      const path=[];
+      //const path=[] as p5
+      const path=[]
       x=x-120;
       for(let i =0; i < length; i++){
         x = x+120;
-        this.p5.rect(x,y,120,120);
-        path.push(this.p5.rect);
-      }
+        const rect= this.p5.rect(x,y,120,120);
+        path.push(rect);
+
+      }//part class and that constructor
     }
     checkForPath(x:number, y:number){
         return (
