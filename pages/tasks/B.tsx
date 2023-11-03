@@ -155,7 +155,7 @@ export const TypingTypistGamePage = (props: { list: string[] }) => {
     }
   }, [inputValue, wordPosition]);
   return (
-    <Layout title="Home | Next.js + TypeScript Example">
+    <Layout title="Home | Next.js + TypeScript Example" className={` max-h-screen overflow-hidden`}>
       <div
         className={`w-full h-full flex flex-col items-center justify-center gap-8 grow relative`}
       >

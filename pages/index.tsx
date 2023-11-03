@@ -11,6 +11,7 @@ import {
   DNDGameSaveData,
   TypingGameSaveData,
 } from "../utils/types/GeneralGameTypes";
+import { useRouter } from "next/router";
 const IndexPage = () => {
   const [explosionStreak, setExplosionStreak] = useState(false);
   const [explosionAccuracy, setExplosionAccuracy] = useState(false);
@@ -30,6 +31,15 @@ const IndexPage = () => {
       playedCount: 0,
       gameID: "dnd",
     });
+  // add daily streak
+  const [dailyStreak, setDailyStreak] = useLocalStorage<{
+    streak: number;
+    lastPlayed?: number;
+  }>("dailyStreak", {
+    streak: 0,
+    lastPlayed: undefined,
+  });
+  const router = useRouter();
   useEffect(() => {
     if (explosionStreak) {
       setTimeout(() => {
@@ -87,7 +97,7 @@ const IndexPage = () => {
                 <span
                   className={`bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 bg-clip-text text-transparent text-3xl font-bold font-poppins`}
                 >
-                  8 Days
+                  {dailyStreak.streak} Days
                 </span>
               </div>
             </div>
@@ -137,6 +147,44 @@ const IndexPage = () => {
                 >
                   Up 10% from last week
                 </span>
+              </div>
+            </div>
+          </div>
+          <div
+            className={`w-80 bg-gradient-to-br from-pink-300/30 via-purple-300/30 to-indigo-400/30 flex flex-row items-center justify-start p-px rounded-2xl gap-6 shadow-sm relative group hover:from-pink-300/70 hover:via-purple-300/70 hover:to-indigo-400/70 duration-300 transition-all cursor-pointer`}
+            onClick={() => {
+              router.push("/feedback");
+            }}
+          >
+            <div
+              className={` bg-gradient-to-br from-pink-300/50 via-purple-300/50 to-indigo-400/50 w-full h-full absolute top-0 left-0 blur-xl rounded-2xl group-hover:opacity-100 opacity-0 transition-all duration-300`}
+            ></div>
+            <div
+              className={`flex flex-row items-center justify-start p-6 rounded-2xl bg-gray-750 w-full h-full relative z-10 gap-6`}
+            >
+              <div
+                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
+              ></div>
+              <div
+                className={`rounded-full w-20 h-20 text-5xl bg-gray-800 flex items-center justify-center`}
+              >
+                📢
+              </div>
+              <div className={`flex flex-col gap-4`}>
+                <span
+                  className={`text-gray-100/60 text-base font-medium font-wsans`}
+                >
+                  Give us feedback!
+                </span>
+                <button
+                  className={`bg-purple-500 rounded-2xl px-6 py-3 text-white text-sm font-medium font-wsans`}
+                >
+                  {/* <span
+                  className={`bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 bg-clip-text text-transparent text-3xl font-bold font-poppins`}
+                > */}
+                  Give Feedback
+                  {/* </span> */}
+                </button>
               </div>
             </div>
           </div>
@@ -204,7 +252,7 @@ const IndexPage = () => {
             {
               <ActivityCard
                 title="Labyrinth Escape"
-                description="Navigate through perilous mazes and avoid bubbling lava pits in this intense maze runner! Play as the brave hero Questor and use your wits to guide him out of intricate labyrinths filled with traps."
+                description="Navigate through perilous mazes and avoid bubbling lava pits in this intense maze runner! Use your wits to guide him out of intricate labyrinths filled with traps."
                 bestAttempt="25.08s"
                 lastAttempt={1832252210000}
                 icon={"🌋"}
@@ -215,7 +263,6 @@ const IndexPage = () => {
                 complete
               />
             }
-            {}
           </div>
         </div>
       </div>

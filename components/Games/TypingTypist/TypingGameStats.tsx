@@ -69,6 +69,26 @@ export const TypingGameStats = () => {
         gameID: "typing",
       } as TypingGameSaveData)
     );
+    const dailyStreak = JSON.parse(
+      globalThis?.localStorage?.getItem("dailyStreak") ||
+        JSON.stringify({
+          lastPlayed: 0,
+          streak: 0,
+        })
+    );
+    // if last played is gt than 24 hours ago but less than 48h ago, increment streak
+    if (dailyStreak.lastPlayed < Date.now() - 172800000) {
+      dailyStreak.streak++;
+    }
+    // if last played is gt than 48 hours ago, reset streak
+    if (dailyStreak.lastPlayed < Date.now() - 172800000) {
+      dailyStreak.streak = 1;
+    }
+    dailyStreak.lastPlayed = Date.now();
+    globalThis?.localStorage?.setItem(
+      "dailyStreak",
+      JSON.stringify(dailyStreak)
+    );
     return {
       accuracy: lastGame.accuracy,
       words: lastGame.words,

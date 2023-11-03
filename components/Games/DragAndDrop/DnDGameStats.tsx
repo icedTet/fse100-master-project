@@ -20,6 +20,7 @@ export const DnDGameStats = () => {
       gameID: "dnd",
     });
   const tallied = useRef(false);
+
   const currentAttemptData = useMemo<DNDStatistics>(() => {
     if (tallied.current) {
       return {
@@ -46,7 +47,8 @@ export const DnDGameStats = () => {
         },
         bestAttempt: {
           attemptTime:
-            (dndSavedGameData!.bestAttempt?.attemptTime || 0) <= attemptTime && dndSavedGameData!.bestAttempt?.attemptTime !== 0
+            (dndSavedGameData!.bestAttempt?.attemptTime || 0) <= attemptTime &&
+            dndSavedGameData!.bestAttempt?.attemptTime !== 0
               ? dndSavedGameData!.bestAttempt?.attemptTime
               : attemptTime,
           accuracy:
@@ -59,6 +61,27 @@ export const DnDGameStats = () => {
         gameID: "dnd",
       })
     );
+    const dailyStreak = JSON.parse(
+      globalThis?.localStorage?.getItem("dailyStreak") ||
+        JSON.stringify({
+          lastPlayed: 0,
+          streak: 0,
+        })
+    );
+    // if last played is gt than 24 hours ago but less than 48h ago, increment streak
+    if (dailyStreak.lastPlayed < Date.now() - 172800000) {
+      dailyStreak.streak++;
+    }
+    // if last played is gt than 48 hours ago, reset streak
+    if (dailyStreak.lastPlayed < Date.now() - 172800000) {
+      dailyStreak.streak = 1;
+    }
+    dailyStreak.lastPlayed = Date.now();
+    globalThis?.localStorage?.setItem(
+      "dailyStreak",
+      JSON.stringify(dailyStreak)
+    );
+
     console.log(
       {
         averageAttempt: {
@@ -99,15 +122,15 @@ export const DnDGameStats = () => {
   }, [query]);
   const positiveText = useMemo(() => {
     if (
+      !dndSavedGameData!.bestAttempt?.attemptTime ||
       (currentAttemptData.attemptTime || 0) <=
-      (dndSavedGameData!.bestAttempt?.attemptTime || 0)
+        dndSavedGameData!.bestAttempt?.attemptTime
     ) {
       return `🏆 Wow! that's a new all time best! You beat your best score by ${
-        ~~(
-          ((dndSavedGameData!.bestAttempt?.attemptTime || 0) -
-            (currentAttemptData.attemptTime || 0)) *
-          0.1
-        ) / 100
+        ~~(dndSavedGameData!.bestAttempt?.attemptTime
+          ? (dndSavedGameData!.bestAttempt?.attemptTime || 0) -
+            (currentAttemptData.attemptTime || 0)
+          : currentAttemptData.attemptTime * 0.1) / 100
       }s!`;
     }
     if (
