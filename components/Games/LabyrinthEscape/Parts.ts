@@ -2,7 +2,7 @@ import { P5CanvasInstance } from "@p5-wrapper/react";
 import { Coordinate } from "./PlayerPositioning";
 
 //from shape manager
-export class Parts{
+export class Parts implements Squares{
     x: number;
     y: number;
     len: number;
@@ -23,9 +23,7 @@ export class Parts{
         const part=[]
         this.x-=20;
         for(let i =0; i < this.len; i++){
-            this.x+=120;
-            const rect= this.p5.rect(this.x,this.y,120,120);
-            part.push(rect);
+            Squares({x: this.x, y: this.y}, 120, this.p5);
         }
     }
 }
