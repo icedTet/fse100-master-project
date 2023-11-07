@@ -14,6 +14,6 @@ class Square{
     }
 
     draw(){
-        
+        this.p5.square(this.x, this.y, 120);
     }
 }
