@@ -1,7 +1,11 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { Coordinate } from "../DragAndDrop/dndTypes";
 
+<<<<<<< HEAD
 class Squares{
+=======
+export class Square{
+>>>>>>> cb5dfcf4e125a548e6324684938b5e24e6aa2b7f
     x: number;
     y: number;
     size: number;
