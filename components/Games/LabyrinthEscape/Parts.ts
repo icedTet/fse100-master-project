@@ -18,6 +18,7 @@ export class Parts{
 
     draw(){
         this.drawPart();
+        
     }
 
     drawPart(){
