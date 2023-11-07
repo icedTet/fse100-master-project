@@ -1,8 +1,6 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
-import { Console } from "console";
 import { Coordinate } from "./PlayerPositioning";
-import { player } from "./Player";
-import { PlayerManager } from "./PlayerManager";
+
 
 export class MazeMap{
     p5: P5CanvasInstance;

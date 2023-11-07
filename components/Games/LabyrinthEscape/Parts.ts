@@ -2,7 +2,7 @@ import { P5CanvasInstance } from "@p5-wrapper/react";
 import { Coordinate } from "./PlayerPositioning";
 
 //from shape manager
-class Parts{
+export class Parts{
     x: number;
     y: number;
     len: number;
@@ -16,12 +16,16 @@ class Parts{
     }
 
     draw(){
-        const path=[]
+        this.drawPart();
+    }
+
+    drawPart(){
+        const part=[]
         this.x-=20;
         for(let i =0; i < this.len; i++){
             this.x+=120;
             const rect= this.p5.rect(this.x,this.y,120,120);
-            path.push(rect);
+            part.push(rect);
         }
     }
 }

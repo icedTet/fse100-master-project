@@ -2,6 +2,7 @@ import { P5CanvasInstance } from "@p5-wrapper/react";
 import { PlayerManager } from "../Games/LabyrinthEscape/PlayerManager";
 import { player } from "../Games/LabyrinthEscape/Player";
 import { MazeMap } from "../Games/LabyrinthEscape/MazeMap";
+import { Parts } from "../Games/LabyrinthEscape/Parts";
 
 export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
   let startTime = 0;
@@ -9,6 +10,7 @@ export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
   let points = 0;
   const playerManager = PlayerManager.getInstance(); // Create a new player manager.
   const mazeMap = new MazeMap(p5,{x:window.innerWidth,y:window.innerHeight});
+  const parts =  Parts
   console.debug(MazeMap);
   for(let i=0 ;i<1;i++){
     let a =10;
