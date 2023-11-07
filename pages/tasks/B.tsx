@@ -18,7 +18,7 @@ const TypistCountdown = dynamic(
   () => import("../../components/Games/TypingTypist/TypistCountdown"),
   { ssr: false }
 );
-const timeLimit = 1000 * 60 * 5; // 30 seconds
+const timeLimit = 1000 * 60 * 0.5; // 30 seconds
 export type TypingTypistWordResult = Map<
   string,
   {
