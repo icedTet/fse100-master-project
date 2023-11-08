@@ -20,6 +20,11 @@ export class Square{
     }
 
     drawSquare(){
+        let c = this.p5.color(0, 0, 0);
+        this.p5.fill(c);
+        this.p5.strokeWeight(1);
+        this.p5.stroke(255, 0, 255);
+        console.log("drawing square")
         this.p5.square(this.x, this.y, this.size);
     }
 }

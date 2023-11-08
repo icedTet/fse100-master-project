@@ -10,9 +10,8 @@ export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
   let points = 0;
   const playerManager = PlayerManager.getInstance(); // Create a new player manager.
   const mazeMap = new MazeMap(p5,{x:window.innerWidth,y:window.innerHeight});
-  const parts =  new Parts({x:0,y:300}, 120, p5);
-
   console.debug(MazeMap);
+  
   for(let i=0 ;i<1;i++){
     let a =10;
     let b =(window.innerHeight/2)+20;
@@ -56,8 +55,8 @@ export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
   p5.draw = () => {
     p5.background(255);
     //player holes
-    //mazeMap.draw();
-    parts.draw();
+    mazeMap.draw();
+    
     if ((points = 6)) {
       totalTime = (startTime - Date.now()) / 1000;
     }
