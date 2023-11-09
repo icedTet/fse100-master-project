@@ -1,5 +1,6 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { Coordinate } from "../DragAndDrop/dndTypes";
+import { player } from "./Player";
 
 
 export class Square{
@@ -27,4 +28,13 @@ export class Square{
         console.log("drawing square")
         this.p5.square(this.x, this.y, this.size);
     }
+
+    checkForPlayer(x: number, y: number) {
+        return (
+          x >= this.x + 40  &&
+          x <= this.x + 80 &&
+          y >= this.y + 40 &&
+          y <= this.y + 80
+        );
+      }
 }

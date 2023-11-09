@@ -18,11 +18,7 @@ export class MazeMap{
       this.p5 = p5;
       this.tolerance = 0.05;
       this.path=[];
-      this.path[0]=new Parts({x: 0,y: window.innerHeight/2},4,this.p5);
-      this.path[1]=new Parts({x: 360,y: window.innerHeight/2 -120},1,this.p5)
-      this.path[2]=new Parts({x: 360,y: window.innerHeight/2 -120*2},4,this.p5)
-      this.path[3]=new Parts({x: 360,y: window.innerHeight/2 -120*3},3,this.p5)
-
+      
     }
     id?: number | undefined;
     //part: null
@@ -35,7 +31,13 @@ export class MazeMap{
       this.path.forEach(r=>{
         r.draw()
       })
-
+      this.path[0]=new Parts({x: 0,y: window.innerHeight/2},4,this.p5);
+      this.path[1]=new Parts({x: 360,y: window.innerHeight/2 -120},1,this.p5)
+      this.path[2]=new Parts({x: 360,y: window.innerHeight/2 -120*2},4,this.p5)
+      this.path[3]=new Parts({x: 720,y: window.innerHeight/2 -120*3},3,this.p5)
+      this.path[4]=new Parts({x: 960,y: window.innerHeight/2 -120*2},2,this.p5)
+      this.path[5]=new Parts({x: 1080,y: window.innerHeight/2 -120*1},3,this.p5)
+      this.path[6]=new Parts({x: 1320,y: window.innerHeight/2},5,this.p5)
     }
   
     checkForPath(x:number, y:number){

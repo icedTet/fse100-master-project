@@ -21,7 +21,7 @@ export class player implements Player {
     this.playerSize = playerSize;
     this.p5 = p5;
     this.destination = destination;
-    this.tolerance = 0.05;
+    this.tolerance = 0.15;
     PlayerManager.getInstance().addPlayer(this);
   }
   id?: number | undefined;
@@ -70,7 +70,7 @@ export class player implements Player {
     this.p5.fill(c);
     this.p5.strokeWeight(1);
     this.p5.stroke(255, 0, 255);
-    this.p5.rect(this.x, this.y, this.playerSize, this.playerSize);
+    this.p5.circle(this.x+this.playerSize/2, this.y+this.playerSize/2, this.playerSize);
   }
   /**
    * Updates the position of the player.
