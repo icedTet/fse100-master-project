@@ -14,13 +14,16 @@ export class PlayerManager {
     draggedPlayer: Player | null = null;
     nextPlayerID: number = 0;
     lastMousePosition: Coordinate = { x: 0, y: 0 };
+    active: Player| null;
     private constructor() {
       this.Player = new Map();
+      this.active = null;
     }
     addPlayer(player: Player) {
       player.id = this.nextPlayerID;
       this.Player.set(this.nextPlayerID, player);
       this.nextPlayerID++;
+      this.active = player;
       return this.Player.get(this.nextPlayerID - 1);
     }
     removePlayer(playerID: number) {

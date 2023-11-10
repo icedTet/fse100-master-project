@@ -5,6 +5,8 @@ export type Coordinate = {
   y: number;
 };
 export interface Player {
+  x: number;
+  y: number;
   id?: number;
   draw: (p5: P5CanvasInstance) => void;
   isClickingOnPlayer: (x: number, y: number) => boolean;

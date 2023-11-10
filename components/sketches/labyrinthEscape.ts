@@ -13,8 +13,8 @@ export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
   console.debug(MazeMap);
   
   for(let i=0 ;i<1;i++){
-    let a =10;
-    let b =(window.innerHeight/2)+20;
+    let a =50;
+    let b =(window.innerHeight/2)+60;
     let c = 1820;
     let d = (window.innerHeight/2)+20;
     const Player = new player({ x: a, y: b }, 80, p5, { x: c, y: d });

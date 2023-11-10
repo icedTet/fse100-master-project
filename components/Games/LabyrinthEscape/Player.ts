@@ -3,8 +3,8 @@ import { Player, Coordinate } from "./PlayerPositioning";
 import { PlayerManager } from "./PlayerManager";
 
 export class player implements Player {
-  x: number;
-  y: number;
+  public x: number;
+  public y: number;
   playerSize: number;
   p5: P5CanvasInstance;
   destination: Coordinate;
@@ -33,10 +33,10 @@ export class player implements Player {
    */
   isClickingOnPlayer(x: number, y: number) {
     return (
-      x > this.x &&
-      x < this.x + this.playerSize &&
-      y > this.y &&
-      y < this.y + this.playerSize
+      x > this.x -this.playerSize/2&&
+      x < this.x + this.playerSize/2 &&
+      y > this.y -this.playerSize/2&&
+      y < this.y + this.playerSize/2
     );
   }
   /**
@@ -55,10 +55,9 @@ export class player implements Player {
     this.p5.fill(c);
     this.p5.strokeWeight(1);
     this.p5.stroke(255, 0, 255);
-    this.p5.rect(
+    this.p5.circle(
       this.destination.x,
       this.destination.y,
-      this.playerSize,
       this.playerSize
     );
   }
@@ -70,7 +69,7 @@ export class player implements Player {
     this.p5.fill(c);
     this.p5.strokeWeight(1);
     this.p5.stroke(255, 0, 255);
-    this.p5.circle(this.x+this.playerSize/2, this.y+this.playerSize/2, this.playerSize);
+    this.p5.circle(this.x, this.y, this.playerSize);
   }
   /**
    * Updates the position of the player.
