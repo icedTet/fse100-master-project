@@ -9,15 +9,15 @@ export class Square{
     y: number;
     size: number;
     correct: boolean;
-    previousSquare: Square | null;
+
     p5: P5CanvasInstance;
-    constructor(start: Coordinate, size: number, previousSquare: Square | null, p5: P5CanvasInstance){
+    constructor(start: Coordinate, size: number,  p5: P5CanvasInstance){
         this.x = start.x;
         this.y = start.y;
         this.size = size;
         this.p5 = p5;
         this.correct = false;
-        this.previousSquare = previousSquare;
+     
     }
 
     draw(){
@@ -26,38 +26,42 @@ export class Square{
         // console.log(player.x,player.y)
         this.checkForPlayer(player.x, player.y);
         this.drawSquare();
+       // this.calculateDistance();
     }
 
     drawSquare(){
         let c = this.p5.color(0, 0, 0);
-        if(this.correct){
+        if(this.correct==true){
             c = this.p5.color(0, 255, 0);
         }
         this.p5.fill(c);
         this.p5.strokeWeight(1);
         this.p5.stroke(255, 0, 255);
         this.p5.square(this.x, this.y, this.size);
+        /*this.p5.line(this.x,this.y+(this.size)/2,this.x+this.size,this.y+(this.size)/2);
+        this.p5.line(this.x+(this.size)/2,this.y,this.x+(this.size)/2,this.y+(this.size));*/
+        this.p5.strokeWeight(10);
+        this.p5.point(this.x+(this.size)/2, this.y+(this.size)/2);
+
     }
 
     checkForPlayer(x: number, y: number) {
-        if (this.x < 20){
-
         
-        // console.log(x >= this.x + 40);
-        // console.log("x:" + x);
-        // console.log("this.x:" + this.x);
-        }
-        if (
-          x >= this.x + 40  &&
-          x <= this.x + 80 &&
-          y >= this.y + 40 &&
-          y <= this.y + 80 && 
-          (this.previousSquare == null || this.previousSquare.correct)
+        if(
+          x >= this.x+(this.size)/2 - (this.size/2)  &&
+          x <= this.x+(this.size)/2 + (this.size/2)&&
+          y >= this.y+(this.size)/2 - (this.size/2) &&
+          y <= this.y+(this.size)/2 + (this.size/2)
         ){
+            console.log("out",Square);
             this.correct = true
-            return true;
         }
+    
         //console.log(this.correct);
-        return false;
+        
       }
+       // calculateDistance() {
+
+
+       // }
 }
