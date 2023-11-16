@@ -8,15 +8,10 @@ export class MazeMap{
     p5: P5CanvasInstance;
     tolerance: number;
     correct: boolean = false;
-    OOB: Coordinate;
-    death: boolean = false;
     path: Parts[]
     constructor(
-      p5: P5CanvasInstance,
-      OOB: Coordinate,
-      
+      p5: P5CanvasInstance,      
     ) {
-    this.OOB= OOB;
       this.p5 = p5;
       this.tolerance = 0.05;
       this.path=[];
@@ -34,10 +29,10 @@ export class MazeMap{
       const player = PlayerManager.getInstance().active!
       if(this.mapCompleted()){
         this.correct == true;
+        
       }
       //console.log(this.mapCompleted(player.x, player.y));
         this.drawPath();
-        this.updateFailure();
         }
     
     drawPath(){
@@ -47,22 +42,6 @@ export class MazeMap{
       
     }
   
-    checkForPath(x:number, y:number){
-        return (
-            x >= this.OOB.x * this.tolerance &&
-            x <= this.OOB.x * this.tolerance &&
-            y >= this.OOB.y * this.tolerance &&
-            y <= this.OOB.y * this.tolerance
-          );
-
-    }
-    
-    updateFailure(){
-        if (this.death==true){
-          let c=this.p5.color(100,100,100);
-        }
-    }
-
     mapCompleted(){
       for(let i = 0; i < this.path.length; i++){
         if(!this.path[0].partCompleted()){
