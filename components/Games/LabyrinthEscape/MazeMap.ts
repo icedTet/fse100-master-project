@@ -32,8 +32,10 @@ export class MazeMap{
     //part: null
     draw(){
       const player = PlayerManager.getInstance().active!
-      this.mapCompleted(player.x, player.y);
-      console.log(this.mapCompleted(player.x, player.y));
+      if(this.mapCompleted()){
+        this.correct == true;
+      }
+      //console.log(this.mapCompleted(player.x, player.y));
         this.drawPath();
         this.updateFailure();
         }
@@ -61,9 +63,9 @@ export class MazeMap{
         }
     }
 
-    mapCompleted(x: number, y: number){
+    mapCompleted(){
       for(let i = 0; i < this.path.length; i++){
-        if(!this.path[0].partCompleted(x, y)){
+        if(!this.path[0].partCompleted()){
           this.correct = false;
           return false;
         }

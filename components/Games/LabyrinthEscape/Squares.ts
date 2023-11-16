@@ -30,6 +30,9 @@ export class Square{
 
     drawSquare(){
         let c = this.p5.color(0, 0, 0);
+        if(this.previousSquare == null){
+            c = this.p5.color(0, 0, 255);
+        }
         if(this.correct){
             c = this.p5.color(0, 255, 0);
         }

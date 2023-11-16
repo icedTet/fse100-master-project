@@ -35,22 +35,22 @@ export class Parts{
     init(){
         let previousSquare = null;
         if(this.previousPart==null){
-        let previousSquare= new Square({x: this.x+0*120, y: this.y}, 120, null, this.p5);
+        previousSquare= new Square({x: this.x+0*120, y: this.y}, 120, null, this.p5);
         this.squares.push(previousSquare);
         }
         else{
-            let previousSquare= new Square({x: this.x+0*120, y: this.y}, 120, this.previousPart.squares[this.previousPart.len], this.p5);
+            previousSquare= new Square({x: this.x+0*120, y: this.y}, 120, this.previousPart.squares[this.previousPart.len-1], this.p5);
             this.squares.push(previousSquare);
         }
 
-        for(let i =1; i < this.len; i++){
-            let s= null;
+        for(let i = 1; i < this.len; i++){
+            let s = null;
             s = new Square({x: this.x+i*120, y: this.y}, 120, previousSquare, this.p5);
             this.squares.push(s);
             previousSquare = s;
         }
     }
-    partCompleted(x: number, y: number){
+    partCompleted(){
         for(let i = 0; i < this.squares.length; i++){
         if(!this.squares[i].correct)
             return false;
