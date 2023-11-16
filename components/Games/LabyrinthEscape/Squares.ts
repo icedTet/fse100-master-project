@@ -26,6 +26,7 @@ export class Square{
         // console.log(player.x,player.y)
         this.checkForPlayer(player.x, player.y);
         this.drawSquare();
+        
     }
 
     drawSquare(){
@@ -45,7 +46,7 @@ export class Square{
     checkForPlayer(x: number, y: number) {
         if (this.x < 20){
 
-        
+
         // console.log(x >= this.x + 40);
         // console.log("x:" + x);
         // console.log("this.x:" + this.x);
