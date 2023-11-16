@@ -48,10 +48,10 @@ export class Square{
         // console.log("this.x:" + this.x);
         }
         if (
-          x >= this.x + 40  &&
-          x <= this.x + 80 &&
-          y >= this.y + 40 &&
-          y <= this.y + 80 && 
+          x >= this.x &&
+          x <= this.x + this.size &&
+          y >= this.y &&
+          y <= this.y + this.size && 
           (this.previousSquare == null || this.previousSquare.correct)
         ){
             this.correct = true
