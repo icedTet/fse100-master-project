@@ -28,14 +28,14 @@ export class MazeMap{
     draw(){
       const player = PlayerManager.getInstance().active!
       if(this.mapCompleted()){
-        this.correct == true;
-        
+        this.correct = true;
       }
       //console.log(this.mapCompleted(player.x, player.y));
         this.drawPath();
         }
     
     drawPath(){
+      this.p5.clear(0,0,0,0)
       this.path.forEach(r=>{
         r.draw()
       })
