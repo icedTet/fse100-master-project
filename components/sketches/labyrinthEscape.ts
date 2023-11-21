@@ -3,6 +3,7 @@ import { PlayerManager } from "../Games/LabyrinthEscape/PlayerManager";
 import { player } from "../Games/LabyrinthEscape/Player";
 import { MazeMap } from "../Games/LabyrinthEscape/MazeMap";
 import { Parts } from "../Games/LabyrinthEscape/Parts";
+import { Square } from "../Games/LabyrinthEscape/Squares";
 
 export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
   let startTime = 0;
@@ -17,7 +18,7 @@ export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
     let b =(window.innerHeight/2)+60;
     let c = 1820;
     let d = (window.innerHeight/2)+20;
-    const Player = new player({ x: a, y: b }, 80, p5, { x: c, y: d });
+    const Player1 = new player({ x: a, y: b }, 80, p5, { x: c, y: d },mazeMap);
   }
  
 
@@ -54,6 +55,12 @@ export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
       totalTime = (startTime - Date.now()) / 1000;
     }
     PlayerManager.getInstance().drawPlayers(p5);
+   /* for(let i=0; i<mazeMap.path.length; i++){
+
+    for(let j=0; j<this.mazeMap.path[i].squares.length; j++){
+      this.mazeMap.path[i].squares[j].checkForPlayer(this.Player1.x,this.Player1.y)
+  }
+} */
   };
 
 }

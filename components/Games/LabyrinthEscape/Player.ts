@@ -1,6 +1,8 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { Player, Coordinate } from "./PlayerPositioning";
 import { PlayerManager } from "./PlayerManager";
+import { Square } from "./Squares";
+import { MazeMap } from "./MazeMap";
 
 export class player implements Player {
   public x: number;
@@ -10,11 +12,13 @@ export class player implements Player {
   destination: Coordinate;
   tolerance: number;
   correct: boolean = false;
+  map: MazeMap;
   constructor(
     playerStart: Coordinate,
     playerSize: number,
     p5: P5CanvasInstance,
-    destination: Coordinate
+    destination: Coordinate,
+    map: MazeMap
   ) {
     this.x = playerStart.x;
     this.y = playerStart.y;
@@ -22,6 +26,7 @@ export class player implements Player {
     this.p5 = p5;
     this.destination = destination;
     this.tolerance = 0.15;
+    this.map = map;
     PlayerManager.getInstance().addPlayer(this);
   }
   id?: number | undefined;
@@ -65,7 +70,11 @@ export class player implements Player {
    * Draws the player.
    */
   drawPlayer() {
-    let c = this.correct ? this.p5.color(0, 255, 0) : this.p5.color(0, 0, 255);
+    const squares = [] as Square[];
+    this.map.path.forEach(p=>{
+      squares.push(...p.squares)
+    })
+    let c =  this.correct ? this.p5.color(0, 255, 0) : this.isOnASquare(squares) ? this.p5.color(255,0,255) :this.p5.color(255, 0, 0);
     this.p5.fill(c);
     this.p5.strokeWeight(1);
     this.p5.stroke(255, 0, 255);
@@ -110,5 +119,17 @@ export class player implements Player {
     this.y = this.destination.y;
     this.correct = true;
     PlayerManager.getInstance().releasePlayerFromMouse();
+  }
+  isOnASquare(squares: Square[]) {
+    let onSquare = false;
+    squares.forEach(sq=>{
+      const cx = sq.x + sq.size/2;
+      const cy = sq.y + sq.size/2;
+      const dist = Math.sqrt((this.y-cy)**2 + (this.x-cx)**2);
+      if (dist <=sq.size/2- this.playerSize/2) {
+        onSquare = true;
+      } 
+    })
+    return onSquare;
   }
 }

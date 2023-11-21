@@ -1,6 +1,7 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
 import { Coordinate } from "./PlayerPositioning";
 import { Square } from "./Squares";
+import { player } from "./Player";
 
 //from shape manager
 export class Parts{
@@ -23,9 +24,10 @@ export class Parts{
     }
 
     draw(){
+        
         console.log("draw")
         this.drawPart();
-
+        
     }
     drawPart(){
         this.squares.forEach(sq=>{
