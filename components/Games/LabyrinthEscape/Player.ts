@@ -74,7 +74,11 @@ export class player implements Player {
     for(let i = 0; i < this.map.len; i++){
       squares.push(this.map.squares[i])
     }
-    let c =  this.correct ? this.p5.color(0, 255, 0) : this.isOnASquare(squares) ? this.p5.color(255,0,255) :this.p5.color(255, 0, 0);
+    let c = this.p5.color(0,0,255)
+    if(this.isOnASquare(squares))
+    c = this.p5.color(0, 0, 255);
+    else
+    c = this.p5.color(255,0,0)
     this.p5.fill(c);
     this.p5.strokeWeight(1);
     this.p5.stroke(255, 0, 255);
@@ -122,14 +126,32 @@ export class player implements Player {
   }
   isOnASquare(squares: Square[]) {
     let onSquare = false;
-    squares.forEach(sq=>{
-      const cx = sq.x + sq.size/2;
-      const cy = sq.y + sq.size/2;
-      const dist = Math.sqrt((this.y-cy)**2 + (this.x-cx)**2);
-      if (dist <=sq.size/2- this.playerSize/2) {
-        onSquare = true;
-      } 
-    })
-    return onSquare;
+    for(let i = 0; i<squares.length-1; i++){
+      if(squares[i].x<squares[i+1].x){
+        onSquare = 
+          this.x > squares[i].x
+          this.x < squares[i+1].x+120
+          this.y < squares[i].y
+          this.y > squares[i].y-120
+      }
+      else{
+        onSquare = 
+          this.x > squares[i].x
+          this.x < squares[i].x+120
+          this.y > squares[i].y
+          this.y < squares[i+1].y+120
+      }
+      if(onSquare)
+      return true
+    }
+    // squares.forEach(sq=>{
+    //   const cx = sq.x + sq.size/2;
+    //   const cy = sq.y + sq.size/2;
+    //   const dist = Math.sqrt((this.y-cy)**2 + (this.x-cx)**2);
+    //   if (dist <=sq.size/2- this.playerSize/2) {
+    //     onSquare = true;
+    //   } 
+    // })
+    return false;
   }
 }

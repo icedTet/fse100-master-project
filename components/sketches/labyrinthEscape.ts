@@ -15,8 +15,8 @@ export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
   for(let i=0 ;i<1;i++){
     let a =50;
     let b =(window.innerHeight/2)+60;
-    let c = 1820;
-    let d = (window.innerHeight/2)+20;
+    let c = 1500;
+    let d = (window.innerHeight/2)+50;
     const Player1 = new player({ x: a+10, y: b-370 }, 80, p5, { x: c, y: d },mazeMap);
   }
  
