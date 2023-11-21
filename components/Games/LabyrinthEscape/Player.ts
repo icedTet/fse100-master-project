@@ -71,9 +71,9 @@ export class player implements Player {
    */
   drawPlayer() {
     const squares = [] as Square[];
-    this.map.path.forEach(p=>{
-      squares.push(...p.squares)
-    })
+    for(let i = 0; i < this.map.len; i++){
+      squares.push(this.map.squares[i])
+    }
     let c =  this.correct ? this.p5.color(0, 255, 0) : this.isOnASquare(squares) ? this.p5.color(255,0,255) :this.p5.color(255, 0, 0);
     this.p5.fill(c);
     this.p5.strokeWeight(1);

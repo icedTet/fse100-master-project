@@ -2,7 +2,6 @@ import { P5CanvasInstance } from "@p5-wrapper/react";
 import { PlayerManager } from "../Games/LabyrinthEscape/PlayerManager";
 import { player } from "../Games/LabyrinthEscape/Player";
 import { MazeMap } from "../Games/LabyrinthEscape/MazeMap";
-import { Parts } from "../Games/LabyrinthEscape/Parts";
 import { Square } from "../Games/LabyrinthEscape/Squares";
 
 export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
@@ -18,7 +17,7 @@ export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
     let b =(window.innerHeight/2)+60;
     let c = 1820;
     let d = (window.innerHeight/2)+20;
-    const Player1 = new player({ x: a, y: b }, 80, p5, { x: c, y: d },mazeMap);
+    const Player1 = new player({ x: a+10, y: b-370 }, 80, p5, { x: c, y: d },mazeMap);
   }
  
 
