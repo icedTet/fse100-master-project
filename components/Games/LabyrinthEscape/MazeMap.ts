@@ -28,6 +28,9 @@ export class MazeMap{
         this.len++;
       }
     }
+
+ 
+
     id?: number | undefined;
     //part: null
     draw(){

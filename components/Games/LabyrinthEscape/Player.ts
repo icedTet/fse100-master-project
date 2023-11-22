@@ -130,41 +130,92 @@ export class player implements Player {
   isOnASquare(squares: Square[]) {
     let index=this.closestSquareIndex(squares);
     //console.log("final i: " + index)
-    if(index == 0){
-      return true
-    }
-    else if(index == squares.length-1){
-      return true
-    }
-    else{
     let lastSquarePosition = "0"
     //console.log(squares[index-1].y+ ", " + squares[index].y)
-    if(squares[index-1].x<squares[index].x){
-      lastSquarePosition = "left"
-    }
-    if(squares[index-1].x>squares[index].x){
-      lastSquarePosition = "right"
-    }
-    if(squares[index-1].y<squares[index].y){
-      lastSquarePosition = "up"
-    }
-    if(squares[index-1].y>squares[index].y){
-      lastSquarePosition = "down"
+    if(index!=0){
+      if(squares[index-1].x<squares[index].x){
+        lastSquarePosition = "left"
+      }
+      if(squares[index-1].x>squares[index].x){
+        lastSquarePosition = "right"
+      }
+      if(squares[index-1].y<squares[index].y){
+        lastSquarePosition = "up"
+      }
+      if(squares[index-1].y>squares[index].y){
+        lastSquarePosition = "down"
+      }
     }
 
     let nextSquarePosition = "0"
-    if(squares[index+1].x>squares[index].x){
-      nextSquarePosition = "right"
+    if(index!=squares.length-1){
+      if(squares[index+1].x>squares[index].x){
+        nextSquarePosition = "right"
+      }
+      if(squares[index+1].x<squares[index].x){
+        nextSquarePosition = "left"
+      }
+      if(squares[index+1].y>squares[index].y){
+        nextSquarePosition = "down"
+      }
+      if(squares[index+1].y<squares[index].y){
+        nextSquarePosition = "up"
+      }
     }
-    if(squares[index+1].x<squares[index].x){
-      nextSquarePosition = "left"
+    if(index == 0){
+      if(nextSquarePosition === "left"){
+        return this.x+40 < squares[index].x+80 &&
+               this.x+40 > squares[index].x-80 &&
+               this.y+40 < squares[index].y+80 &&
+               this.y+40 > squares[index].y+40
+      }
+      if(nextSquarePosition === "right"){
+        return this.x+40 < squares[index].x+200 &&
+               this.x+40 > squares[index].x+40 &&
+               this.y+40 < squares[index].y+80 &&
+               this.y+40 > squares[index].y+40
+      }
+      if(nextSquarePosition === "up"){
+        return this.x+40 < squares[index].x+80 &&
+               this.x+40 > squares[index].x+40 &&
+               this.y+40 < squares[index].y+80 &&
+               this.y+40 > squares[index].y-80
+      }
+      if(nextSquarePosition === "down"){
+        return this.x+40 < squares[index].x+80 &&
+               this.x+40 > squares[index].x+40 &&
+               this.y+40 < squares[index].y+200 &&
+               this.y+40 > squares[index].y+40
+      }
     }
-    if(squares[index+1].y>squares[index].y){
-      nextSquarePosition = "down"
+
+    if(index == squares.length-1){
+      if(lastSquarePosition === "left"){
+        return this.x+40 < squares[index].x+80 &&
+               this.x+40 > squares[index].x-80 &&
+               this.y+40 < squares[index].y+80 &&
+               this.y+40 > squares[index].y+40
+      }
+      if(lastSquarePosition === "right"){
+        return this.x+40 < squares[index].x+200 &&
+               this.x+40 > squares[index].x+40 &&
+               this.y+40 < squares[index].y+80 &&
+               this.y+40 > squares[index].y+40
+      }
+      if(lastSquarePosition === "up"){
+        return this.x+40 < squares[index].x+80 &&
+               this.x+40 > squares[index].x+40 &&
+               this.y+40 < squares[index].y+80 &&
+               this.y+40 > squares[index].y-80
+      }
+      if(lastSquarePosition === "down"){
+        return this.x+40 < squares[index].x+80 &&
+               this.x+40 > squares[index].x+40 &&
+               this.y+40 < squares[index].y+200 &&
+               this.y+40 > squares[index].y+40
+      }
     }
-    if(squares[index+1].y<squares[index].y){
-      nextSquarePosition = "up"
-    }
+
     console.log(lastSquarePosition+nextSquarePosition)
     if((lastSquarePosition === "left" && nextSquarePosition === "right") || (lastSquarePosition === "right" && nextSquarePosition === "left")){
       return (this.x+40 < squares[index].x+200 &&
@@ -229,7 +280,6 @@ export class player implements Player {
               this.y+40 > squares[index].y+40)
     }
     return false
-    }
   }
 
   closestSquareIndex(squares: Square[]){
