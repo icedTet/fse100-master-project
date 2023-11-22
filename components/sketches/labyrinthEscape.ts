@@ -7,17 +7,17 @@ import { Square } from "../Games/LabyrinthEscape/Squares";
 export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
   let startTime = 0;
   let totalTime = 0;
-  let points = 0;
+  let GAME_MODE = 3; // change mode [1-3] to get different maps!!!
   const playerManager = PlayerManager.getInstance(); // Create a new player manager.
-  const mazeMap = new MazeMap(p5);
+  const mazeMap = new MazeMap(GAME_MODE, p5); 
   //console.debug(MazeMap);
   
   for(let i=0 ;i<1;i++){
-    let a =10;
-    let b =(window.innerHeight/2)+20;
+    let a =20;
+    let b = 20;
     let c = 1220;
-    let d = (window.innerHeight/2)+10;
-    const Player1 = new player({ x: a+10, y: b-370 }, 80, p5, { x: c, y: d },mazeMap);
+    let d = 500;
+    const Player1 = new player({ x: a, y: b }, 80, p5, { x: c, y: d },mazeMap);
   }
  
 
@@ -50,8 +50,9 @@ export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
     //player holes
     mazeMap.draw();
     
-    if ((points = 6)) {
+    if (mazeMap.correct) {
       totalTime = (startTime - Date.now()) / 1000;
+      console.log(totalTime)
     }
     PlayerManager.getInstance().drawPlayers(p5);
    /* for(let i=0; i<mazeMap.path.length; i++){

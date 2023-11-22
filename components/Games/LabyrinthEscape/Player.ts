@@ -56,7 +56,7 @@ export class player implements Player {
    * Draws the hole, where the player should be moved to.
    */
   drawHole() {
-    let c = this.p5.color(0, 0, 0);
+    let c = this.p5.color(255, 0, 0);
     this.p5.fill(c);
     this.p5.strokeWeight(1);
     this.p5.stroke(255, 0, 255);
@@ -73,6 +73,7 @@ export class player implements Player {
     const squares = [] as Square[];
     for(let i = 0; i < this.map.len; i++){
       squares.push(this.map.squares[i])
+      //console.log(squares[i])
     }
     let c = this.p5.color(0,0,255)
     if(this.isOnASquare(squares))
@@ -99,7 +100,7 @@ export class player implements Player {
       this.x += newPosition.x;
       this.y += newPosition.y;
     }
-    console.log(this.map.correct)
+    //console.log(this.map.correct)
     if (this.checkForHole(this.x, this.y)&&this.map.correct) {
       this.playerWin();
     }
@@ -216,7 +217,7 @@ export class player implements Player {
       }
     }
 
-    console.log(lastSquarePosition+nextSquarePosition)
+    //console.log(lastSquarePosition+nextSquarePosition)
     if((lastSquarePosition === "left" && nextSquarePosition === "right") || (lastSquarePosition === "right" && nextSquarePosition === "left")){
       return (this.x+40 < squares[index].x+200 &&
               this.x+40 > squares[index].x-80 &&
@@ -286,7 +287,7 @@ export class player implements Player {
     let minDist = 2000;
     let index = 0;
     for(let i = 0; i < squares.length; i++){
-      //console.log(minDist + ", " + this.p5.dist(this.x,this.y,squares[i].x+60,squares[i].y+60))
+      //console.log(minDist + ", " + squares[i])
       if(minDist > this.p5.dist(this.x + 40,this.y + 40,squares[i].x+60,squares[i].y+60)){
       minDist = this.p5.dist(this.x+ 40,this.y+40,squares[i].x+60,squares[i].y+60);
       index = i;
