@@ -10,13 +10,13 @@ export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
   let points = 0;
   const playerManager = PlayerManager.getInstance(); // Create a new player manager.
   const mazeMap = new MazeMap(p5);
-  console.debug(MazeMap);
+  //console.debug(MazeMap);
   
   for(let i=0 ;i<1;i++){
-    let a =50;
-    let b =(window.innerHeight/2)+60;
-    let c = 1500;
-    let d = (window.innerHeight/2)+50;
+    let a =10;
+    let b =(window.innerHeight/2)+20;
+    let c = 1220;
+    let d = (window.innerHeight/2)+10;
     const Player1 = new player({ x: a+10, y: b-370 }, 80, p5, { x: c, y: d },mazeMap);
   }
  

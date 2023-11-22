@@ -24,7 +24,8 @@ export class Square{
         const player = PlayerManager.getInstance().active!
         // console.log("player",player)
         // console.log(player.x,player.y)
-        this.checkForPlayer(player.x, player.y);
+        if(this.checkForPlayer(player.x, player.y))
+        this.correct = true;
         this.drawSquare();
     }
 
@@ -43,21 +44,13 @@ export class Square{
     }
 
     checkForPlayer(x: number, y: number) {
-        if (this.x < 20){
-
-        
-        // console.log(x >= this.x + 40);
-        // console.log("x:" + x);
-        // console.log("this.x:" + this.x);
-        }
         if (
-          x >= this.x &&
-          x <= this.x + this.size &&
-          y >= this.y &&
-          y <= this.y + this.size && 
+          x+40 >= this.x+40 &&
+          x+40 <= this.x + this.size-40 &&
+          y+40 >= this.y+40 &&
+          y+40 <= this.y + this.size-40 && 
           (this.previousSquare == null || this.previousSquare.correct)
         ){
-            this.correct = true
             return true;
         }
         //console.log(this.correct);

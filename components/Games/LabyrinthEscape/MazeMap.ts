@@ -15,20 +15,16 @@ export class MazeMap{
       this.p5 = p5;
       this.squares[0] = new Square({x:0, y:0},120, null, this.p5)
       this.len = 1
-      for(let i = 1; i < 4; i++){
-      this.squares[i] = new Square({x:i*120, y:0},120, this.squares[i-1], this.p5)
+      for(let i = 1; i < 5; i++){
+      this.squares[i] = new Square({x:0, y:i*120},120, this.squares[i-1], this.p5)
       this.len++;
       }
-      for(let i = 4; i < 7; i++){
-        this.squares[i] = new Square({x:i*120-120, y:120},120, this.squares[i-1], this.p5)
+      for(let i = 5; i < 11; i++){
+        this.squares[i] = new Square({x:i*120-480, y:480},120, this.squares[i-1], this.p5)
         this.len++;
       }
-      for(let i = 7; i < 9; i++){
-        this.squares[i] = new Square({x:600, y:i*120-600},120, this.squares[i-1], this.p5)
-        this.len++;
-      }
-      for(let i = 9; i < 16; i++){
-        this.squares[i] = new Square({x:i*120-360, y:360},120, this.squares[i-1], this.p5)
+      for(let i = 11; i < 16; i++){
+        this.squares[i] = new Square({x:i*120-600, y:360},120, this.squares[i-1], this.p5)
         this.len++;
       }
     }
@@ -39,13 +35,13 @@ export class MazeMap{
       if(this.mapCompleted()){
         this.correct = true;
       }
-      //console.log(this.mapCompleted(player.x, player.y));
+      //console.log("map completed = " + this.correct);
         this.drawPath();
         }
     
     drawPath(){
       this.p5.clear(0,0,0,0)
-      console.log(this.squares)
+      //console.log(this.squares)
       for(let i = 0; i < this.squares.length; i++){
         this.squares[i].draw();
       }
@@ -53,12 +49,10 @@ export class MazeMap{
   
     mapCompleted(){
       for(let i = 0; i < this.squares.length; i++){
-        if(!this.squares[0].correct){
-          this.correct = false;
+        if(!this.squares[i].correct){
           return false;
         }
       }
-      this.correct = true;
       return true;
     }
 }

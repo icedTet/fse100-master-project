@@ -38,10 +38,10 @@ export class player implements Player {
    */
   isClickingOnPlayer(x: number, y: number) {
     return (
-      x > this.x -this.playerSize/2&&
-      x < this.x + this.playerSize/2 &&
-      y > this.y -this.playerSize/2&&
-      y < this.y + this.playerSize/2
+      x > this.x &&
+      x < this.x + this.playerSize &&
+      y > this.y &&
+      y < this.y + this.playerSize
     );
   }
   /**
@@ -60,7 +60,7 @@ export class player implements Player {
     this.p5.fill(c);
     this.p5.strokeWeight(1);
     this.p5.stroke(255, 0, 255);
-    this.p5.circle(
+    this.p5.square(
       this.destination.x,
       this.destination.y,
       this.playerSize
@@ -79,10 +79,12 @@ export class player implements Player {
     c = this.p5.color(0, 0, 255);
     else
     c = this.p5.color(255,0,0)
+    if(this.correct)
+    c = this.p5.color(0, 255, 0)
     this.p5.fill(c);
     this.p5.strokeWeight(1);
     this.p5.stroke(255, 0, 255);
-    this.p5.circle(this.x, this.y, this.playerSize);
+    this.p5.square(this.x, this.y, this.playerSize);
   }
   /**
    * Updates the position of the player.
@@ -97,7 +99,8 @@ export class player implements Player {
       this.x += newPosition.x;
       this.y += newPosition.y;
     }
-    if (this.checkForHole(this.x, this.y)) {
+    console.log(this.map.correct)
+    if (this.checkForHole(this.x, this.y)&&this.map.correct) {
       this.playerWin();
     }
   }
@@ -125,33 +128,121 @@ export class player implements Player {
     PlayerManager.getInstance().releasePlayerFromMouse();
   }
   isOnASquare(squares: Square[]) {
-    let onSquare = false;
-    for(let i = 0; i<squares.length-1; i++){
-      if(squares[i].x<squares[i+1].x){
-        onSquare = 
-          this.x > squares[i].x
-          this.x < squares[i+1].x+120
-          this.y < squares[i].y
-          this.y > squares[i].y-120
-      }
-      else{
-        onSquare = 
-          this.x > squares[i].x
-          this.x < squares[i].x+120
-          this.y > squares[i].y
-          this.y < squares[i+1].y+120
-      }
-      if(onSquare)
+    let index=this.closestSquareIndex(squares);
+    //console.log("final i: " + index)
+    if(index == 0){
       return true
     }
-    // squares.forEach(sq=>{
-    //   const cx = sq.x + sq.size/2;
-    //   const cy = sq.y + sq.size/2;
-    //   const dist = Math.sqrt((this.y-cy)**2 + (this.x-cx)**2);
-    //   if (dist <=sq.size/2- this.playerSize/2) {
-    //     onSquare = true;
-    //   } 
-    // })
-    return false;
+    else if(index == squares.length-1){
+      return true
+    }
+    else{
+    let lastSquarePosition = "0"
+    //console.log(squares[index-1].y+ ", " + squares[index].y)
+    if(squares[index-1].x<squares[index].x){
+      lastSquarePosition = "left"
+    }
+    if(squares[index-1].x>squares[index].x){
+      lastSquarePosition = "right"
+    }
+    if(squares[index-1].y<squares[index].y){
+      lastSquarePosition = "up"
+    }
+    if(squares[index-1].y>squares[index].y){
+      lastSquarePosition = "down"
+    }
+
+    let nextSquarePosition = "0"
+    if(squares[index+1].x>squares[index].x){
+      nextSquarePosition = "right"
+    }
+    if(squares[index+1].x<squares[index].x){
+      nextSquarePosition = "left"
+    }
+    if(squares[index+1].y>squares[index].y){
+      nextSquarePosition = "down"
+    }
+    if(squares[index+1].y<squares[index].y){
+      nextSquarePosition = "up"
+    }
+    console.log(lastSquarePosition+nextSquarePosition)
+    if((lastSquarePosition === "left" && nextSquarePosition === "right") || (lastSquarePosition === "right" && nextSquarePosition === "left")){
+      return (this.x+40 < squares[index].x+200 &&
+              this.x+40 > squares[index].x-80 &&
+              this.y+40 < squares[index].y+80 &&
+              this.y+40 > squares[index].y+40)
+    }
+    if((lastSquarePosition === "up" && nextSquarePosition === "down") || (lastSquarePosition === "down" && nextSquarePosition === "up")){
+      return (this.x+40 < squares[index].x+80 &&
+              this.x+40 > squares[index].x+40 &&
+              this.y+40 < squares[index].y+200 &&
+              this.y+40 > squares[index].y-80)
+    }
+    if((lastSquarePosition === "left" && nextSquarePosition === "down") || (lastSquarePosition === "down" && nextSquarePosition === "left")){
+      return (this.x+40 < squares[index].x+80 &&
+              this.x+40 > squares[index].x-80 &&
+              this.y+40 < squares[index].y+80 &&
+              this.y+40 > squares[index].y+40)||
+             (this.x+40 < squares[index].x+80 &&
+              this.x+40 > squares[index].x+40 &&
+              this.y+40 < squares[index].y+200 &&
+              this.y+40 > squares[index].y+40)
+    }
+    if((lastSquarePosition === "up" && nextSquarePosition === "right") || (lastSquarePosition === "right" && nextSquarePosition === "up")){
+      return (this.x+40 < squares[index].x+200 &&
+              this.x+40 > squares[index].x+40 &&
+              this.y+40 < squares[index].y+80 &&
+              this.y+40 > squares[index].y+40)||
+             (this.x+40 < squares[index].x+80 &&
+              this.x+40 > squares[index].x+40 &&
+              this.y+40 < squares[index].y+80 &&
+              this.y+40 > squares[index].y-80)
+    }
+    if((lastSquarePosition === "left" && nextSquarePosition === "up") || (lastSquarePosition === "up" && nextSquarePosition === "left")){
+      return (this.x+40 < squares[index].x+80 &&
+              this.x+40 > squares[index].x-80 &&
+              this.y+40 < squares[index].y+80 &&
+              this.y+40 > squares[index].y+40)||
+             (this.x+40 < squares[index].x+80 &&
+              this.x+40 > squares[index].x+40 &&
+              this.y+40 < squares[index].y+80 &&
+              this.y+40 > squares[index].y-80)
+    }
+    if((lastSquarePosition === "down" && nextSquarePosition === "right") || (lastSquarePosition === "right" && nextSquarePosition === "down")){
+      return (this.x+40 < squares[index].x+80 &&
+              this.x+40 > squares[index].x+40 &&
+              this.y+40 < squares[index].y+200 &&
+              this.y+40 > squares[index].y+40)||
+             (this.x+40 < squares[index].x+200 &&
+              this.x+40 > squares[index].x+40 &&
+              this.y+40 < squares[index].y+80 &&
+              this.y+40 > squares[index].y+40)
+    }
+    if((lastSquarePosition === "down" && nextSquarePosition === "left") || (lastSquarePosition === "left" && nextSquarePosition === "down")){
+      return (this.x+40 < squares[index].x+80 &&
+              this.x+40 > squares[index].x+40 &&
+              this.y+40 < squares[index].y+200 &&
+              this.y+40 > squares[index].y+40)||
+             (this.x+40 < squares[index].x+80 &&
+              this.x+40 > squares[index].x-80 &&
+              this.y+40 < squares[index].y+80 &&
+              this.y+40 > squares[index].y+40)
+    }
+    return false
+    }
+  }
+
+  closestSquareIndex(squares: Square[]){
+    let minDist = 2000;
+    let index = 0;
+    for(let i = 0; i < squares.length; i++){
+      //console.log(minDist + ", " + this.p5.dist(this.x,this.y,squares[i].x+60,squares[i].y+60))
+      if(minDist > this.p5.dist(this.x + 40,this.y + 40,squares[i].x+60,squares[i].y+60)){
+      minDist = this.p5.dist(this.x+ 40,this.y+40,squares[i].x+60,squares[i].y+60);
+      index = i;
+      //console.log("temp i: "+ i)
+      }
+    }
+    return index;
   }
 }
