@@ -3,6 +3,17 @@ import { Player, Coordinate } from "./PlayerPositioning";
 import { PlayerManager } from "./PlayerManager";
 import { Square } from "./Squares";
 import { MazeMap } from "./MazeMap";
+import { Howl } from "howler";
+const soundReject = new Howl({
+  src: ["/reject.ogg"],
+  volume: 0.5,
+  autoplay: false,
+});
+const soundSuccess = new Howl({
+  src: ["/hit.ogg"],
+  volume: 0.5,
+  autoplay: false,
+});
 
 export class player implements Player {
   public x: number;
@@ -13,6 +24,7 @@ export class player implements Player {
   tolerance: number;
   correct: boolean = false;
   map: MazeMap;
+  lastOnSquare: boolean = false;
   constructor(
     playerStart: Coordinate,
     playerSize: number,
@@ -72,8 +84,19 @@ export class player implements Player {
       //console.log(squares[i])
     }
     let c = this.p5.color(0, 0, 255);
-    if (this.isOnASquare(squares)) c = this.p5.color(0, 0, 255);
-    else c = this.p5.color(255, 0, 0);
+    if (this.isOnASquare(squares)) {
+      if (!this.lastOnSquare) {
+        soundSuccess.play();
+      }
+      this.lastOnSquare = true;
+      c = this.p5.color(0, 0, 255);
+    } else {
+      if (this.lastOnSquare) {
+        soundReject.play();
+      }
+      this.lastOnSquare = false;
+      c = this.p5.color(255, 0, 0);
+    }
     if (this.correct) c = this.p5.color(0, 255, 0);
     this.p5.fill(c);
     this.p5.strokeWeight(1);
