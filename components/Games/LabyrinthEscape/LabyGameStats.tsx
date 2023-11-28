@@ -8,16 +8,17 @@ import {
 } from "../../../utils/types/GeneralGameTypes";
 import ReactConfetti from "react-confetti";
 import ConfettiExplosion from "react-confetti-explosion";
+import { PlayerManager } from "./PlayerManager";
 
-export const DnDGameStats = () => {
+export const LabyGameStats = () => {
   const query = useSearchParams();
   const [dndSavedGameData, setDndSavedGameData] =
-    useLocalStorage<DNDGameSaveData>("dndStatistics", {
+    useLocalStorage<DNDGameSaveData>("labyStatistics", {
       averageAttempt: undefined,
       bestAttempt: undefined,
       lastPlayed: undefined,
       playedCount: 0,
-      gameID: "dnd",
+      gameID: "laby",
     });
   const tallied = useRef(false);
 
@@ -31,7 +32,7 @@ export const DnDGameStats = () => {
     const attemptTime = parseFloat(query.get("attemptTime") || "0");
     const score = parseFloat(query.get("score") || "0");
     globalThis?.localStorage?.setItem(
-      "dndStatistics",
+      "labyStatistics",
       JSON.stringify({
         averageAttempt: {
           attemptTime:
@@ -58,7 +59,7 @@ export const DnDGameStats = () => {
         },
         lastPlayed: Date.now(),
         playedCount: dndSavedGameData!.playedCount + 1,
-        gameID: "dnd",
+        gameID: "laby",
       })
     );
     const dailyStreak = JSON.parse(
@@ -108,9 +109,9 @@ export const DnDGameStats = () => {
         },
         lastPlayed: Date.now(),
         playedCount: dndSavedGameData!.playedCount + 1,
-        gameID: "dnd",
+        gameID: "laby",
       },
-      { attemptTime }
+      { attemptTime,score }
     );
     return {
       attemptTime,
@@ -118,6 +119,7 @@ export const DnDGameStats = () => {
     };
   }, [query]);
   useMemo(() => {
+    PlayerManager.getInstance().reset();
     console.log({ query, currentAttemptData });
   }, [query]);
   const positiveText = useMemo(() => {
@@ -211,6 +213,32 @@ export const DnDGameStats = () => {
                 </div>
               </div>
               <div
+                className={`flex flex-row px-6 py-4 border-2 border-gray-100/10 rounded-2xl gap-8 items-center bg-gray-800`}
+              >
+                <span className={`text-5xl font-bold text-gray-100`}>🎯</span>
+                <div className={`flex flex-col gap-1`}>
+                  <span className={`text-3xl font-bold text-gray-100`}>
+                    Attempt Accuracy
+                  </span>
+                  <div className="flex flex-row gap-2 items-baseline">
+                    <span className={`text-gray-100/80 text-2xl font-medium`}>
+                      {currentAttemptData.points/100 || `--`}%
+                    </span>
+                    {/* <span className={`text-gray-100/40 text-lg font-medium`}>
+                      (
+                      {currentAttemptData.attemptTime
+                        ? ~~((currentAttemptData.attemptTime * 100) / 1000) /
+                          100
+                        : `--`}
+                      s)
+                    </span> */}
+                  </div>
+                  {/* <span className={`text-gray-100/60 text-xs font-normal`}>
+                    {positiveText}
+                  </span> */}
+                </div>
+              </div>
+              <div
                 className={`flex flex-row px-6 py-4 border-2 border-gray-100/10 rounded-2xl gap-8 items-center bg-gray-800 relative`}
               >
                 <span
@@ -295,4 +323,4 @@ export const DnDGameStats = () => {
     </div>
   );
 };
-export default DnDGameStats;
+export default LabyGameStats;

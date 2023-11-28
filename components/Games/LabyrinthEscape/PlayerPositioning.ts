@@ -1,4 +1,6 @@
 import { P5CanvasInstance } from "@p5-wrapper/react";
+import { MazeMap } from "./MazeMap";
+import { Square } from "./Squares";
 
 export type Coordinate = {
   x: number;
@@ -14,4 +16,7 @@ export interface Player {
   tolerance: number; // Percentage of the shape that the mouse can be outside of the hole shape and still be considered "in" the hole and lock
   checkForHole: (x: number, y: number) => boolean;
   correct: boolean;
+  map: MazeMap;
+  isOnASquare: (squares: Square[]) => boolean;
+  onSquares: () => boolean;
 }

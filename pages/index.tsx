@@ -12,6 +12,45 @@ import {
   TypingGameSaveData,
 } from "../utils/types/GeneralGameTypes";
 import { useRouter } from "next/router";
+import LabyActivityCard from "../components/HomePage/LabyActivityCard";
+import { motion } from "framer-motion";
+const animateItem = {
+  hidden: {
+    opacity: 0,
+    y: 100,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1,
+      type: "spring",
+      bounce: 0.3,
+    },
+  },
+};
+const animateParent = {
+  hidden: {
+    opacity: 0,
+    //   x: -100,
+    transition: {
+      duration: 0.5,
+      delay: 0.5,
+      // when: "afterChildren",
+      staggerChildren: 0.2,
+    },
+  },
+  visible: {
+    opacity: 1,
+    //   x: 0,
+    transition: {
+      duration: 0,
+      delay: 0.1,
+      when: "beforeChildren",
+      staggerChildren: 0.25,
+    },
+  },
+};
 const IndexPage = () => {
   const [explosionStreak, setExplosionStreak] = useState(false);
   const [explosionAccuracy, setExplosionAccuracy] = useState(false);
@@ -29,7 +68,15 @@ const IndexPage = () => {
       bestAttempt: undefined,
       lastPlayed: undefined,
       playedCount: 0,
-      gameID: "dnd",
+      gameID: "typing",
+    });
+  const [labySavedGameData, setLabySavedGameData] =
+    useLocalStorage<DNDGameSaveData>("labyStatistics", {
+      averageAttempt: undefined,
+      bestAttempt: undefined,
+      lastPlayed: undefined,
+      playedCount: 0,
+      gameID: "laby",
     });
   // add daily streak
   const [dailyStreak, setDailyStreak] = useLocalStorage<{
@@ -55,15 +102,26 @@ const IndexPage = () => {
       }, 2500);
     }
   }, [explosionAccuracy]);
+
   return (
     <Layout title="Home | Next.js + TypeScript Example">
-      <div className={`flex flex-col gap-8 w-full h-full px-16`}>
-        <div className={`flex flex-row gap-8`}>
-          <div
+      <motion.div
+        className={`flex flex-col gap-8 w-full h-full px-16`}
+        initial="hidden"
+        animate="visible"
+        // variants={animateItem}
+      >
+        <motion.div
+          className={`flex flex-row gap-8`}
+
+          variants={animateItem}
+        >
+          <motion.div
             className={`w-80 bg-gradient-to-br from-pink-300/30 via-purple-300/30 to-indigo-400/30 flex flex-row items-center justify-start p-px rounded-2xl gap-6 shadow-sm relative group hover:from-pink-300/70 hover:via-purple-300/70 hover:to-indigo-400/70 duration-300 transition-all cursor-pointer`}
             onClick={() => {
               setExplosionStreak(true);
             }}
+            // variants={animateItem}
           >
             <div
               className={` bg-gradient-to-br from-pink-300/50 via-purple-300/50 to-indigo-400/50 w-full h-full absolute top-0 left-0 blur-xl rounded-2xl group-hover:opacity-100 opacity-0 transition-all duration-300`}
@@ -101,12 +159,13 @@ const IndexPage = () => {
                 </span>
               </div>
             </div>
-          </div>
-          <div
+          </motion.div>
+          <motion.div
             className={`w-80 bg-gradient-to-r from-green-200/30 to-green-500/30 flex flex-row items-center justify-start p-px rounded-2xl gap-6 shadow-sm relative group hover:from-green-200/70 hover:to-green-500/70 duration-300 transition-all cursor-pointer`}
             onClick={() => {
               setExplosionAccuracy(true);
             }}
+            // variants={animateItem}
           >
             <div
               className={` bg-gradient-to-br from-green-200/50 to-green-500/50 w-full h-full absolute top-0 left-0 blur-xl rounded-2xl group-hover:opacity-100 opacity-0 transition-all duration-300`}
@@ -149,12 +208,13 @@ const IndexPage = () => {
                 </span>
               </div>
             </div>
-          </div>
-          <div
+          </motion.div>
+          <motion.div
             className={`w-80 bg-gradient-to-br from-pink-300/30 via-purple-300/30 to-indigo-400/30 flex flex-row items-center justify-start p-px rounded-2xl gap-6 shadow-sm relative group hover:from-pink-300/70 hover:via-purple-300/70 hover:to-indigo-400/70 duration-300 transition-all cursor-pointer`}
             onClick={() => {
               router.push("/feedback");
             }}
+            // variants={animateItem}
           >
             <div
               className={` bg-gradient-to-br from-pink-300/50 via-purple-300/50 to-indigo-400/50 w-full h-full absolute top-0 left-0 blur-xl rounded-2xl group-hover:opacity-100 opacity-0 transition-all duration-300`}
@@ -187,13 +247,18 @@ const IndexPage = () => {
                 </button>
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
         <div className={`flex flex-col gap-6 pb-6`}>
           <span className={`text-lg text-gray-200/40 font-bold`}>
             Recommended tasks
           </span>
-          <div className={`grid grid-cols-2 gap-6`}>
+          <motion.div
+            className={`grid grid-cols-2 gap-6`}
+            variants={animateParent}
+            initial="hidden"
+            animate="visible"
+          >
             {
               <ActivityCard
                 title={"Typing Tune-Up!"}
@@ -250,22 +315,36 @@ const IndexPage = () => {
               />
             }
             {
-              <ActivityCard
+              <LabyActivityCard
                 title="Labyrinth Escape"
                 description="Navigate through perilous mazes and avoid bubbling lava pits in this intense maze runner! Use your wits to guide him out of intricate labyrinths filled with traps."
-                bestAttempt="25.08s"
-                lastAttempt={1832252210000}
+                bestAttempt={
+                  labySavedGameData.bestAttempt
+                    ? `${
+                        labySavedGameData.bestAttempt.attemptTime / 1000
+                      } seconds`
+                    : "--"
+                }
+                lastAttempt={labySavedGameData.lastPlayed || 0}
+                resetTime={
+                  labySavedGameData.lastPlayed
+                    ? labySavedGameData.lastPlayed + 72000000
+                    : undefined
+                }
                 icon={"🌋"}
                 onClick={() => {
                   alert("Game not implemented yet");
                 }}
                 link="/tasks/C"
-                complete
+                complete={
+                  labySavedGameData.lastPlayed !== undefined &&
+                  labySavedGameData.lastPlayed + 72000000 > Date.now()
+                }
               />
             }
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </Layout>
   );
 };

@@ -4,10 +4,11 @@ import { player } from "../Games/LabyrinthEscape/Player";
 import { MazeMap } from "../Games/LabyrinthEscape/MazeMap";
 import { Square } from "../Games/LabyrinthEscape/Squares";
 
-export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
+export const labyrinthEscapeSketch = (p5: P5CanvasInstance) => {
+  console.log("labyrinthEscapeSketch",{p5});
   let startTime = 0;
   let totalTime = 0;
-  let GAME_MODE = 3; // change mode [1-3] to get different maps!!!
+  let GAME_MODE = PlayerManager.getInstance().difficulty; // change mode [1-3] to get different maps!!!
   const playerManager = PlayerManager.getInstance(); // Create a new player manager.
   const mazeMap = new MazeMap(GAME_MODE, p5); 
   //console.debug(MazeMap);
@@ -23,15 +24,14 @@ export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
 
 
   p5.setup = () => {
-    p5.createCanvas(window.innerWidth, window.innerHeight);
-
-    startTime = Date.now();
+    p5.createCanvas(window.innerWidth*.95, window.innerWidth* 7/16);
   };
   p5.mousePressed = () => {
     const selectedPlayer = PlayerManager.getInstance().determinePlayerClicked(
       p5.mouseX,
       p5.mouseY
     );
+
   };
   p5.mouseDragged = () => {
     const selectedPlayer = PlayerManager.getInstance().determinePlayerClicked(
@@ -49,7 +49,6 @@ export const labyrinthEscapeSketch = (p5: P5CanvasInstance) =>{
   p5.draw = () => {
     //player holes
     mazeMap.draw();
-    
     if (mazeMap.correct) {
       totalTime = (startTime - Date.now()) / 1000;
       console.log(totalTime)

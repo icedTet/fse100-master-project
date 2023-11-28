@@ -1,10 +1,11 @@
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
-import { motion } from "framer-motion";
-dayjs.extend(duration)
+dayjs.extend(duration);
 import Link from "next/link";
 import { useLayoutEffect, useState } from "react";
 import ConfettiExplosion from "react-confetti-explosion";
+import { PlayerManager } from "../Games/LabyrinthEscape/PlayerManager";
+import { motion } from "framer-motion";
 const animateItem  = {
   hidden: {
     opacity: 0,
@@ -42,7 +43,7 @@ const animateParent ={
     },
   },
 }
-export const ActivityCard = (props: {
+export const LabyActivityCard = (props: {
   title: string;
   description: string;
   bestAttempt: string;
@@ -144,23 +145,44 @@ export const ActivityCard = (props: {
               Best attempt: {bestAttempt}
             </span>
             <span className={`text-gray-100/40 text-xs font-light`}>
-              Last attempt on {
-                lastAttempt ? `${dayjs(lastAttempt).format("M/D/YY")} at
-                ${dayjs(lastAttempt).format("h:mm A")}` : "--/--/--"
-              }
+              Last attempt on{" "}
+              {lastAttempt
+                ? `${dayjs(lastAttempt).format("M/D/YY")} at
+                ${dayjs(lastAttempt).format("h:mm A")}`
+                : "--/--/--"}
             </span>
           </div>
-          <Link href={link || ""}>
-            <button
-              className={`bg-purple-500 rounded-2xl px-6 py-3 text-white text-sm font-medium font-wsans`}
-            >
-              Play now
-            </button>
-          </Link>
+          <div className={`flex flex-row gap-2`}>
+            {" "}
+            <Link href={link || ""}>
+              <button
+                className={`bg-purple-500 rounded-2xl px-6 py-3 text-white text-sm font-medium font-wsans`}
+                onClick={()=>PlayerManager.getInstance().setDifficulty(1)}
+              >
+               Lvl I
+              </button>
+            </Link>
+            <Link href={link || ""}>
+              <button
+                className={`bg-purple-500 rounded-2xl px-6 py-3 text-white text-sm font-medium font-wsans`}
+                onClick={()=>PlayerManager.getInstance().setDifficulty(2)}
+              >
+               Lvl II
+              </button>
+            </Link>
+            <Link href={link || ""}>
+              <button
+                className={`bg-purple-500 rounded-2xl px-6 py-3 text-white text-sm font-medium font-wsans`}
+                onClick={()=>PlayerManager.getInstance().setDifficulty(3)}
+              >
+                Lvl III
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </motion.div>
   );
 };
 
-export default ActivityCard;
+export default LabyActivityCard;
