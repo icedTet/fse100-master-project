@@ -14,6 +14,7 @@ import wordList from "../../public/words.json";
 import { TypistWord } from "../../components/Games/TypingTypist/TypistWord";
 import Link from "next/link";
 import { HiChevronLeft } from "react-icons/hi";
+import { Howl } from "howler";
 const TypistCountdown = dynamic(
   () => import("../../components/Games/TypingTypist/TypistCountdown"),
   { ssr: false }
@@ -26,6 +27,18 @@ export type TypingTypistWordResult = Map<
     correct: boolean;
   }[]
 >;
+
+const soundReject = new Howl({
+  src: ["/reject.ogg"],
+  volume: 0.5,
+  autoplay: false,
+});
+const soundSuccess = new Howl({
+  src: ["/hit.ogg"],
+  volume: 0.5,
+  autoplay: false,
+});
+
 /**
  * Timer component that counts down from a given timestamp. Will show MM:SS when the timestamp is greater than 1 minute, and SS.MS when the timestamp is less than 1 minute.
  */
@@ -123,6 +136,8 @@ export const TypingTypistGamePage = (props: { list: string[] }) => {
       const word = result.map((r) => r.char).join("");
       successRecord.set(word, result);
       console.log(successRecord);
+      console.log("updating");
+      soundSuccess.play();
     },
     []
   );
@@ -154,8 +169,31 @@ export const TypingTypistGamePage = (props: { list: string[] }) => {
       setInputValue("");
     }
   }, [inputValue, wordPosition]);
+  useEffect(() => {
+    const currentWord = list[wordPosition];
+    if (!currentWord) return;
+    if (!inputValue) return;
+    // if the current input value does not start with the current word, play a reject sound
+    for (let i = 0; i < inputValue.length; i++) {
+      if (currentWord[i] !== inputValue[i]) {
+        console.log(
+          "reject",
+          currentWord[i],
+          inputValue[i],
+          inputValue,
+          currentWord
+        );
+        soundReject.play();
+        break;
+      }
+    }
+  }, [inputValue, wordPosition]);
+
   return (
-    <Layout title="Home | Next.js + TypeScript Example" className={` max-h-screen overflow-hidden`}>
+    <Layout
+      title="Home | Next.js + TypeScript Example"
+      className={` max-h-screen overflow-hidden`}
+    >
       <div
         className={`w-full h-full flex flex-col items-center justify-center gap-8 grow relative`}
       >
@@ -206,11 +244,7 @@ export const TypingTypistGamePage = (props: { list: string[] }) => {
             <div
               className={`bg-gray-800/50  p-6 rounded-2xl backdrop-blur-lg flex flex-row gap-8 items-center border border-gray-100/10 justify-between`}
             >
-              <Link
-                href={`/`}
-                onClick={() => {
-                }}
-              >
+              <Link href={`/`} onClick={() => {}}>
                 <div
                   className={`bg-gray-700/50 h-12 aspect-square flex flex-row items-center justify-center rounded-xl cursor-pointer hover:bg-gray-600 transition-all duration-150 z-30`}
                 >
