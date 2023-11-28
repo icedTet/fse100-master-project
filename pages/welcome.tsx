@@ -70,7 +70,7 @@ export const WelcomePage = () => {
             className="text-xl text-center text-gray-200"
             variants={animateItem}
           >
-            This is a demo of the new Stroke Recovery Lab. To get started,
+            This is the new Stroke Recovery Lab. To get started,
             please enter your name below.
           </motion.p>
           <motion.input
