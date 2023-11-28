@@ -4,6 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { HiCog, HiLogout, HiOutlineCog, HiOutlineLogout } from "react-icons/hi";
 import { useRouter } from "next/router";
+import { MonogramPFP } from "./MonogramPFP";
 type Props = {
   children?: ReactNode;
   title?: string;
@@ -40,15 +41,16 @@ const Layout = ({
           <div className={`flex flex-row gap-4 items-center justify-between `}>
             <div className={`relative p-1`}>
               <div
-                className={`bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-400 rounded-full p-1 relative z-10`}
+                className={`bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-400 rounded-full p-0.5 relative z-10`}
               >
-                <Image
+                {/* <Image
                   src="/pika.jpg"
                   className={`w-16 h-16 rounded-full`}
                   width={64}
                   height={64}
                   alt={"Profile pic"}
-                />
+                /> */}
+                <MonogramPFP firstName={name.split(" ")[0]?.toUpperCase()} lastName={name.split(" ")[1]?.toUpperCase()} className={`w-16 h-16`} />
               </div>
               <div
                 className={`bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-400 rounded-full w-full h-full absolute top-0 left-0 blur-md opacity-30`}
