@@ -64,14 +64,13 @@ export const WelcomePage = () => {
             className="text-6xl font-bold text-center text-white"
             variants={animateItem}
           >
-            Welcome
+            Welcome to the Stroke Recovery Lab
           </motion.h1>
           <motion.p
             className="text-xl text-center text-gray-200"
             variants={animateItem}
           >
-            This is the new Stroke Recovery Lab. To get started,
-            please enter your name below.
+            To get started, please enter your name below
           </motion.p>
           <motion.input
             //   variants={animateItem}
