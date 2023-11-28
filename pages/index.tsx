@@ -160,7 +160,7 @@ const IndexPage = () => {
               </div>
             </div>
           </motion.div>
-          <motion.div
+          {/* <motion.div
             className={`w-80 bg-gradient-to-r from-green-200/30 to-green-500/30 flex flex-row items-center justify-start p-px rounded-2xl gap-6 shadow-sm relative group hover:from-green-200/70 hover:to-green-500/70 duration-300 transition-all cursor-pointer`}
             onClick={() => {
               setExplosionAccuracy(true);
@@ -208,7 +208,7 @@ const IndexPage = () => {
                 </span>
               </div>
             </div>
-          </motion.div>
+          </motion.div> */}
           <motion.div
             className={`w-80 bg-gradient-to-br from-pink-300/30 via-purple-300/30 to-indigo-400/30 flex flex-row items-center justify-start p-px rounded-2xl gap-6 shadow-sm relative group hover:from-pink-300/70 hover:via-purple-300/70 hover:to-indigo-400/70 duration-300 transition-all cursor-pointer`}
             onClick={() => {
